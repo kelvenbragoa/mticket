@@ -1,0 +1,197 @@
+@extends('layouts.master')
+@section('content')
+
+<main id="main" class="site-main">
+    <div class="page-title" style="background-image: url({{asset('template2/images/menu/festas.jpeg')}});">
+        <div class="container">
+            <div class="page-title__content">
+                <h4 class="page-title__capita">{{$categoria->name}}</h4>
+                <h1 class="page-title__name">O MELHOR SO AQUI!</h1>
+                <p class="page-title__slogan">Mticket</p>
+            </div>
+        </div>
+    </div>
+    <div class="intro">
+        <div class="container">
+            <h2 class="title">{{$categoria->name}}</h2>
+            <div class="intro__content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="intro__text">Veja os principais eventos da categoria "{{$categoria->name}}".</div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="intro__meta">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="intro__meta__item">
+                                        <h3>Moeda</h3>
+                                        <p>
+                                            <i class="la la-money-bill"></i>
+                                            <span>Metical</span>
+                                        </p>
+                                    </div>
+                                    <!-- .intro__meta__item -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="intro__meta__item">
+                                        <h3>Lingua</h3>
+                                        <p>
+                                            <i class="la la-globe"></i>
+                                            <span>Português</span>
+                                        </p>
+                                    </div>
+                                    <!-- .intro__meta__item -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="intro__meta__item">
+                                        <h3>Melhor tempo para visitar</h3>
+                                        <p>
+                                            <i class="la la-clock"></i>
+                                            <span>Todos</span>
+                                        </p>
+                                    </div>
+                                    <!-- .intro__meta__item -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- .intro__meta -->
+                    </div>
+                </div>
+            </div>
+            <!-- .intro__content -->
+        </div>
+    </div>
+    <!-- .intro -->
+    <section class="restaurant-wrap">
+        <div class="city-content__tabtitle tabs">
+            <div class="container">
+                <div class="city-content__tabtitle__tablist">
+                    <ul>
+                        <li class="active"><a title="{{$categoria->name}}" >Todos Eventos da Categoria {{$categoria->name}}</a></li>
+
+                    </ul>
+                </div>
+                <div class="title_home offset-item">
+                    <h2 class="title title--more">
+                       
+                        
+                       
+                         
+                        
+    
+                        <a title="Ver todas categorias" href="{{URL::to('/todas-categorias')}}">Ver categorias</a>
+                    </h2>
+                </div>
+                <!-- .city-content__tabtitle__tablist -->
+                {{-- <a class="city-content__tabtitle__button btn btn-mapsview" title="Maps view" href="maps-view.html">
+                    <i class="la la-map-marked-alt la-24"></i> Mapa
+                </a> --}}
+                <!-- .city-content__tabtitle__button -->
+            </div>
+        </div>
+        <!-- .city-content__tabtitle -->
+        <div class="container">
+           
+            
+
+            <div class="row">
+              
+                @forelse ($events as $item)
+                <div class="col-sm-3">
+                    <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
+                        <div class="place-inner">
+                            <div class="place-thumb hover-img">
+                                <a class="entry-thumb" href=""><img src="/storage/{{$item->image}}" alt=""></a>
+                                <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist " data-place-id="185">
+                                    <span class="icon-heart">
+                                        <i class="la la-bookmark large"></i>
+                                    </span>
+                                </a>
+                                <a class="entry-category rosy-pink" href="#">
+                                    <i class="las la-user"></i><span>{{$item->user->name}}</span>
+                                </a>
+                                <a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}" class="author" title="Author"> <img src="/storage/{{$item->user->image}}" alt="Author"></a>
+                            </div>
+                            <div class="entry-detail">
+                                <div class="entry-head">
+                                    <div class="place-type list-item">
+                                        <span>{{$item->user->name}}</span>
+                                    </div>
+                                    <div class="place-city">
+                                        <a href="#">{{$item->city->name}}</a>
+                                    </div>
+                                </div>
+                                <h3 class="place-title"><a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}">{!! Str::limit($item->name, 20) !!}</a></h3>
+                                <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                                <div class="entry-bottom">
+                                    <div class="place-preview">
+                                        <div class="place-rating">
+                                            <span>{{$item->like->count()}}</span>
+                                            <i class="la la-heart"></i>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="place-price">
+                                        <span>{{count($item->tickets)}} Bilhetes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <p>Nenhum evento</p>
+            @endforelse
+         
+
+        
+                
+              
+
+
+
+                
+           
+                </div>
+                <!-- .city-content -->
+                <div class="other-city banner-white">
+                    <div class="container">
+                        <h2 class="title title--while">Explorar outras cidades</h2>
+                        <div class="other-city__content">
+                            <div class="row">
+                                
+                                @foreach (\App\Models\Province::orderBy('name','asc')->limit(4)->get() as $item)
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="cities__item hover__box">
+                                        <div class="cities__thumb hover__box__thumb">
+                                            <a title="Maputo" href="{{URL::to('/provincia/'.$item->id.'/eventos')}}">
+                                                <img src="{{asset('template2/images/city/maputo.jpg')}}" alt="{{$item->name}}">
+                                            </a>
+                                        </div>
+                                        <h4 class="cities__name">{{$item->name}}</h4>
+                                        <div class="cities__info">
+                                            <h3 class="cities__capital">{{$item->name}}</h3>
+                                            <p class="cities__number">{{$item->events->count()}} Eventos</p>
+                                        </div>
+                                    </div>
+                                    <!-- .cities__item -->
+                                </div>
+                            @endforeach
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- .other-city -->
+                   
+        
+        </div>
+    </section>
+
+ 
+  
+
+</main>
+<!-- .site-main -->
+
+@endsection
