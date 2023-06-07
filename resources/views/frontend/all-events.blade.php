@@ -81,14 +81,7 @@
                         <div class="place-inner">
                             <div class="place-thumb hover-img">
                                 <a class="entry-thumb" href="{{URL::to('/detalhes/'.$item->id.'/evento')}}"><img src="/storage/{{$item->image}}" alt=""></a>
-                                <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist " data-place-id="185">
-                                    <span class="icon-heart">
-                                        <i class="la la-bookmark large"></i>
-                                    </span>
-                                </a>
-                                <a class="entry-category rosy-pink" href="#">
-                                    <i class="las la-user"></i><span>{{$item->user->name}}</span>
-                                </a>
+                               
                                 <a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}" class="author" title="Author"> <img src="/storage/{{$item->user->image}}" alt="Author"></a>
                             </div>
                             <div class="entry-detail">
@@ -118,13 +111,14 @@
                                     <div class="entry-bottom">
                                         <div class="place-preview">
                                             <div class="place-rating">
-                                                <span>DOM, 14 MAR - 15:30</span>
-
+                                                {{-- <span>DOM, 14 MAR - 15:30</span> --}}
+                                                <span>{{date('l d M',strtotime($item->start_date))}}</span>
+    
                                             </div>
-
+    
                                         </div>
                                         <div class="place-price">
-                                            <span>1500MT</span>
+                                            <span>{{$item->tickets->min('price')}}</span>
                                         </div>
                                     </div>
                             </div>

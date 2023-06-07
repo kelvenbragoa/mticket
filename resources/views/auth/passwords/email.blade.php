@@ -28,16 +28,34 @@
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <h3>Password Reset</h3>
-                        <p>To reset your password, enter the email address you use to sign in to iofrm</p>
+                        <h1>
+                            <a style="
+                            text-align:center;
+                            border: 0;
+                            font-size: 100%;
+                            margin: 0;
+                            outline: 0;
+                            padding: 0;
+                            vertical-align: baseline;
+                            color: #0097ff;
+                            text-decoration: none;
+                            transition: all 0.3s ease-in-out 0s;
+                            -moz-transition: all 0.3s ease-in-out 0s;
+                            -o-transition: all 0.3s ease-in-out 0s;
+                            -webkit-transition: all 0.3s ease-in-out 0s;
+                            -ms-transition: all 0.3s ease-in-out 0s;"
+                            
+                            href="{{URL::to('/')}}"> MTICKET </a></h1>
+                        <h3>Redefinir Password</h3>
+                        <p>Para redefinir a password, introduza seu email que se registrou</p>
                         <form>
                             <input class="form-control" type="text" name="username" placeholder="E-mail Address" required>
                             <div class="form-button full-width">
-                                <button id="submit" type="submit" class="ibtn btn-forget">Send Reset Link</button>
+                                <button id="submit" type="submit" class="ibtn btn-forget">Enviar link para redefinir password</button>
                             </div>
                         </form>
                     </div>
-                    <div class="form-sent">
+                    {{-- <div class="form-sent">
                         <div class="tick-holder">
                             <div class="tick-icon"></div>
                         </div>
@@ -46,7 +64,7 @@
                         <div class="info-holder">
                             <span>Unsure if that email address was correct?</span> <a href="#">We can help</a>.
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

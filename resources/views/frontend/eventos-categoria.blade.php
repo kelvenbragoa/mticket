@@ -63,7 +63,7 @@
     </div>
     <!-- .intro -->
     <section class="restaurant-wrap">
-        <div class="city-content__tabtitle tabs">
+        {{-- <div class="city-content__tabtitle tabs">
             <div class="container">
                 <div class="city-content__tabtitle__tablist">
                     <ul>
@@ -82,40 +82,49 @@
                         <a title="Ver todas categorias" href="{{URL::to('/todas-categorias')}}">Ver categorias</a>
                     </h2>
                 </div>
+               
+            </div>
+        </div> --}}
+        <div class="city-content__tabtitle tabs">
+            <div class="container">
+                <div class="city-content__tabtitle__tablist">
+                    <ul>
+                        <li class="active"><a ttitle="{{$categoria->name}}">Todos Eventos da Categoria {{$categoria->name}}</a></li>
+
+                    </ul>
+                </div>
                 <!-- .city-content__tabtitle__tablist -->
-                {{-- <a class="city-content__tabtitle__button btn btn-mapsview" title="Maps view" href="maps-view.html">
+                <a class="city-content__tabtitle__button btn btn-mapsview" title="Maps view" href="maps-view.html">
                     <i class="la la-map-marked-alt la-24"></i> Mapa
-                </a> --}}
+                </a>
                 <!-- .city-content__tabtitle__button -->
             </div>
         </div>
         <!-- .city-content__tabtitle -->
         <div class="container">
            
-            
+            <h2 class="title title--more">
+                Em alta
+                
+            </h2>
 
-            <div class="row">
+            <div class="restaurant-sliders slick-sliders offset-item">
+                <div class="restaurant-slider slick-slider" data-item="4" data-itemScroll="4" data-arrows="true" data-dots="true" data-tabletItem="2" data-tabletScroll="2" data-mobileItem="1" data-mobileScroll="1">
               
                 @forelse ($events as $item)
-                <div class="col-sm-3">
+                
                     <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
                         <div class="place-inner">
                             <div class="place-thumb hover-img">
-                                <a class="entry-thumb" href=""><img src="/storage/{{$item->image}}" alt=""></a>
-                                <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist " data-place-id="185">
-                                    <span class="icon-heart">
-                                        <i class="la la-bookmark large"></i>
-                                    </span>
-                                </a>
-                                <a class="entry-category rosy-pink" href="#">
-                                    <i class="las la-user"></i><span>{{$item->user->name}}</span>
-                                </a>
-                                <a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}" class="author" title="Author"> <img src="/storage/{{$item->user->image}}" alt="Author"></a>
+                                <a class="entry-thumb" href="{{URL::to('/detalhes/'.$item->id.'/evento')}}"><img src="/storage/{{$item->image}}" alt=""></a>
+                               
+                               
+                                <a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}" class="author"> <img src="/storage/{{$item->user->image}}"></a>
                             </div>
                             <div class="entry-detail">
                                 <div class="entry-head">
                                     <div class="place-type list-item">
-                                        <span>{{$item->user->name}}</span>
+                                        <span>{{$item->user->company_name}}</span>
                                     </div>
                                     <div class="place-city">
                                         <a href="#">{{$item->city->name}}</a>
@@ -135,16 +144,96 @@
                                         <span>{{count($item->tickets)}} Bilhetes</span>
                                     </div>
                                 </div>
+                                <div class="entry-bottom">
+                                    <div class="place-preview">
+                                        <div class="place-rating">
+                                            {{-- <span>DOM, 14 MAR - 15:30</span> --}}
+                                            <span>{{date('l d M',strtotime($item->start_date))}}</span>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="place-price">
+                                        <span>{{$item->tickets->min('price')}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            @empty
+                <p>Nenhum evento</p>
+            @endforelse
+            
+         
+        </div>
+    </div>
+        
+    <h2 class="title title--more">
+        Os mais visualizados
+        
+    </h2>
+
+    <div class="restaurant-sliders slick-sliders offset-item">
+        <div class="restaurant-slider slick-slider" data-item="4" data-itemScroll="4" data-arrows="true" data-dots="true" data-tabletItem="2" data-tabletScroll="2" data-mobileItem="1" data-mobileScroll="1">
+      
+        @forelse ($events as $item)
+        
+            <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
+                <div class="place-inner">
+                    <div class="place-thumb hover-img">
+                        <a class="entry-thumb" href="{{URL::to('/detalhes/'.$item->id.'/evento')}}"><img src="/storage/{{$item->image}}" alt=""></a>
+                       
+                       
+                        <a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}" class="author"> <img src="/storage/{{$item->user->image}}"></a>
+                    </div>
+                    <div class="entry-detail">
+                        <div class="entry-head">
+                            <div class="place-type list-item">
+                                <span>{{$item->user->company_name}}</span>
+                            </div>
+                            <div class="place-city">
+                                <a href="#">{{$item->city->name}}</a>
+                            </div>
+                        </div>
+                        <h3 class="place-title"><a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}">{!! Str::limit($item->name, 20) !!}</a></h3>
+                        <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                        <div class="entry-bottom">
+                            <div class="place-preview">
+                                <div class="place-rating">
+                                    <span>{{$item->like->count()}}</span>
+                                    <i class="la la-heart"></i>
+                                </div>
+                                
+                            </div>
+                            <div class="place-price">
+                                <span>{{count($item->tickets)}} Bilhetes</span>
+                            </div>
+                        </div>
+                        <div class="entry-bottom">
+                            <div class="place-preview">
+                                <div class="place-rating">
+                                    {{-- <span>DOM, 14 MAR - 15:30</span> --}}
+                                    <span>{{date('l d M',strtotime($item->start_date))}}</span>
+
+                                </div>
+
+                            </div>
+                            <div class="place-price">
+                                <span>{{$item->tickets->min('price')}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            @empty
-                <p>Nenhum evento</p>
-            @endforelse
-         
-
+            </div>
         
+    @empty
+        <p>Nenhum evento</p>
+    @endforelse
+    
+ 
+</div>
+</div>
                 
               
 

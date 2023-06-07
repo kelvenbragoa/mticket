@@ -11,15 +11,10 @@
 </head>
 <body>
     <div class="form-body without-side">
-        <div class="website-logo">
-            <a href="/">
-                <div class="logo">
-                    <h1 class="logo"><a href="/">MyTicket</a></h1>
-                </div>
-            </a>
-        </div>
+        
         <div class="row">
             <div class="img-holder">
+                
                 <div class="bg"></div>
                 <div class="info-holder">
                     <img src="images/graphic3.svg" alt="">
@@ -28,6 +23,26 @@
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
+                       
+                        <h1>
+                            <a style="
+                            text-align:center;
+                            border: 0;
+                            font-size: 100%;
+                            margin: 0;
+                            outline: 0;
+                            padding: 0;
+                            vertical-align: baseline;
+                            color: #0097ff;
+                            text-decoration: none;
+                            transition: all 0.3s ease-in-out 0s;
+                            -moz-transition: all 0.3s ease-in-out 0s;
+                            -o-transition: all 0.3s ease-in-out 0s;
+                            -webkit-transition: all 0.3s ease-in-out 0s;
+                            -ms-transition: all 0.3s ease-in-out 0s;"
+                            
+                            href="{{URL::to('/')}}"> MTICKET </a></h1>
+                       
                         <h3>Entre com sua conta</h3>
                         <p>Acesse a todos o eventos em uma só plataforma..</p>
                         <form method="POST" action="{{ route('login') }}">
@@ -52,10 +67,10 @@
                                 <button id="submit" type="submit" class="ibtn">Entrar</button> <a href="{{ route('password.request') }}">Esqueceu password?</a>
                             </div>
                         </form>
-                        <div class="other-links">
+                        {{-- <div class="other-links">
                             <div class="text">Or login with</div>
                             <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a><a href="#"><i class="fab fa-google"></i>Google</a><a href="#"><i class="fab fa-linkedin-in"></i>Linkedin</a>
-                        </div>
+                        </div> --}}
                         <div class="page-links">
                             <a href="{{URL::to('/register')}}">Registrar nova conta</a>
                         </div>

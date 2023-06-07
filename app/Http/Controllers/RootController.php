@@ -45,7 +45,8 @@ class RootController extends Controller
 
         $events= Event::where('province_id',$provincia)->where('status_id',2)->orderBy('id','desc')->get();
         $provincia = Province::find($provincia);
-        return view('frontend.eventos-provincia',compact('events','provincia'));
+        $provinces = Province::limit(4)->get();
+        return view('frontend.eventos-provincia',compact('events','provincia','provinces'));
         
     }
 

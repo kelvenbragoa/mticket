@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title> Mticket - Ingressos para Eventos, Shows, Teatros, Cursos e mais</title>
     <meta name="robots" content="index, follow" />
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
+    <meta name="keywords" content="ingressos, tickets, mtickets" />
+    <meta name="description" content="Mticket o seu app de bilhetes online" />
 
     <!-- favicons -->
     <link rel="shortcut icon" href="{{asset('template2/images/ttttt.png')}}">
@@ -69,12 +69,44 @@
                                     <div class="popup__content">
                                         <div class="popup__user popup__box open-form">
                                                 @auth
-                                                <a title="Login" href="{{URL::to('/home')}}" class="open-login">Perfil</a>
+                                                <a title="Login" href="{{URL::to('/home')}}">Perfil</a>
                                                 @else
-                                                <a title="Login" href="{{URL::to('/login')}}" class="open-login">Entrar</a>
-                                                <a title="Sign Up" href="{{URL::to('/register')}}" class="open-signup">Registrar</a>
+                                                <a title="Login" href="{{URL::to('/login')}}">Entrar/Registrar</a>
+                                                {{-- <a title="Sign Up" href="{{URL::to('/register')}}">Registrar</a> --}}
                                                 @endauth
                                         </div>
+                                        <div class="popup__user popup__box open-form">
+                                            <a href="{{URL::to('/todos-eventos')}}" title="Eventos">Eventos</a>
+                                        </div>
+
+                                        @auth
+                                        <div class="popup__user popup__box open-form">
+                                            <a href="{{route('carrinho.index')}}" title="Carrinho">Carrinho</a>
+                                        </div>
+                                        @endauth
+
+                                        @auth
+                                        <div class="popup__user popup__box open-form">
+                                            @if (Auth::user()->is_promotor == 1)
+                                                <a href="{{route('eventos.create')}}" title="Organizar eventos">Organizar evento</a>
+                                            @else
+                                                <a href="{{URL::to('/ser-promotor')}}" title="Seja um promotor">Seja um promotor</a>
+                                            @endif
+                                        </div>
+                                        @endauth
+
+                                        {{-- <div class="popup__user popup__box open-form">
+                                            @auth
+
+                                                @if (Auth::user()->is_promotor == 1)
+                                                    <a href="{{route('eventos.create')}}" title="Organizar eventos">Organizar evento</a>
+                                                @endif
+
+                                            @else
+                                                <a href="{{URL::to('/ser-promotor')}}" title="Seja um promotor">Seja um promotor</a>
+                                            @endauth
+                                        </div> --}}
+                                       
                                         <!-- .popup__user -->
                                         <div class="popup__destinations popup__box">
                                             <ul class="menu-arrow">
@@ -84,25 +116,12 @@
                                                         @foreach (\App\Models\Province::orderBy('name','asc')->get() as $item)
                                                             <li><a href="{{URL::to('/provincia/'.$item->id.'/eventos')}}" title="{{$item->name}}">{{$item->name}}</a></li>
                                                         @endforeach
-                                                        {{-- <li><a href="city-details-1.html" title="New York">Beira</a></li>
-                                                        <li><a href="city-details-1.html" title="Barcelona">Tete</a></li>
-                                                        <li><a href="city-details-1.html" title="Amsterdam">Nampula</a></li>
-                                                        <li><a href="city-details-1.html" title="Los Angeles">Chimoio</a></li>
-                                                        <li><a href="city-details-1.html" title="London">Inhambane</a></li>
-                                                        <li><a href="city-details-1.html" title="Bangkok">Quelimane</a></li>
-                                                        <li><a href="city-details-1.html" title="Paris">Zambezia</a></li> --}}
+                                                       
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="popup__menu popup__box">
-                                            <ul class="menu-arrow">
-
-                                            </ul>
-                                            </li>
-
-                                            </ul>
-                                        </div>
+                                        
                                         <!-- .popup__menu -->
                                     </div>
                                     <!-- .popup__content -->
@@ -120,10 +139,11 @@
                                     <i class="la la-times"></i>
                                 </a>
                                 <!-- .search__close -->
-                                <form action="{{URL::to('/todos-eventos')}}"  class="site-banner__search layout-02">
+                                <form action="{{URL::to('/pesquisar-eventos')}}" method="GET" class="site-banner__search layout-02">
+                                    @csrf
                                     <div class="field-input">
                                         <label for="s">Oque?</label>
-                                        <input class="site-banner__search__input open-suggestion" id="s" type="text" name="search" placeholder="Oque?" autocomplete="off">
+                                        <input class="site-banner__search__input open-suggestion" id="s" type="text" name="category" placeholder="Oque?" autocomplete="off">
                                         <div class="search-suggestions name-suggestions">
                                             <ul>
                                                 @foreach (\App\Models\Category::orderBy('name','asc')->get() as $item)
@@ -140,10 +160,10 @@
                                     <!-- .site-banner__search__input -->
                                     <div class="field-input">
                                         <label for="loca">Aonde?</label>
-                                        <input class="site-banner__search__input open-suggestion" id="loca" type="text" name="province_id" placeholder="Aonde?" autocomplete="off">
+                                        <input class="site-banner__search__input open-suggestion" id="loca" type="text" name="province" placeholder="Aonde?" autocomplete="off">
                                         <div class="search-suggestions location-suggestions">
                                             <ul>
-                                                <li><a href="#"><i class="las la-location-arrow"></i><span>Todos Lugares</span></a></li>
+                                                
                                                 @foreach (\App\Models\Province::orderBy('name','asc')->get() as $item)
                                                     <li><a href="#"><span>{{$item->name}}</span></a></li>
                                                 @endforeach
@@ -168,7 +188,7 @@
                             <nav class="main-menu">
                                 <ul>
                                     <li>
-                                         @auth
+                                            @auth
                                             @if (Auth::user()->is_promotor == 1)
                                                 <a href="{{route('eventos.create')}}" title="Organizar eventos">Organizar evento</a>
                                             @endif
@@ -177,9 +197,12 @@
                                             @endauth
 
                                     </li>
+                                    @auth
                                     <li>
                                         <a href="{{route('carrinho.index')}}" title="Organizar eventos">Carrinho</a>
                                     </li>
+                                    @endauth
+                                   
                                     <li>
                                         
                                          <a href="{{URL::to('/todos-eventos')}}" title="Eventos">Eventos</a>
@@ -211,12 +234,17 @@
                                                 <!-- .site__search -->
                                             </div>
                                              @auth
-                                                
+                                             <div class="right-header__button btn">
+                                                <a title="Add place" href="{{URL::to('/home')}}">
+
+                                                    <span>Perfil</span>
+                                                </a>
+                                            </div>
                                             @else
                                             <div class="right-header__button btn">
                                                 <a title="Add place" href="{{URL::to('/login')}}">
 
-                                                    <span>Cadastre-se</span>
+                                                    <span>Login</span>
                                                 </a>
                                             </div>
                                                 {{-- <a href="{{URL::to('/login')}}" title="Entrar">Entrar</a> --}}

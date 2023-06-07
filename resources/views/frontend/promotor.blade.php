@@ -66,7 +66,7 @@
                     <div class="features-info ">
                         <h3>Crie <br> <span>O Seu</span> Evento</h3>
                         <p>Em menos de 5 minutos, você cadastra todas as informações do seu evento, como data horário e local. Cria os tipos de bilhete que irá vender e personaliza uma página exclusiva para o seu evento.</p>
-                        <a href="# " class="more " title="Read more ">Read more</a>
+                        <a href="# " class="more " title="Ler mais">Ver mais</a>
                     </div>
                 </div>
                 <!-- .features-item -->
@@ -77,7 +77,7 @@
                     <div class="features-info ">
                         <h3>Divulgue a <br> sua <span>Pagina</span></h3>
                         <p>Depois de criado, a sua página já está no ar e o seu evento publicado no nosso site e também no app. Pronto, todo mundo já pode acessar a página do seu evento para comprar ou fazer inscrições!. </p>
-                        <a href="# " class="more " title="Read more ">Read more</a>
+                        <a href="# " class="more " title="Ler mais">Ver mais</a>
                     </div>
                 </div>
                 <!-- .features-item -->
@@ -88,7 +88,7 @@
                     <div class="features-info ">
                         <h3>Acompanhe e<br> <span>gerencie </span> suas vendas</h3>
                         <p>Agora é só acompanhar o andamento das suas vendas, gerenciar os compradores, reenviar ingressos se necessário, e até mesmo emitir cortesias para seus convidados ou patrocinadores. </p>
-                        <a href="# " class="more " title="Read more ">Read more</a>
+                        <a href="# " class="more " title="Ler mais">Ver mais</a>
                     </div>
                 </div>
                 <!-- .features-item -->
@@ -100,7 +100,7 @@
                         <h3>Controle a entrada <br> dos <span>compradores</span></h3>
                         <p>No dia do seu evento, você tem a sua disposição uma relação com todos os compradores do seu evento para poder fazer o controle de conferência dos bilhete. E ainda pode baixar o nosso app para Organizadores e fazer a leitura
                             dos ingressos direto pela câmera do seu celular!</p>
-                        <a href="# " class="more " title="Read more ">Read more</a>
+                        <a href="# " class="more " title="Ler mais">Ver mais</a>
                     </div>
                 </div>
                 <!-- .features-item -->
@@ -111,7 +111,7 @@
                     <div class="features-info ">
                         <h3>Receba o dinheiro <br> <span>das </span> suas vendas</h3>
                         <p>Agora é só acompanhar o andamento das suas vendas, gerenciar os compradores, reenviar ingressos se necessário, e até mesmo emitir cortesias para seus convidados ou patrocinadores. </p>
-                        <a href="# " class="more " title="Read more ">Read more</a>
+                        <a href="# " class="more " title="Ler mais">Ver mais</a>
                     </div>
                 </div>
             </div>
@@ -168,6 +168,10 @@
             <div class="payment-method">
                 <ul>
                     <li><img src="{{asset('template2/images/assets/paypal.png')}}" alt="Paypal"></li>
+                    <li><img src="{{asset('template2/images/assets/mpesa.png')}}" alt="Mpesa"></li>
+                    <li><img src="{{asset('template2/images/assets/emola.png')}}" alt="Emola"></li>
+                    <li><img src="{{asset('template2/images/assets/bim.png')}}" alt="Bim"></li>
+                    <li><img src="{{asset('template2/images/assets/mkesh.png')}}" alt="Mkesh"></li>
                     <li><img src="{{asset('template2/images/assets/stripe.png')}}" alt="Stripe"></li>
                     <li><img src="{{asset('template2/images/assets/skrill.png')}}" alt="Skrill"></li>
                     <li><img src="{{asset('template2/images/assets/master-card.png')}}" alt="Master-card"></li>

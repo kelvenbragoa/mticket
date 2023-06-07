@@ -56,6 +56,48 @@
         </div> --}}
         <div class="container">
             <div class="row">
+                <div class="col-lg-4">
+                    <div class="sidebar sidebar-shadow sidebar-sticky">
+                        <aside class="widget widget-sb-detail">
+                           
+                            <div class="widget-top">
+                                <div class="flex">
+                                    <div class="store-detail">
+                                        <span class="open">A venda</span>
+                                        <img src="/storage/{{$event->user->image}}" alt="Autor">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="map-detail">
+                                <div id="map"></div>
+                                <div class="map-local"><i class="las la-directions"></i></div>
+                                <a href="#" class="direction btn" target="_blank">Direções<i class="las la-external-link-alt"></i></a>
+                            </div>
+
+                           <div class="business-info">
+                            <h4>Informações</h4>
+                            <ul>
+                                <li><i class="las la-clock"></i> <a>{{date('l M Y',strtotime($event->start_date))}}</a></li>
+                                <li><i class="las la-tag"></i> <a>{{$event->tickets->count()}} Bilhetes disponíveis</a></li>
+                                <li><i class="las la-map-marked-alt large"></i><a>{{$event->address}} - {{$event->city->name}}</a></li>
+                                <li><i class="la la-phone large"></i> <a href="tel:{{$event->phone}}">{{$event->phone}}</a></li>
+                                <li><i class="la la-globe large"></i> <a href="{{$event->website}}">{{$event->website}}</a></li>
+                            </ul>
+                            <div class="button-wrap">
+                                <div class="button"><a href="{{URL::to('/checkout/'.$event->id.'/evento')}}" class="btn">Proceder</a></div>
+
+                            </div>
+                        </div>
+                         
+                           
+                           
+                        </aside>
+                        <!-- .widget-reservation -->
+                    </div>
+                    <!-- .sidebar -->
+                </div>
                 <div class="col-lg-8">
                     <div class="place__left">
                         <ul class="place__breadcrumbs breadcrumbs">
@@ -98,11 +140,12 @@
                                 <ol><i class="las la-map-marked-alt large"></i> <a href="#">{{$event->address}} - {{$event->city->name}} </a></ol>
                                 <ol><i class="las la-envelope"></i><a href="mailto:{{$event->email}}">{{$event->email}}</a></ol>
                                 <ol><i class="la la-phone large"></i> <a href="tel:+31 20-235-2117">{{$event->phone}}</a></ol>
-                                <ol><i class="la la-globe large"></i> <a href="{{$event->website}}" target="_blank">{{$event->website}}</a></ol>
-                                <ol><i class="la la-facebook large"></i> <a href="{{$event->facebook}}" target="_blank">{{$event->facebook}}</a></ol>
-                                <ol><i class="la la-instagram large"></i> <a href="{{$event->instagram}}" target="_blank">{{$event->instagram}}</a></ol>
-                                <ol><i class="la la-twitter large"></i> <a href="{{$event->twitter}}" target="_blank">{{$event->twitter}}</a></ol>
-                                <ol><i class="la la-youtube large"></i> <a href="{{$event->youtube}}" target="_blank">Clique aqui</a></ol>
+
+                                @if ($event->website != null) <ol><i class="la la-globe large"></i> <a href="{{$event->website}}" target="_blank">{{$event->website}}</a></ol> @endif 
+                                @if ($event->facebook != null)<ol><i class="la la-facebook large"></i> <a href="{{$event->facebook}}" target="_blank">{{$event->facebook}}</a></ol>@endif 
+                                @if ($event->instagram != null)<ol><i class="la la-instagram large"></i> <a href="{{$event->instagram}}" target="_blank">{{$event->instagram}}</a></ol>@endif 
+                                @if ($event->twitter != null)<ol><i class="la la-twitter large"></i> <a href="{{$event->twitter}}" target="_blank">{{$event->twitter}}</a></ol>@endif 
+                                @if ($event->youtube != null)<ol><i class="la la-youtube large"></i> <a href="{{$event->youtube}}" target="_blank">Clique aqui</a></ol>@endif 
                             </ul>
                             <hr>
                            
@@ -131,8 +174,9 @@
                                             <img src="/storage/sys/musci.jpeg" alt="music">
                                             <div class="menu-info">
                                                 <h4>{{$item->name}}</h4>
-                                                <p>{{date('H:i',strtotime($item->start_time))}} até {{date('H:i',strtotime($item->end_time))}}</p>
+                                                
                                                 <p>{{$item->description}}</p>
+                                                <span class="price">{{date('H:i',strtotime($item->start_time))}} até {{date('H:i',strtotime($item->end_time))}}</span>
                                                
                                             </div>
                                         </div>
@@ -148,6 +192,32 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- .place__box -->
+                        <div class="place__box">
+                            <h3>Duvidas?</h3>
+                            <ul class="faqs-accordion">
+                                <li>
+                                    <h4>Em caso de cancelamento de evento?</h4>
+                                    <div class="desc">
+                                        <p>Em caso de cancelamento do evento o promotor irá informar em relação a proxima data.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h4>Os ingressos não adiquiridos na plataforma mticket?</h4>
+                                    <div class="desc">
+                                        <p>A aquisição dos ingressos para eventos só serão aceites se forem adiquiridos a partir da plataforma.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h4>Como é feito o scan</h4>
+                                    <div class="desc">
+                                        <p>Após a aquisição do ingresso irá receber o mesmo em forma de QrCode, baste que apresente na portaria.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- .place__box -->
                         
                         <div class="place__box place__box--reviews">
                             <h3 class="place__title--reviews">
@@ -157,43 +227,69 @@
                                     <i class="la la-heart"></i>
                                 </span>
                             </h3>
+                            <div class="review-form">
+                                <h3>Escrever um comentário</h3>
+                                <form action="{{route('review.store')}}" method="POST">
+                                   @csrf
+                                    <div class="field-textarea">
+                                        <img class="author-avatar" src="/storage/{{Auth::user()->image ?? 'profile/default.jpg'}}" alt=""> 
+                                        <textarea name="review" placeholder="Escrever um comentário"></textarea>
+                                        <input type="hidden" value="{{$event->id}}" name="event_id">
+                                        
+                                    </div>
+                                    @auth
+                                    <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
+                                        <div class="field-submit">
+                                            <input type="submit" class="btn" value="Submeter">
+                                        </div>
+                                    @else
+                                        <div class="field-submit">
+                                            <input class="btn" value="Faça login" style="background-color: red">
+                                        </div>
+                                    @endauth
+                                    
+                                </form>
+                            </div>
+                            <br>
+
                             <ul class="place__comments">
 
                                 @foreach ($event->review as $item)
                                 <li>
                                     <div class="place__author">
                                         <div class="place__author__avatar">
-                                            <a title="{{$item->user->name}}" href="#"><img src="/storage/{{$item->user->image ?? 'profile/default.jpg'}}" alt=""></a>
+                                            <a title="{{$item->user->name}}" ><img src="/storage/{{$item->user->image ?? 'profile/default.jpg'}}" alt=""></a>
                                         </div>
                                         <div class="place__author__info">
-                                            <a title="Sebastian" href="#">{{$item->user->name}}</a>
+                                            <a title="Sebastian" >{{$item->user->name}}</a>
                                            
-                                            <span class="time">{{$item->created_at->format('H:i d-m-Y')}}</span>
+                                            <span class="time">{{$item->created_at->format('l M')}}</span>
                                         </div>
                                     </div>
                                     <div class="place__comments__content">
                                         <p>{{$item->review}}.</p>
                                     </div>
-                                    {{-- <a title="Reply" href="#" class="place__comments__reply">
-                                        <i class="la la-comment-dots"></i> Responder
+                                    @if ($item->reply != null)
+                                    <a  class="place__comments__reply">
+                                        <i class="la la-comment-dots"></i>
                                     </a>
                                     <ul>
                                         <li>
                                             <div class="place__author">
                                                 <div class="place__author__avatar">
-                                                    <a title="Chiemeka" href="#"><img src="/storage/{{Auth::user()->image ?? 'profile/default.jpg'}}" alt=""></a>
+                                                    <a title="Chiemeka" ><img src="/storage/{{$event->user->image ?? 'profile/default.jpg'}}" alt=""></a>
                                                 </div>
                                                 <div class="place__author__info">
-                                                    <a title="Chiemeka" href="#">Promotor</a>
-                                                   
-                                                    <span class="time">October 1, 2022</span>
+                                                    <a title="Chiemeka" >{{$event->user->name}}</a>
+
                                                 </div>
                                             </div>
                                             <div class="place__comments__content">
                                                 <p>Top Top, isso vai arder.</p>
                                             </div>
                                         </li>
-                                    </ul> --}}
+                                    </ul>
+                                    @endif
                                 </li>
 
                                 @endforeach
@@ -213,144 +309,13 @@
                                     </a>
                                 </li> --}}
                             </ul>
-                            <div class="review-form">
-                                <h3>Escrever um comentário</h3>
-                                <form action="{{route('review.store')}}" method="POST">
-                                   @csrf
-                                    <div class="field-textarea">
-                                        <img class="author-avatar" src="/storage/{{Auth::user()->image ?? 'profile/default.jpg'}}" alt="">
-                                        <textarea name="review" placeholder="Escrever um comentário"></textarea>
-                                        <input type="hidden" value="{{$event->id}}" name="event_id">
-                                        
-                                    </div>
-                                    @auth
-                                    <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
-                                        <div class="field-submit">
-                                            <input type="submit" class="btn" value="Submeter">
-                                        </div>
-                                    @else
-                                        <div class="field-submit">
-                                            <input class="btn" value="Faça login" style="background-color: red">
-                                        </div>
-                                    @endauth
-                                    
-                                </form>
-                            </div>
+                            
                         </div>
                         <!-- .place__box -->
                     </div>
                     <!-- .place__left -->
                 </div>
-                <div class="col-lg-4">
-                    <div class="sidebar sidebar-shadow sidebar-sticky">
-                        <aside class="widget widget-sb-detail">
-                            <div class="widget-top">
-                                <div class="flex">
-                                    <div class="store-detail">
-                                        <span class="open">Inicio</span>
-                                        <div class="toggle-select">
-                                            <div class="toggle-show"> {{date('d-m-Y',strtotime($event->start_date))}} ás {{$event->start_time}} </div>
-                                            
-                                        </div>
-                                    </div>
-                                   
-                                    <img src="/storage/{{$event->user->image}}" alt="Autor">
-                                    
-                                </div>
-                                <div class="flex">
-                                    <div class="store-detail">
-                                        <span class="close">Termina</span>
-                                        <div class="toggle-select">
-                                            <div class="toggle-show"> {{date('d-m-Y',strtotime($event->end_date))}} ás {{$event->end_time}} </div>
-                                            
-                                        </div>
-                                    </div>
-                                   
-                                   
-                                    
-                                </div>
-                            </div>
-                           <hr>
-
-                           <div class="business-info">
-                            <h4>Informações Evento - Promotor</h4>
-                            <ul>
-                                <li><i class="las la-person-booth"></i> <a href="#" target="_blank">{{$event->tickets->count()}} Bilhetes disponíveis</a></li>
-                                <li><i class="las la-map-marked-alt large"></i><a href="mailto:info@getgolo.com">{{$event->address}} - {{$event->city->name}}</a></li>
-                                <li><i class="la la-phone large"></i> <a href="tel:+31 20-235-2117">{{$event->phone}}</a></li>
-                                <li><i class="la la-globe large"></i> <a href="{{$event->website}}" target="_blank">{{$event->website}}</a></li>
-                            </ul>
-                            <div class="button-wrap">
-                                <div class="button"><a href="{{URL::to('/checkout/'.$event->id.'/evento')}}" class="btn">Proceder</a></div>
-
-                            </div>
-                        </div>
-                         
-                            {{-- <div class="business-info">
-                                <h4>Bilhetes Eventos</h4>
-                                <form action="" class="shop-details__addcart">
-                                    @csrf
-                                    @forelse ($event->tickets as $item)
-                                    <div class="row">
-                                        <div class="col-lg-7">
-                                            <div class="shop-details__quantity1">
-                                            {{$item->name}}({{$item->price}}MT)
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5">
-
-                                            @if ($item->end_date >= date('Y-m-d') && $item->end_time >= date('H:i'))
-                                            <div class="shop-details__quantity">
-                                                <span class="minus">		
-                                                    <i class="la la-minus"></i>
-                                                </span>
-                                                <input type="number" name="quantity" value="0" class="qty">
-                                                <span class="plus">											
-                                                    <i class="la la-plus"></i>
-                                                </span>
-                                                
-                                            </div>
-                                            @else
-                                           
-                                            <div class="shop-details__quantity">
-                                               
-                                                <input type="text" style="background-color: red; color:white" value="Esgostado" readonly class="qty">
-                                            </div>
-                                            @endif
-                                            
-
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    @empty
-                                        <p>Ainda não bilhetes para este evento</p>
-                                    @endforelse
-                                    
-
-                                    
-
-                                    <div class="button-wrap">
-                                        @auth
-                                            <input type="submit" class="btn" value="Comprar">
-                                        @else
-                                            <div class="button"><a href="{{URL::to('/login')}}" class="btn" style="background-color: red">Faça login</a></div>
-                                        @endauth
-                                        
-                                       <!--   <div class="button"><a href="#" class="btn btn-border">Contacto</a></div>-->
-                                    </div>
-                                    
-                                   
-                                </form>
-                                
-                             
-                                
-                            </div> --}}
-                           
-                        </aside>
-                        <!-- .widget-reservation -->
-                    </div>
-                    <!-- .sidebar -->
-                </div>
+                
             </div>
         </div>
     </div>
@@ -368,27 +333,21 @@
                             <div class="place-item layout-02 place-hover" data-maps_name="myticket">
                                 <div class="place-inner">
                                     <div class="place-thumb hover-img">
-                                        <a class="entry-thumb" href=""><img src="/storage/{{$item->image}}" alt=""></a>
-                                        <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist " data-place-id="185">
-                                            <span class="icon-heart">
-                                                <i class="la la-bookmark large"></i>
-                                            </span>
-                                        </a>
-                                        <a class="entry-category rosy-pink" href="#">
-                                            <i class="las la-user"></i><span>{{$item->user->name}}</span>
-                                        </a>
+                                        <a class="entry-thumb" href="{{URL::to('/detalhes/'.$item->id.'/evento')}}"><img src="/storage/{{$item->image}}" alt=""></a>
+                                       
+                                       
                                         <a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}" class="author" title="Author"> <img src="/storage/{{$item->user->image}}" alt="Author"></a>
                                     </div>
                                     <div class="entry-detail">
                                         <div class="entry-head">
                                             <div class="place-type list-item">
-                                                <span>{{$item->user->name}}</span>
+                                                <span>{{$item->user->company_name}}</span>
                                             </div>
                                             <div class="place-city">
-                                                <a href="#">{{$item->city->name}}</a>
+                                                <a href="">{{$item->city->name}}</a>
                                             </div>
                                         </div>
-                                        <h3 class="place-title"><a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}">{{$item->name}}</a></h3>
+                                        <h3 class="place-title"><a title="{{$item->name}}" href="{{URL::to('/detalhes/'.$item->id.'/evento')}}">{!! Str::limit($item->name, 20) !!}</a></h3>
                                         <div class="open-now"><i class="las la-door-open"></i>A venda</div>
                                         <div class="entry-bottom">
                                             <div class="place-preview">
@@ -400,6 +359,20 @@
                                             </div>
                                             <div class="place-price">
                                                 <span>{{count($item->tickets)}} Bilhetes</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="entry-bottom">
+                                            <div class="place-preview">
+                                                <div class="place-rating">
+                                                    {{-- <span>DOM, 14 MAR - 15:30</span> --}}
+                                                    <span>{{date('l d M',strtotime($item->start_date))}}</span>
+                
+                                                </div>
+                
+                                            </div>
+                                            <div class="place-price">
+                                                <span>{{$item->tickets->min('price')}}</span>
                                             </div>
                                         </div>
                                     </div>

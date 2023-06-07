@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="footer__top__info">
-                        <h1 class="logo"><a href="index.html">Mticket</a></h1>
+                        <h1 class="logo"><a href="/">Mticket</a></h1>
                         <p class="footer__top__info__desc">Descubra coisas incríveis para fazer onde quer que vá.</p>
                         <div class="footer__top__info__app">
                             <a title="App Store" href="#" class="banner-apps__download__iphone"><img src="{{asset('template2/images/assets/app-store.png')}}" alt="App Store"></a>
@@ -18,9 +18,8 @@
                     <aside class="footer__top__nav">
                         <h3>Mticket</h3>
                         <ul>
-                            <li><a title="About Us" href="sobrenos.html">Sobre nós</a></li>
-                            <li><a title="Blog" href="contacto.html">Localização</a></li>
-                            <li><a title="Blog" href="faqs.html">Perguntas frequentes</a></li>
+                            <li><a title="About Us" href="{{URL::to('/acerca-nos')}}">Sobre nós</a></li>
+                            <li><a title="Blog" href="{{URL::to('/faqs')}}">Perguntas frequentes</a></li>
                         </ul>
                     </aside>
                 </div>
@@ -28,10 +27,10 @@
                     <aside class="footer__top__nav">
                         <h3>Suporte</h3>
                         <ul>
-                            <li><a title="Get in Touch" href="contacto.html">Entre em contacto</a></li>
-                            <li><a title="Help Center" href="faqs.html">Duvidas frequentes</a></li>
+                            <li><a title="Get in Touch" href="{{URL::to('/contactos')}}">Entre em contacto</a></li>
+                            <li><a title="Help Center" href="{{URL::to('/faqs')}}">Duvidas frequentes</a></li>
 
-                            <li><a title="How it works" href="#">Como Funciona</a></li>
+                            {{-- <li><a title="How it works" href="#">Como Funciona</a></li> --}}
                         </ul>
                     </aside>
                 </div>
@@ -39,7 +38,7 @@
                     <aside class="footer__top__nav footer__top__nav--contact">
                         <h3>Contacte nós</h3>
                         <p>Email: support@mticket.co.mz</p>
-                        <p>Phone: +258842280974</p>
+                        <p>Phone: +258 84 0000</p>
                         <ul>
                             <li class="facebook">
                                 <a title="Facebook" href="#">
@@ -68,7 +67,7 @@
         </div>
         <!-- .top-footer -->
         <div class="footer__bottom">
-            <p class="footer__bottom__copyright">2023 &copy; <a title="Uxper Team" href="#">connectUS.co.mz</a>. All rights reserved.</p>
+            <p class="footer__bottom__copyright">{{date('Y')}} &copy; <a title="Uxper Team" href="#">connectUS.co.mz</a>. All rights reserved.</p>
         </div>
         <!-- .top-footer -->
     </div>
@@ -83,3 +82,6 @@
 </body>
 
 </html>
+
+<script src="{{asset('template2/js/map-single.js')}}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvPDNG6pePr9iFpeRKaOlaZF_l0oT3lWk&callback=initMap" async defer></script>

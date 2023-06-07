@@ -38,6 +38,7 @@ Route::get('/todos-eventos', [App\Http\Controllers\User\EventsController::class,
 Route::get('/todas-categorias', [App\Http\Controllers\User\EventsController::class, 'frontedAllCategories']);
 Route::get('/categoria/{categoria}/eventos', [App\Http\Controllers\RootController::class, 'eventsCategory']);
 Route::get('/provincia/{provincia}/eventos', [App\Http\Controllers\RootController::class, 'eventsProvince']);
+Route::get('/pesquisar-eventos', [App\Http\Controllers\User\EventsController::class, 'search']);
 
 
 

@@ -26,6 +26,17 @@ class EventsController extends Controller
         
     }
 
+    public function search(Request $request){
+        $data = $request->all();
+
+        $province = Province::where('name',$data['province'])->first();
+        $category = Category::where('name',$data['category'])->first();
+
+        $events = Event::where('province_id',$province->id)->where('main_category_id',$category->id)->where('status_id',2)->get();
+
+        return view('frontend.search',compact('events'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
