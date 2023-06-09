@@ -244,7 +244,7 @@
                                         </div>
                                     @else
                                         <div class="field-submit">
-                                            <input class="btn" value="Faça login" style="background-color: red">
+                                            <input class="btn" value="Faça o login" style="background-color: red">
                                         </div>
                                     @endauth
                                     

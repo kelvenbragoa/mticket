@@ -11,9 +11,24 @@
         </div>
     </div>
     <main class="page ">
+
+        
         <section class="shopping-cart ">
+
+            
             <div class="container ">
-            <form action="{{route('checkout.store')}}" method="POST">
+
+
+            <div class="mb-4">
+                {{$event->id}}
+                @if (Session::has('messageSuccess'))
+                       
+                <div class="alert alert-primary" role="alert">
+                    {{Session::get('messageSuccess')}}
+                  </div>
+            @endif
+            </div>
+            <form action="{{route('carrinho.store')}}" method="POST">
                 @csrf
                 <input type="hidden" name="event_id" value="{{$event->id}}">    
                <div class="content ">
@@ -57,7 +72,7 @@
                                                                         <i class="la la-plus "></i>
                                                                 </span>
                                                                             
-                                                                <input type="number" name="quantity[]" value="0" class="qty ">
+                                                                <input type="number" name="quantity[]" value="0" id="qtyticket" class="qty ">
                                                                 <input type="hidden" name="ticket_id[]" value="{{$item->id}}">
                                                                 <input type="hidden" name="price[]" value="{{$item->price}}">
                                                                 <span class="minus ">		
@@ -91,17 +106,12 @@
                         </div>
                         <div class="col-md-12 col-lg-4 ">
                             <div class="summary ">
-                                <h3>Total</h3>
-                                {{--<div class="summary-item "><span class="text ">Subtotal</span><span class="price ">0 MT</span></div>
-                                <div class="summary-item "><span class="text ">Descontos</span><span class="price ">0 MT</span></div>
-                                <div class="summary-item "><span class="text ">Enviou</span><span class="price ">0 MT</span></div> --}}
-                                <div class="summary-item "><span class="text ">Total</span><span class="price ">0 MT</span></div>
-                                <hr>
-                                {{-- <a href="" class="btn btn-primary btn-lg btn-block " title="Pagar ">Efetuar pagamento</a> --}}
+                                <h3>Proceder para o carrinho de compras</h3>
+                               
                                 @auth
-                                    <button class="btn btn-primary btn-lg btn-block " type="submit">Efetuar pagamento</button>
+                                    <button class="btn btn-primary btn-lg btn-block " type="submit">Adicionar ao carrinho de compras</button>
                                 @else
-                                    <a class="btn btn-primary btn-lg btn-block " href="{{route('login')}}">Login</a>
+                                    <a class="btn btn-primary btn-lg btn-block " style="background-color: red" href="{{route('login')}}">Faça o Login</a>
                                 @endauth
                                 
                             </div>
@@ -120,5 +130,7 @@
 <!-- .other-products -->
 </main>
 <!-- .site-main -->
+
+
 
 @endsection

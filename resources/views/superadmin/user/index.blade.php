@@ -30,6 +30,7 @@
                                 <th style="width:40%;">Nome</th>
                                 <th style="width:40%;">Email</th>
                                 <th style="width:40%;">Telefone</th>
+                                <th style="width:80%;">É promotor</th>
                                 <th style="width:80%;">Tipo</th>
                                 <th style="width:80%;">Genêro</th>
                                 <th style="width:80%;">Província</th>
@@ -43,13 +44,21 @@
                                     <td>{{$item->name ?? ''}}</td>
                                     <td>{{$item->email ?? ''}}</td>
                                     <td>{{$item->mobile ?? ''}}</td>
+                                    <td>@if ($item->is_promotor == 1)
+                                        Sim
+                                    @else
+                                        Não
+                                    @endif</td>
                                     <td>{{$item->role->name ?? ''}}</td>
                                     <td>{{$item->gender->name ?? ''}}</td>
                                     <td>{{$item->province->name ?? ''}}</td>
                                     <td>{{$item->city->name ?? ''}}</td>
 
                                     <td class="table-action">
-                                       {{-- <a href="{{URL::to('/user/'.$item->id.'/edit')}}"><i class="align-middle" data-feather="edit-2"></i></a>  --}}
+                                        @if ($item->role_id != 1)
+                                        <a href="{{URL::to('/user/'.$item->id.'/edit')}}"><i class="align-middle" data-feather="edit-2"></i></a> 
+                                        @endif
+                                        
                                        
                                     </td>
                                 </tr>

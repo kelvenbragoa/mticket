@@ -93,7 +93,7 @@ class UserController extends Controller
         $user->update(
             $data,
             );
-        return back()->with('message','Success');
+        return redirect()->route('user.index')->with('message','Success');
     }
 
     /**

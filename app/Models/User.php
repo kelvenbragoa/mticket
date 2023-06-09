@@ -27,6 +27,7 @@ class User extends Authenticatable
         'city_id',
         'bi',
         'gender_id',
+        'is_promotor',
         'image',
         'description',
         'company_name',
