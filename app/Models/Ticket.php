@@ -10,6 +10,10 @@ class Ticket extends Model
     use HasFactory;
     protected $guarded = [];
 
+    
+    public function event(){
+        return $this->hasOne('App\Models\Event', 'id', 'event_id');
+    }
 
     
 

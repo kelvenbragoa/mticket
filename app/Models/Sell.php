@@ -17,4 +17,8 @@ class Sell extends Model
     public function ticket(){
         return $this->hasOne('App\Models\Ticket', 'id', 'ticket_id');
     }
+
+    public function event(){
+        return $this->hasOne('App\Models\Event', 'id', 'event_id');
+    }
 }

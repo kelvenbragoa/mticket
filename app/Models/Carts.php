@@ -9,4 +9,8 @@ class Carts extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function ticket(){
+        return $this->hasOne('App\Models\Ticket', 'id', 'ticket_id');
+    }
 }

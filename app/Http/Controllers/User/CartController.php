@@ -18,7 +18,13 @@ class CartController extends Controller
     public function index()
     {
         //
-        return view('frontend.carrinho');
+        $cart = Carts::where('user_id',Auth::user()->id)->get();
+        $total = 0;
+
+        foreach($cart as $item){
+            $total = $total + $item->ticket->price;
+        }
+        return view('frontend.carrinho',compact('cart','total'));
     }
 
     /**

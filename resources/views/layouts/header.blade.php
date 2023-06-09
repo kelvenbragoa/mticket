@@ -87,6 +87,10 @@
                                         <div class="popup__user popup__box open-form">
                                             <a href="{{route('carrinho.index')}}" title="Carrinho">Carrinho</a>
                                         </div>
+
+                                        <div class="popup__user popup__box open-form">
+                                            <a href="{{route('meusbilhetes.index')}}" title="Carrinho">Meus Bilhetes</a>
+                                        </div>
                                         @endauth
 
                                         @auth
@@ -204,6 +208,9 @@
                                     @auth
                                     <li>
                                         <a href="{{route('carrinho.index')}}" title="Organizar eventos">Carrinho</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('meusbilhetes.index')}}" title="">Meus Bilhetes</a>
                                     </li>
                                     @endauth
                                    

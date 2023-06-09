@@ -90,5 +90,8 @@ Route::get('/detalhes/{evento}/evento', [App\Http\Controllers\User\EventsControl
 
 Route::get('/checkout/{evento}/evento', [App\Http\Controllers\User\CheckOutController::class, 'checkout']);
 Route::resource('checkout', 'App\Http\Controllers\User\CheckOutController');
+Route::resource('meusbilhetes', 'App\Http\Controllers\User\MyTicketController');
+
+
 
 
