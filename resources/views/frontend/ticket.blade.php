@@ -195,6 +195,8 @@ html {
     color: gray;
 }
 </style>
+
+@for ($i = 0; $i < $sell->qty; $i++)
 <body>
     <!-- partial:index.partial.html -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -209,7 +211,7 @@ html {
                 </p>
                 <div class="ticket-number">
                     <p>
-                        #0{{$sell->id}}
+                        #0{{$i}}{{$sell->id}}
                     </p>
                 </div>
             </div>
@@ -252,7 +254,7 @@ html {
                     <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">
                 </div>
                 <p class="ticket-number">
-                    #0{{$sell->id}}
+                    #0{{$i}}{{$sell->id}}
                 </p>
             </div>
         </div>
@@ -261,5 +263,7 @@ html {
     <script src="./script.js"></script>
 
 </body>
+@endfor
+
 
 </html>

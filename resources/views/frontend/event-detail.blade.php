@@ -244,7 +244,7 @@
                                         </div>
                                     @else
                                         <div class="field-submit">
-                                            <a class="btn" href="{{route('login')}}" style="background-color: red">Comentar</a>
+                                            <a class="btn" href="{{route('login')}}" style="background-color: rgb(0, 191, 255)">Comentar</a>
                                         </div>
                                     @endauth
                                     

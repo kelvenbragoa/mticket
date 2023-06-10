@@ -109,9 +109,9 @@
                                 <h3>Adicionar</h3>
                                
                                 @auth
-                                    <button class="btn btn-primary btn-lg btn-block " type="submit">Adicionar ao carrinho de compras</button>
+                                    <button class="btn btn-primary btn-lg btn-block " type="submit">Adicionar</button>
                                 @else
-                                    <a class="btn btn-primary btn-lg btn-block " style="background-color: red" href="{{route('login')}}">Faça o Login</a>
+                                    <a class="btn btn-primary btn-lg btn-block " style="background-color: rgb(0, 140, 233)" href="{{route('login')}}">Comprar</a>
                                 @endauth
                                 
                             </div>
