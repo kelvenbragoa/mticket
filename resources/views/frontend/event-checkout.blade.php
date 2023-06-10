@@ -58,7 +58,7 @@
                                                     @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$item->end_date $item->end_time")))
                                                     <div class="col-md-4 quantity ">
                                                         
-                                                        <button class="btn btn-danger " style="background-color:red;">Esgotado</button>
+                                                        <button class="btn btn-danger " style="background-color:rgb(212, 212, 212);">Indisponível</button>
                                                             
                                                         
                                                        
