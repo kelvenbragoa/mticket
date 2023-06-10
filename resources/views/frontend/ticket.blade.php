@@ -4,228 +4,261 @@
 <head>
     <meta charset="UTF-8">
     <title>Mticket</title>
-    <link rel="stylesheet" href="https://az813057.vo.msecnd.net/testdrive/var-fonts/font-declarations.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="./style.css">
 
-    <style>
-        /*
- *	TICKET
- *	---------------------------------------------
- */
+</head>
 
-.ticket-wrap {
-    text-align: center;
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100vh;
+    display: grid;
+    font-family: "Staatliches", cursive;
+    background: #ffff;
+    color: black;
+    font-size: 14px;
+    letter-spacing: 0.1em;
 }
 
 .ticket {
-    display: inline-block;
-    margin: 0 auto;
-    border: 2px solid #04aff4;
-    font-family: "Variable Bahnschrift", "FF DIN", "Franklin Gothic", "Helvetica Neue", sans-serif;
-    font-feature-settings: "kern" 1;
-    background: #fff;
+    margin: auto;
+    display: flex;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
-.ticket__header {
-    margin: 0;
-    padding: 1.5em;
-    background: #f4f5f6;
+.left {
+    display: flex;
 }
 
-.ticket__co span,
-.ticket__route span {
-    display: block;
+.image {
+    height: 250px;
+    width: 250px;
+    background-image: url("/storage/{{$sell->event->image}}");
+    background-size: contain;
+    opacity: 0.85;
 }
 
-.ticket__co {
-    display: inline-block;
-    position: relative;
-    padding-left: 5em;
-    line-height: 1;
-    color: #04aff4;
-}
-
-.ticket__co-icon {
+.admit-one {
     position: absolute;
-    top: 50%;
-    margin-top: -2em;
-    left: 0;
-    width: 4em;
-    height: auto;
+    color: darkgray;
+    height: 250px;
+    padding: 0 10px;
+    letter-spacing: 0.15em;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    writing-mode: vertical-rl;
+    transform: rotate(-180deg);
 }
 
-.ticket__co-name {
-    font-size: 2.5em;
-    font-variation-settings: "wght" 500, "wdth" 75;
-    letter-spacing: -.01em;
+.admit-one span:nth-child(2) {
+    color: white;
+    font-weight: 700;
 }
 
-.ticket__co-subname {
-    font-variation-settings: "wght" 700;
-    color: #04aff4;
+.left .ticket-number {
+    height: 250px;
+    width: 250px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 5px;
 }
 
-.ticket__body {
-    padding: 2rem 1.25em 1.25em;
+.ticket-info {
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.ticket__route {
-    font-variation-settings: "wght" 300;
-    font-size: 2em;
-    line-height: 1.1;
-}
-
-.ticket__description {
-    margin-top: .5em;
-    font-variation-settings: "wght" 350;
-    font-size: 1.125em;
-    color: #04aff4;
-}
-
-.ticket__timing {
+.date {
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 5px 0;
+    font-weight: 700;
     display: flex;
     align-items: center;
-    margin-top: 1rem;
-    padding: 1rem 0;
-    border-top: 2px solid #9facbc;
-    border-bottom: 2px solid #9facbc;
+    justify-content: space-around;
+}
+
+.date span {
+    width: 100px;
+}
+
+.date span:first-child {
     text-align: left;
 }
 
-.ticket__timing p {
-    margin: 0 1rem 0 0;
-    padding-right: 1rem;
-    border-right: 2px solid #9facbc;
-    line-height: 1;
+.date span:last-child {
+    text-align: right;
 }
 
-.ticket__timing p:last-child {
-    margin: 0;
-    padding: 0;
-    border-right: 0;
+.date .june-29 {
+    color: #d83565;
+    font-size: 20px;
 }
 
-.ticket__small-label {
-    display: block;
-    margin-bottom: .5em;
-    font-variation-settings: "wght" 300;
-    font-size: .875em;
+.show-name {
+    font-size: 32px;
+    font-family: "Nanum Pen Script", cursive;
+    color: #d83565;
+}
+
+.show-name h1 {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     color: #04aff4;
 }
 
-.ticket__detail {
-    font-variation-settings: "wght" 700;
-    font-size: 1.25em;
+.time {
+    padding: 10px 0;
     color: #04aff4;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-weight: 700;
 }
 
-.ticket__admit {
-    margin-top: 2rem;
-    font-size: 2.5em;
-    font-variation-settings: "wght" 700, "wdth" 85;
-    line-height: 1;
-    color: #04aff4;
+.time span {
+    font-weight: 400;
+    color: gray;
 }
 
-.ticket__fine-print {
-    margin-top: 1rem;
-    font-variation-settings: "wdth" 75;
-    color: #3c3c3c;
+.left .time {
+    font-size: 16px;
 }
 
-.ticket__barcode {
-    margin-top: 1.25em;
-    width: 299px;
-    max-width: 100%;
+.location {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding-top: 8px;
+    border-top: 1px solid gray;
 }
 
-@media (min-width: 36em) {
-    .ticket-wrap {
-        margin-bottom: 4em;
-        text-align: center;
-    }
-    .ticket {
-        margin: 0 auto;
-        transform: rotate(6deg);
-    }
-    .ticket__header {
-        margin: 0;
-        padding: 2em;
-    }
-    .ticket__body {
-        padding: 3rem 2em 2em;
-    }
-    .ticket__detail {
-        font-size: 1.75em;
-    }
-    .ticket__admit {
-        margin-top: 2rem;
-    }
+.location .separator {
+    font-size: 20px;
 }
 
-@supports (display: grid) {
-    @media (min-width: 72em) {
-        .ticket-info, .ticket-wrap {
-            align-self: center;
-        }
-        .ticket-wrap {
-            order: 2;
-            margin-bottom: 0;
-        }
-        .ticket-info {
-            order: 1;
-        }
-    }
+.right {
+    width: 180px;
+    border-left: 1px dashed #404040;
 }
-    </style>
-</head>
 
+.right .admit-one {
+    color: darkgray;
+}
 
+.right .admit-one span:nth-child(2) {
+    color: gray;
+}
 
+.right .right-info-container {
+    height: 250px;
+    padding: 10px 10px 10px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.right .show-name h1 {
+    font-size: 18px;
+}
+
+.barcode {
+    height: 100px;
+}
+
+.barcode img {
+    height: 100%;
+}
+
+.right .ticket-number {
+    color: gray;
+}
+</style>
 <body>
     <!-- partial:index.partial.html -->
-    <div class="l-col-right ticket-wrap" aria-label="A fake boat ticket demonstrating mixing font weights and widths">
-        <div class="ticket" aria-hidden="true">
-            <div class="ticket__header">
-                <div class="ticket__co">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-                    <span class="ticket__co-name">Mticket</span>
-                    <span class="u-upper ticket__co-subname">{{$sell->event->name}}</span>
+    <div class="ticket">
+        <div class="left">
+            <div class="image">
+                <p class="admit-one">
+                    <span>Mticket</span>
+                    <span>Mticket</span>
+                    <span>Mticket</span>
+                </p>
+                <div class="ticket-number">
+                    <p>
+                        #0{{$sell->id}}
+                    </p>
                 </div>
             </div>
-            <div class="ticket__body">
-                <p class="ticket__route">Pedro Leandro</p>
-
-                <div class="ticket__timing">
-                    <p>
-                        <span class="u-upper ticket__small-label">Data</span>
-                        <span class="ticket__detail">{{date('d-m-Y',strtotime($sell->event->start_date))}}</span>
-                    </p>
-                    <p>
-                        <span class="u-upper ticket__small-label">Inicio</span>
-                        <span class="ticket__detail">{{date('H:i',strtotime($sell->event->start_time))}}</span>
-                    </p>
-                    <p>
-                        <span class="u-upper ticket__small-label">Local</span>
-                        <span class="ticket__detail">{{$sell->event->address}}</span>
-                    </p>
+            <div class="ticket-info">
+                <p class="date">
+                    <span>{{date('l',strtotime($sell->event->start_date))}}</span>
+                    <span class="june-29">{{date('d-m',strtotime($sell->event->start_date))}}</span>
+                    <span>{{date('Y',strtotime($sell->event->start_date))}}</span>
+                </p>
+                <div class="show-name">
+                    <h1>{{$sell->event->name}}</h1>
+                    <h2>{{Auth::user()->name}}</h2>
+                    <h2>{{$sell->ticket->name}}</h2>
                 </div>
-                <p class="ticket__fine-print">Este bilhete não pode ser atribuido a outra pessoa</p>
-                <p class="u-upper ticket__admit">{{$sell->ticket->name}}</p>
-                <div class="receipt qr-code">
-                    <svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29.938 29.938">
-                   <path d="M7.129 15.683h1.427v1.427h1.426v1.426H2.853V17.11h1.426v-2.853h2.853v1.426h-.003zm18.535 12.83h1.424v-1.426h-1.424v1.426zM8.555 15.683h1.426v-1.426H8.555v1.426zm19.957 12.83h1.427v-1.426h-1.427v1.426zm-17.104 1.425h2.85v-1.426h-2.85v1.426zm12.829 0v-1.426H22.81v1.426h1.427zm-5.702 0h1.426v-2.852h-1.426v2.852zM7.129 11.406v1.426h4.277v-1.426H7.129zm-1.424 1.425v-1.426H2.852v2.852h1.426v-1.426h1.427zm4.276-2.852H.002V.001h9.979v9.978zM8.555 1.427H1.426v7.127h7.129V1.427zm-5.703 25.66h4.276V22.81H2.852v4.277zm14.256-1.427v1.427h1.428V25.66h-1.428zM7.129 2.853H2.853v4.275h4.276V2.853zM29.938.001V9.98h-9.979V.001h9.979zm-1.426 1.426h-7.127v7.127h7.127V1.427zM0 19.957h9.98v9.979H0v-9.979zm1.427 8.556h7.129v-7.129H1.427v7.129zm0-17.107H0v7.129h1.427v-7.129zm18.532 7.127v1.424h1.426v-1.424h-1.426zm-4.277 5.703V22.81h-1.425v1.427h-2.85v2.853h2.85v1.426h1.425v-2.853h1.427v-1.426h-1.427v-.001zM11.408 5.704h2.85V4.276h-2.85v1.428zm11.403 11.405h2.854v1.426h1.425v-4.276h-1.425v-2.853h-1.428v4.277h-4.274v1.427h1.426v1.426h1.426V17.11h-.004zm1.426 4.275H22.81v-1.427h-1.426v2.853h-4.276v1.427h2.854v2.853h1.426v1.426h1.426v-2.853h5.701v-1.426h-4.276v-2.853h-.002zm0 0h1.428v-2.851h-1.428v2.851zm-11.405 0v-1.427h1.424v-1.424h1.425v-1.426h1.427v-2.853h4.276v-2.853h-1.426v1.426h-1.426V7.125h-1.426V4.272h1.426V0h-1.426v2.852H15.68V0h-4.276v2.852h1.426V1.426h1.424v2.85h1.426v4.277h1.426v1.426H15.68v2.852h-1.426V9.979H12.83V8.554h-1.426v2.852h1.426v1.426h-1.426v4.278h1.426v-2.853h1.424v2.853H12.83v1.426h-1.426v4.274h2.85v-1.426h-1.422zm15.68 1.426v-1.426h-2.85v1.426h2.85zM27.086 2.853h-4.275v4.275h4.275V2.853zM15.682 21.384h2.854v-1.427h-1.428v-1.424h-1.427v2.851zm2.853-2.851v-1.426h-1.428v1.426h1.428zm8.551-5.702h2.853v-1.426h-2.853v1.426zm1.426 11.405h1.427V22.81h-1.427v1.426zm0-8.553h1.427v-1.426h-1.427v1.426zm-12.83-7.129h-1.425V9.98h1.425V8.554z"/>
-                </svg>
-                    <div class="description">
+                <div class="time">
 
-                        <p>Mostrar o QR código quando solicitado</p>
-                    </div>
+                    <p>{{date('H:i',strtotime($sell->event->start_time))}}</p>
                 </div>
+                <p class="location"><span>{{$sell->event->address}}</span>
+                    <span class="separator"><i class="far fa-smile"></i></span><span>{{$sell->event->province->name}}, Mocambique</span>
+                </p>
             </div>
+        </div>
+        <div class="right">
+            <p class="admit-one">
+                <span>Mticket</span>
+                <span>Mticket</span>
+                <span>Mticket</span>
+            </p>
+            <div class="right-info-container">
+                <div class="show-name">
+                    <h1>{{$sell->event->name}}</h1>
 
+                </div>
+                <div class="time">
+                    <p>{{date('H:i',strtotime($sell->event->start_time))}}<span>ATÉ</span> {{date('H:i',strtotime($sell->event->end_time))}}</p>
+                    <p>DOORS <span>@</span> {{date('H:i',strtotime($sell->event->start_time))}}</p>
+                </div>
+                <div class="barcode">
+                    <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">
+                </div>
+                <p class="ticket-number">
+                    #0{{$sell->id}}
+                </p>
+            </div>
         </div>
     </div>
     <!-- partial -->
+    <script src="./script.js"></script>
 
 </body>
 

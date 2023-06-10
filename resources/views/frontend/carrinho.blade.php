@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-md-3">
                 Total: {{$total}} MT <br>
-                Total Bilhetes :  {{$cart->count()}}
+                Total Bilhetes :  {{$cart->sum('qtd')}}
             </div>
            
         </div>

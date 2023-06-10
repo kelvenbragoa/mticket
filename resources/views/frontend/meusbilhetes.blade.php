@@ -24,7 +24,7 @@
                     <div class="row ">
                         <div class="col-md-5 product-name ">
                             <div class="product-name ">
-                                <a href="# ">{{$item->ticket->name}} - {{$item->ticket->price}} MT</a>
+                                <a href="# ">{{$item->qty}}x{{$item->ticket->name}} - {{$item->ticket->price*$item->qty}} MT</a>
                                 <a href="{{URL::to('/meusbilhetes/'.$item->id)}}">Ver bilhete</a>
                             </div>
                         </div>
