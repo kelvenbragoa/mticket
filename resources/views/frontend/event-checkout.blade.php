@@ -20,7 +20,7 @@
 
 
             <div class="mb-4">
-                {{$event->id}}
+               
                 @if (Session::has('messageSuccess'))
                        
                 <div class="alert alert-primary" role="alert">
@@ -106,7 +106,7 @@
                         </div>
                         <div class="col-md-12 col-lg-4 ">
                             <div class="summary ">
-                                <h3>Proceder para o carrinho de compras</h3>
+                                <h3>Adicionar</h3>
                                
                                 @auth
                                     <button class="btn btn-primary btn-lg btn-block " type="submit">Adicionar ao carrinho de compras</button>

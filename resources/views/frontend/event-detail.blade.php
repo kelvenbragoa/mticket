@@ -86,7 +86,7 @@
                                 <li><i class="la la-globe large"></i> <a href="{{$event->website}}">{{$event->website}}</a></li>
                             </ul>
                             <div class="button-wrap">
-                                <div class="button"><a href="{{URL::to('/checkout/'.$event->id.'/evento')}}" class="btn">Proceder</a></div>
+                                <div class="button"><a href="{{URL::to('/checkout/'.$event->id.'/evento')}}" class="btn">Comprar</a></div>
 
                             </div>
                         </div>
@@ -240,11 +240,11 @@
                                     @auth
                                     <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
                                         <div class="field-submit">
-                                            <input type="submit" class="btn" value="Submeter">
+                                            <input type="submit" class="btn" value="Comentar">
                                         </div>
                                     @else
                                         <div class="field-submit">
-                                            <button class="btn" style="background-color: red">Comentar</button>
+                                            <a class="btn" href="{{route('login')}}" style="background-color: red">Comentar</a>
                                         </div>
                                     @endauth
                                     

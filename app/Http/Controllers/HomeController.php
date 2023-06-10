@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,7 +33,10 @@ class HomeController extends Controller
         }
 
         if(Auth::user()->role->name == "user"){
-            return view('user.index');
+            $categories= Category::orderBy('name','asc')->get();
+
+            $events= Event::where('status_id',2)->orderBy('id','desc')->get();
+            return view('welcome',compact('categories','events'));
 
         }
 

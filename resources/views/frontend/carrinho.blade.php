@@ -30,7 +30,7 @@
                     <div class="row ">
                         <div class="col-md-5 product-name ">
                             <div class="product-name ">
-                                <a href="# ">{{$item->ticket->name}} - {{$item->ticket->price}} MT</a>
+                                <a href="# ">{{$item->qtd}}x{{$item->ticket->name}} - {{$item->ticket->price * $item->qtd}} MT</a>
                             </div>
                         </div>
                     </div>

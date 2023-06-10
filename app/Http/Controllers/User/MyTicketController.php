@@ -52,7 +52,7 @@ class MyTicketController extends Controller
                 'user_id'=>Auth::user()->id,
                 'event_id'=>$item->event_id,
                 'ticket_id'=>$item->ticket_id,
-                'qty'=>0,
+                'qty'=>$item->qtd,
                 'price'=>$item->ticket->price,
                 'total'=>$item->ticket->price,
                 'status'=>1
