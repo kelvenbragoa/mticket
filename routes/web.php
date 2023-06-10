@@ -33,13 +33,15 @@ Route::get('/como-funciona', [App\Http\Controllers\RootController::class, 'howit
 Route::get('/termos-privacidade', [App\Http\Controllers\RootController::class, 'politicas'])->name('politicas');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/perfil', [App\Http\Controllers\ProfileController::class, 'perfil'])->name('perfil');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index']);
 
 Route::get('/todos-eventos', [App\Http\Controllers\User\EventsController::class, 'frontedAllEvents']);
 Route::get('/todas-categorias', [App\Http\Controllers\User\EventsController::class, 'frontedAllCategories']);
 Route::get('/categoria/{categoria}/eventos', [App\Http\Controllers\RootController::class, 'eventsCategory']);
 Route::get('/provincia/{provincia}/eventos', [App\Http\Controllers\RootController::class, 'eventsProvince']);
 Route::get('/pesquisar-eventos', [App\Http\Controllers\User\EventsController::class, 'search']);
-
+Route::resource('profile', 'App\Http\Controllers\ProfileController');
 
 
 //SUPERADMIN CONTROLLERS

@@ -73,7 +73,7 @@
                                     <div class="popup__content">
                                         <div class="popup__user popup__box open-form">
                                                 @auth
-                                                <a title="Login" href="{{URL::to('/home')}}">Perfil</a>
+                                                <a title="Login" href="{{URL::to('/perfil')}}">Perfil</a>
                                                 @else
                                                 <a title="Login" href="{{URL::to('/login')}}">Entrar/Registrar</a>
                                                 {{-- <a title="Sign Up" href="{{URL::to('/register')}}">Registrar</a> --}}
@@ -246,7 +246,7 @@
                                             </div>
                                              @auth
                                              <div class="right-header__button btn">
-                                                <a title="Add place" href="{{URL::to('/home')}}">
+                                                <a title="Add place" href="{{URL::to('/perfil')}}">
 
                                                     <span>Perfil</span>
                                                 </a>
