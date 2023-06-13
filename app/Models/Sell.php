@@ -21,4 +21,8 @@ class Sell extends Model
     public function event(){
         return $this->hasOne('App\Models\Event', 'id', 'event_id');
     }
+
+    public function selldetails(){
+        return $this->hasMany('App\Models\SellDetails', 'sell_id', 'id');
+    }
 }

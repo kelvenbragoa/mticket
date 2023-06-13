@@ -4,9 +4,13 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Carts;
+use App\Models\Event;
 use App\Models\Sell;
+use App\Models\SellDetails;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MyTicketController extends Controller
 {
@@ -46,18 +50,48 @@ class MyTicketController extends Controller
     {
         //
 
+        $config = \abdulmueid\mpesa\Config::loadFromFile('config.php');
+        $transactionmpesa = new \abdulmueid\mpesa\Transaction($config);
+        $data = $request->all();
+
+        $request->validate([
+            'mobile' => ['required','numeric'],
+           
+        ]);
+
+        $string = substr(str_shuffle(str_repeat($x='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(3/strlen($x)) )),1,4);
+
+        $ref = 'MT'.Auth::user()->id.'T'.$string;
+        $amount= $data['amount'];
         $cart = Carts::where('user_id',Auth::user()->id)->get();
+
         foreach($cart as $item){
-            Sell::create([
+            $sell = Sell::create([
                 'user_id'=>Auth::user()->id,
                 'event_id'=>$item->event_id,
                 'ticket_id'=>$item->ticket_id,
                 'qty'=>$item->qtd,
                 'price'=>$item->ticket->price,
-                'total'=>$item->ticket->price,
+                'total'=>$item->ticket->price*$item->qtd,
                 'status'=>1
-
             ]);
+
+            Transaction::create([
+                'sell_id'=>$sell->id,
+                'user_id'=>Auth::user()->id,
+                'reference'=>$ref,
+                'method'=>'mpesa'
+            ]);
+
+            for ($i=0; $i < $item->qtd; $i++) { 
+                SellDetails::create([
+                    'sell_id'=>$sell->id,
+                    'user_id'=>Auth::user()->id,
+                    'event_id'=>$item->event_id,
+                    'ticket_id'=>$item->ticket_id,
+                    'status'=>1,
+                ]);
+            }
         }
 
         foreach($cart as $item){
@@ -80,7 +114,15 @@ class MyTicketController extends Controller
         //
         $sell = Sell::find($id);
 
-        return view('frontend.ticket',compact('sell'));
+        // $detail = $sell->selldetails;
+
+        $detail = SellDetails::where('sell_id',$id)->get();
+
+        $event = Event::find($sell->event_id);
+
+
+     
+        return view('frontend.ticket',compact('detail','event'));
     }
 
     /**

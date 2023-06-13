@@ -129,19 +129,17 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        
                                         <!-- .popup__menu -->
                                     </div>
                                     <!-- .popup__content -->
-
                                     <!-- .popup__button -->
                                 </div>
                                 <!-- .popup -->
                             </div>
                             <!-- .site__menu -->
-
                             <!-- .site__brand -->
 
+                            
                             <div class="site__search layout-02">
                                 <a title="Close" href="#" class="search__close">
                                     <i class="la la-times"></i>

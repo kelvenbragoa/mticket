@@ -22,7 +22,7 @@ class CartController extends Controller
         $total = 0;
 
         foreach($cart as $item){
-            $total = $total + $item->ticket->price;
+            $total = $total + $item->ticket->price*$item->qtd;
         }
         return view('frontend.carrinho',compact('cart','total'));
     }
@@ -55,7 +55,7 @@ class CartController extends Controller
         }
 
         if($qty == 0){
-            return back()->with('message','Nenhum Bilhete selecionado');
+            return back()->with('messageError','Nenhum bilhete selecionado. Selecione a quantidade que deseja e proceda.');
         }else{
 
         for ($i=0; $i < count($data['quantity']) ; $i++) { 
@@ -84,7 +84,7 @@ class CartController extends Controller
     }
 }
 
-return back()->with('messageSuccess','Bilhete adicionado ao carrinho');
+return redirect()->route('carrinho.index')->with('messageSuccess','Bilhete adicionado ao carrinho');
     }
 
     /**
@@ -131,5 +131,12 @@ return back()->with('messageSuccess','Bilhete adicionado ao carrinho');
     public function destroy($id)
     {
         //
+
+        $cart = Carts::find($id);
+
+
+        $cart->delete();
+
+        return back()->with('messageSuccess','Bilhete apagado do carrinho');
     }
 }

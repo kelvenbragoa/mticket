@@ -11,7 +11,8 @@
 </head>
 
 <style>
-    @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
 * {
     margin: 0;
@@ -44,7 +45,7 @@ html {
 .image {
     height: 250px;
     width: 250px;
-    background-image: url("/storage/{{$sell->event->image}}");
+    background-image: url("/storage/{{$event->image}}");
     background-size: contain;
     opacity: 0.85;
 }
@@ -113,13 +114,13 @@ html {
 }
 
 .show-name {
-    font-size: 32px;
-    font-family: "Nanum Pen Script", cursive;
+    font-size: 20px;
+    font-family: "Open Sans", cursive;
     color: #d83565;
 }
 
 .show-name h1 {
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 700;
     letter-spacing: 0.1em;
     color: #04aff4;
@@ -196,7 +197,13 @@ html {
 }
 </style>
 
-@for ($i = 0; $i < $sell->qty; $i++)
+@php
+    $i = 1;
+@endphp
+
+@foreach ($detail as $item)
+    
+
 <body>
     <!-- partial:index.partial.html -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -211,27 +218,34 @@ html {
                 </p>
                 <div class="ticket-number">
                     <p>
-                        #0{{$i}}{{$sell->id}}
+                        #0{{$item->id}}
                     </p>
                 </div>
             </div>
             <div class="ticket-info">
                 <p class="date">
-                    <span>{{date('l',strtotime($sell->event->start_date))}}</span>
-                    <span class="june-29">{{date('d-m',strtotime($sell->event->start_date))}}</span>
-                    <span>{{date('Y',strtotime($sell->event->start_date))}}</span>
+                    <span>{{date('l',strtotime($item->event->start_date))}}</span>
+                    <span class="june-29">{{date('d-m',strtotime($item->event->start_date))}}</span>
+                    <span>{{date('Y',strtotime($item->event->start_date))}}</span>
                 </p>
                 <div class="show-name">
-                    <h1>{{$sell->event->name}}</h1>
+                    <h1>{{$item->event->name}}</h1>
+                    <br>
                     <h2>{{Auth::user()->name}}</h2>
-                    <h2>{{$sell->ticket->name}}</h2>
+                    <h2>{{$item->ticket->name}}</h2>
                 </div>
                 <div class="time">
 
-                    <p>{{date('H:i',strtotime($sell->event->start_time))}}</p>
+                    <p>{{date('H:i',strtotime($item->event->start_time))}}</p>
                 </div>
-                <p class="location"><span>{{$sell->event->address}}</span>
-                    <span class="separator"><i class="far fa-smile"></i></span><span>{{$sell->event->province->name}}, Mocambique</span>
+                <p class="location"><span>{{$item->event->address}}</span>
+                    <span class="separator"> 
+                    @if ($item->status == 0)
+                        <i class="fas fa-frown" style="color:red"></i>
+                    @else
+                        <i class="fas fa-smile" style="color:green"></i>
+                    @endif  
+                    </span><span>{{$item->event->province->name}}, Moçambique</span>
                 </p>
             </div>
         </div>
@@ -243,18 +257,32 @@ html {
             </p>
             <div class="right-info-container">
                 <div class="show-name">
-                    <h1>{{$sell->event->name}}</h1>
+                    <h1>{{$item->event->name}}</h1>
 
                 </div>
                 <div class="time">
-                    <p>{{date('H:i',strtotime($sell->event->start_time))}}<span>ATÉ</span> {{date('H:i',strtotime($sell->event->end_time))}}</p>
-                    <p>DOORS <span>@</span> {{date('H:i',strtotime($sell->event->start_time))}}</p>
+                    <p>{{date('H:i',strtotime($item->event->start_time))}}<span>ATÉ</span> {{date('H:i',strtotime($item->event->end_time))}}</p>
+                    {{-- <p>DOORS <span>@</span> {{date('H:i',strtotime($item->event->start_time))}}</p> --}}
                 </div>
                 <div class="barcode">
-                    <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">
+                    @php
+                        $myObj = new stdClass();
+                        $myObj->nome = Auth::user()->name;
+                        $myObj->email = Auth::user()->email;
+                        $myObj->evento = $event->name;
+                        $myObj->ticket = $item->ticket->name;
+                        $myObj->data = $event->start_date;
+                        
+
+                        $myJSON = json_encode($myObj);
+                    @endphp
+                    {!!QrCode::color(255, 255, 240)->backgroundColor(76, 174, 255)->generate($myJSON);!!}
+                    {{-- {!! QrCode::format('png')->merge('https://www.google.com/url?sa=i&url=https%3A%2F%2Fgithub.com%2Ftwbs%2Fbootstrap%2Fdiscussions%2F36709&psig=AOvVaw0CAyQVKARhfVy2_yVUIlwB&ust=1686754537229000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCODIhrrAwP8CFQAAAAAdAAAAABAE')->generate(); !!} --}}
+                    {{-- <img src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(100)->generate('https://inosecure.inovatis.co.mz/scan/')) !!}"> --}}
+                    {{-- <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code"> --}}
                 </div>
                 <p class="ticket-number">
-                    #0{{$i}}{{$sell->id}}
+                    #0{{$item->id}}
                 </p>
             </div>
         </div>
@@ -263,7 +291,13 @@ html {
     <script src="./script.js"></script>
 
 </body>
-@endfor
+
+<br>
+
+@php
+    $i = $i + 1;
+@endphp
+@endforeach
 
 
 </html>
