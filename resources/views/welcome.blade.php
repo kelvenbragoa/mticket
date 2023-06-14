@@ -68,7 +68,11 @@
                                         </div>
                                     </div>
                                     <h3 class="place-title"><a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}">{!! Str::limit($item->name, 20) !!}</a></h3>
-                                    <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                                    @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$item->end_date $item->end_time")))
+                                        <div class="close-now"><i class="las la-door-closed"></i>Encerado</div>
+                                    @else
+                                        <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                                    @endif
                                     <div class="entry-bottom">
                                         <div class="place-preview">
                                             <div class="place-rating">
@@ -105,142 +109,7 @@
                     @empty
                         <p>Nenhum evento !</p>
                     @endforelse
-                    {{-- <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
-                        <div class="place-inner">
-                            <div class="place-thumb hover-img">
-                                <a class="entry-thumb" href="evento.html"><img src="{{asset('template2/images/listing/Festa do Branco Euro.jpeg')}}" alt=""></a>
-
-
-                                <a href="#" class="author" ><img src="{{asset('template2/images/avatars/male-3.jpg')}}" alt="Author"></a>
-                            </div>
-                            <div class="entry-detail">
-                                <div class="entry-head">
-                                    <div class="place-type list-item">
-                                        <span>Nome Promotor</span>
-                                    </div>
-                                    <div class="place-city">
-                                        <a href="#">Beira</a>
-                                    </div>
-                                </div>
-                                <h3 class="place-title"><a href="evento.html">Festa do Branco</a></h3>
-                                <div class="open-now"><i class="las la-door-open"></i>Bilhetes a venda</div>
-                                <div class="entry-bottom">
-                                    <div class="place-preview">
-                                        <div class="place-rating">
-                                            <span>DOM, 14 MAR - 15:30</span>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="place-price">
-                                        <span>1500MT</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
-                        <div class="place-inner">
-                            <div class="place-thumb hover-img">
-                                <a class="entry-thumb" href="evento.html"><img src="{{asset('template2/images/listing/Festa do Branco Euro.jpeg')}}" alt=""></a>
-
-
-                                <a href="#" class="author" ><img src="{{asset('template2/images/avatars/male-3.jpg')}}" alt="Author"></a>
-                            </div>
-                            <div class="entry-detail">
-                                <div class="entry-head">
-                                    <div class="place-type list-item">
-                                        <span>Nome Promotor</span>
-                                    </div>
-                                    <div class="place-city">
-                                        <a href="#">Beira</a>
-                                    </div>
-                                </div>
-                                <h3 class="place-title"><a href="evento.html">Festa do Branco</a></h3>
-                                <div class="open-now"><i class="las la-door-open"></i>A venda</div>
-                                <div class="entry-bottom">
-                                    <div class="place-preview">
-                                        <div class="place-rating">
-                                            <span>DOM, 14 MAR - 15:30</span>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="place-price">
-                                        <span>1500MT</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
-                        <div class="place-inner">
-                            <div class="place-thumb hover-img">
-                                <a class="entry-thumb" href="evento.html"><img src="{{asset('template2/images/listing/Festa do Branco Euro.jpeg')}}" alt=""></a>
-
-
-                                <a href="#" class="author" ><img src="{{asset('template2/images/avatars/male-3.jpg')}}" alt="Author"></a>
-                            </div>
-                            <div class="entry-detail">
-                                <div class="entry-head">
-                                    <div class="place-type list-item">
-                                        <span>Nome Promotor</span>
-                                    </div>
-                                    <div class="place-city">
-                                        <a href="#">Beira</a>
-                                    </div>
-                                </div>
-                                <h3 class="place-title"><a href="evento.html">Festa do Branco</a></h3>
-                                <div class="open-now"><i class="las la-door-open"></i>A venda</div>
-                                <div class="entry-bottom">
-                                    <div class="place-preview">
-                                        <div class="place-rating">
-                                            <span>DOM, 14 MAR - 15:30</span>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="place-price">
-                                        <span>1500MT</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
-                        <div class="place-inner">
-                            <div class="place-thumb hover-img">
-                                <a class="entry-thumb" href="evento.html"><img src="{{asset('template2/images/listing/Festa do Branco Euro.jpeg')}}" alt=""></a>
-
-
-                                <a href="#" class="author" ><img src="{{asset('template2/images/avatars/male-3.jpg')}}" alt="Author"></a>
-                            </div>
-                            <div class="entry-detail">
-                                <div class="entry-head">
-                                    <div class="place-type list-item">
-                                        <span>Nome Promotor</span>
-                                    </div>
-                                    <div class="place-city">
-                                        <a href="#">Beira</a>
-                                    </div>
-                                </div>
-                                <h3 class="place-title"><a href="evento.html">Festa do Branco</a></h3>
-                                <div class="open-now"><i class="las la-door-open"></i>A venda</div>
-                                <div class="entry-bottom">
-                                    <div class="place-preview">
-                                        <div class="place-rating">
-                                            <span>DOM, 14 MAR - 15:30</span>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="place-price">
-                                        <span>1500MT</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+                    
                 </div>
                 <!-- .restaurant-slider -->
                 <div class="place-slider__nav slick-nav">
@@ -263,7 +132,7 @@
             <div class="banner-inner" style="background-image: url(template2/images/workspace/er.png);">
                 <h2>Quer ser promotor?</h2>
                 <p>Entre com a sua conta Mticket, e crie eventos fantasticos com a nossa companhia.</p>
-                <a href="{{URL::to('/login')}}" class="btn">Entrar</a>
+                <a href="{{URL::to('/ser-promotor')}}" class="btn">Seja um Promotor</a>
             </div>
         </div>
     </section>
@@ -293,7 +162,11 @@
                                     </div>
                                 </div>
                                 <h3 class="place-title"><a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}">{!! Str::limit($item->name, 20) !!}</a></h3>
-                                <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                                @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$item->end_date $item->end_time")))
+                                        <div class="close-now"><i class="las la-door-closed"></i>Encerado</div>
+                                    @else
+                                        <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                                    @endif
                                 <div class="entry-bottom">
                                     <div class="place-preview">
                                         <div class="place-rating">
@@ -426,7 +299,11 @@
                                     </div>
                                 </div>
                                 <h3 class="place-title"><a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}">{!! Str::limit($item->name, 20) !!}</a></h3>
-                                <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                                @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$item->end_date $item->end_time")))
+                                        <div class="close-now"><i class="las la-door-closed"></i>Encerado</div>
+                                    @else
+                                        <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                                    @endif
                                 <div class="entry-bottom">
                                     <div class="place-preview">
                                         <div class="place-rating">
@@ -477,7 +354,7 @@
                     <!-- .place-slider__next -->
                 </div>
                 <div class="button-wrap">
-                    <a href="bilhetes.html" class="btn" title="View more">Ver mais</a>
+                    <a href="{{URL::to('/todos-eventos')}}" class="btn" title="View more">Ver mais</a>
                 </div>
                 <!-- .place-slider__nav -->
             </div>

@@ -131,7 +131,11 @@
                                     </div>
                                 </div>
                                 <h3 class="place-title"><a href="{{URL::to('/detalhes/'.$item->id.'/evento')}}">{!! Str::limit($item->name, 20) !!}</a></h3>
-                                <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                                @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$item->end_date $item->end_time")))
+                                        <div class="close-now"><i class="las la-door-closed"></i>Encerado</div>
+                                    @else
+                                        <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                                    @endif
                                 <div class="entry-bottom">
                                     <div class="place-preview">
                                         <div class="place-rating">

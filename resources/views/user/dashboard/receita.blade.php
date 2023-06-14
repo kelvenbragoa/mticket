@@ -52,7 +52,7 @@
                                 <td data-title="ID">{{$item->id}}</td>
                                 <td data-title="Nome"><b>{{$item->name}}</b></td>
                                 <td data-title="Data">{{date('d-m-Y',strtotime($item->start_date))}}</td>
-                                <td data-title="Vendas">{{$item->sells->count()}}</td>
+                                <td data-title="Vendas">{{$item->sell_details->count()}}</td>
                                 <td data-title="Status" class="{{$item->status->alias}}">{{$item->status->name}}</td>
                                 <td data-title="" class="place-action">
                                   
@@ -62,7 +62,7 @@
                             </tr>
                         @empty
                             <tr>
-                                Nenhum evento !
+                                <td colspan="6" align="center">Nenhum evento !</td> 
                             </tr>
                         @endforelse
                         

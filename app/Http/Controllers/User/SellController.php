@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Sell;
+use App\Models\SellDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +20,7 @@ class SellController extends Controller
     {
         //
         $events = Event::where('user_id',Auth::user()->id)->orderBy('id','desc')->paginate(10);
+        
         return view('user.dashboard.receita',compact('events'));
     }
 
@@ -54,7 +56,8 @@ class SellController extends Controller
         //
         $event = Event::find($id);
         $sells = Sell::where('event_id',$id)->paginate(10);
-        return view('user.dashboard.ver-receita',compact('sells','event'));
+        $sell_details= SellDetails::where('event_id',$id)->paginate(10);
+        return view('user.dashboard.ver-receita',compact('sells','event','sell_details'));
     }
 
     /**

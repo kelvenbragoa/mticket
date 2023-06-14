@@ -14,7 +14,7 @@
                         <a href="{{route('vendas.index')}}">Receita</a>
                     </li>
                     <li><a href="{{route('eventos.index')}}">Meus Eventos</a></li>
-                    <li><a href="{{URL::to('home')}}">Perfil</a></li>
+                    <li><a href="{{URL::to('/perfil')}}">Perfil</a></li>
                 </ul>
             </div>
         </div>
@@ -50,6 +50,13 @@
                             <div class="item red">
                                 <h3>Eventos Cancelados</h3>
                                 <span class="number">{{$canceled_events_count}}</span>
+                                <span class="line"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="item red">
+                                <h3>Total Eventos</h3>
+                                <span class="number">{{$all_events}}</span>
                                 <span class="line"></span>
                             </div>
                         </div>

@@ -22,7 +22,15 @@ class Sell extends Model
         return $this->hasOne('App\Models\Event', 'id', 'event_id');
     }
 
+    
+
     public function selldetails(){
         return $this->hasMany('App\Models\SellDetails', 'sell_id', 'id');
+    }
+
+
+    //erro de logica, mas funciona ter em mente para alterar
+    public function transaction(){
+        return $this->hasOne('App\Models\Transaction', 'sell_id', 'id');
     }
 }

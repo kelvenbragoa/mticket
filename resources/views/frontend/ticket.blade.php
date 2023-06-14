@@ -123,12 +123,14 @@ html {
     font-size: 38px;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: #04aff4;
+    /* color: #04aff4; */
+    color: black;
 }
 
 .time {
     padding: 10px 0;
-    color: #04aff4;
+    /* color: #04aff4; */
+    color: black;
     text-align: center;
     display: flex;
     flex-direction: column;

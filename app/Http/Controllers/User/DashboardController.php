@@ -27,6 +27,10 @@ class DashboardController extends Controller
             return count(Event::where('user_id',Auth::user()->id)->where('status_id',2)->get());
         });
 
+        $all_events = Cache::remember('count.events.all.'.$user->id, now()->addSeconds(30),function() use ($user){
+            return count(Event::where('user_id',Auth::user()->id)->get());
+        });
+
         $pending_events_count = Cache::remember('count.events.pending.'.$user->id, now()->addSeconds(30),function() use ($user){
             return count(Event::where('user_id',Auth::user()->id)->where('status_id',3)->get());
         });
@@ -37,7 +41,7 @@ class DashboardController extends Controller
 
 
         $recent_events = Event::where('user_id',Auth::user()->id)->limit(5)->get();
-        return view('user.dashboard.index',compact('approved_events_count','pending_events_count','canceled_events_count', 'recent_events'));
+        return view('user.dashboard.index',compact('approved_events_count','pending_events_count','canceled_events_count', 'recent_events','all_events'));
     }
 
     /**

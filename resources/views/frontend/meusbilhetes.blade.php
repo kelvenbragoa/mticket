@@ -54,27 +54,30 @@
                         @forelse ($myticket as $item)
                         <div class="product mb-3 ">
                             <div class="row ">
-                                <div class="col-md-3 ">
-                                    <img class="img-fluid mx-auto d-block image rounded" src="/storage/{{$item->ticket->event->image}}">
-                                </div>
+                                
+                                    <div class="col-md-3 ">
+                                        <a href="{{URL::to('/meusbilhetes/'.$item->id)}}">
+                                        <img class="img-fluid mx-auto d-block image rounded" src="/storage/{{$item->ticket->event->image}}">
+                                        </a>
+                                    </div>
+                                
                                 <div class="col-md-8 ">
                                     <div class="info ">
                                         <div class="row ">
                                             <div class="col-md-8 product-name ">
                                                 <div class="product-name ">
-                                                    <a href="# ">{{$item->event->name}}</a> <br>
-                                                    <a href="# ">{{$item->ticket->name}}</a>
+                                                    <a href="{{URL::to('/meusbilhetes/'.$item->id)}}">{{$item->event->name}}</a> <br>
+                                                    <a href="{{URL::to('/meusbilhetes/'.$item->id)}}">{{$item->ticket->name}}</a>
                                                     <div class="product-info ">
-                                                        <div>Quantidade: <span class="value">{{$item->selldetails->where('status',0)->count()}}</span></div>
-                                                        <div>Bilhetes Utilizados: <span class="value">{{$item->qty}}</span></div>
+                                                        
+                                                        <div>Quantidade: <span class="value">{{$item->qty}}</span></div>
+                                                        <div>Bilhetes Utilizados: <span class="value">{{$item->selldetails->where('status',0)->count()}}</span></div>
                                                         <div>Preço Unitário: <span class="value">{{$item->ticket->price}} MT</span></div>
                                                         <div>Preço Total: <span class="value">{{$item->ticket->price*$item->qty}} MT</span></div>
+                                                        <div>Transação: <span class="value">{{$item->transaction->reference}} | {{$item->transaction->method}}</span></div>
                                                         
-                                                       
-                                                        <a href="{{URL::to('/meusbilhetes/'.$item->id)}}"> <div ><i class="las la-tag"></i>Ver bilhete</div></a>
-                                                        
-                                                        
-                                                        
+                                                        <a href="{{URL::to('/meusbilhetes/'.$item->id)}}" class="m-4"> <div ><i class="las la-tag"></i>Ver bilhete</div></a>
+ 
                                                     </div>
                                                 </div>
                                             </div>
@@ -86,6 +89,7 @@
                                 </div>
                             </div>
                         </div>
+                        <hr>
                        
                         @empty
                         <div class="product text-center">

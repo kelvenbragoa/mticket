@@ -51,16 +51,16 @@
                             <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" placeholder="Endereço E-mail" value="{{ old('email') }}" required autocomplete="email" autofocus>
                            
                             @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                <small style="color:red">
+                                    <strong>{{ $message }}</strong>
+                                </small> 
                             @enderror
 
                             <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password" required autocomplete="current-password">
                             @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <small style="color:red">
+                                    <strong>{{ $message }}</strong>
+                                </small> 
                                 @enderror
 
                             <div class="form-button">

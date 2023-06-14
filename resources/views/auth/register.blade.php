@@ -8,6 +8,10 @@
     <link rel="stylesheet" type="text/css" href="{{asset('template_login/css/fontawesome-all.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('template_login/css/iofrm-style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('template_login/css/iofrm-theme17.css')}}">
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
     <div class="form-body without-side">
@@ -42,34 +46,68 @@
                             href="{{URL::to('/')}}"> MTICKET </a></h1>
                         <h3>Registrar nova conta</h3>
                         <p>Acesse a todos o eventos em uma só plataforma.</p>
+
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <input class="form-control" type="text" name="name" placeholder="Nome Completo" value="{{old('name')}}" required>
                             @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <small style="color:red">
+                                    <strong>{{ $message }}</strong>
+                                </small> 
                             @enderror
                             <input class="form-control" type="email" name="email" placeholder="Endereço E-mail" value="{{old('email')}}" required>
                             @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <small style="color:red">
+                                    <strong>{{ $message }}</strong>
+                                </small> 
                             @enderror
                             <input class="form-control" type="text" name="mobile" placeholder="Telefone" value="{{old('mobile')}}" required>
                             @error('mobile')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <small style="color:red">
+                                    <strong>{{ $message }}</strong>
+                                </small> 
                             @enderror
-                            <input class="form-control" type="password" name="password" placeholder="Password" required>
+                            <input class="form-control" type="password" name="password" placeholder="Password (8 ou mais caracteres)" required>
+                            
                             @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <small style="color:red">
+                                    <strong>{{ $message }}</strong>
+                                </small>  
                             @enderror
                             <input class="form-control" type="password" name="password_confirmation" placeholder="Repita Password" required>
-                           
+
+                            <label>Qual tipo de usuário deseja ser?</label>
+                            
+                            
+                            <div class="inline-el-holder">
+                                <div class="inline-el">
+                                    <div class="rad-with-details">
+                                        <input type="radio" id="rad3" name="is_promotor" value="0" checked><label for="rad3" required>Usuário Normal</label>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="inline-el">
+                                    <div class="rad-with-details">
+                                        <input type="radio" id="rad2" name="is_promotor" value="1"><label for="rad2" required>Promotor de Eventos</label>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <label for="rad1">Aceita os termos e codições?</label>
+                            
+                            
+                            <div class="inline-el-holder">
+                                <div class="inline-el">
+                                    <div class="rad-with-details">
+                                        <input type="radio" id="rad1" required checked><label for="rad1">Sim</label>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>
                             <div class="form-button">
                                 <button id="submit" type="submit" class="ibtn">Registrar</button>
                             </div>

@@ -36,7 +36,7 @@
                 </div>
                 <!-- .member-wrap-top -->
                 <a href="{{URL::to('/eventos/'.$event->id.'/edit')}}" title="Genaral"><span class="icon"><i class="la la-angle-left"></i></span><span>Voltar</span></a> <br>
-                <a href="{{URL::to('/lineup/'.$event->id.'/add')}}" class="btn btn-pill btn-warning"><i class="far fa-plus"></i>Adicionar Lineup</a>
+                <a href="{{URL::to('/lineup/'.$event->id.'/add')}}" class="btn btn-pill btn-warning mb-3 mt-3"><i class="far fa-plus"></i>Adicionar Lineup</a>
                 
                 <table class="member-place-list table-responsive">
                     <thead>

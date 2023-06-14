@@ -23,9 +23,12 @@ class MyTicketController extends Controller
     {
         //
 
-        $myticket = Sell::where('user_id',Auth::user()->id)->get();
+        $myticket = Sell::where('user_id',Auth::user()->id)->orderBy('id','desc')->get();
         
+        $transaction = Transaction::orderBy('id','desc')->first();
 
+       
+        
       
         return view('frontend.meusbilhetes',compact('myticket'));
     }
@@ -61,7 +64,11 @@ class MyTicketController extends Controller
 
         $string = substr(str_shuffle(str_repeat($x='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(3/strlen($x)) )),1,4);
 
-        $ref = 'MT'.Auth::user()->id.'T'.$string;
+        $transaction = Transaction::orderBy('id','desc')->first();
+
+        $add = $transaction->id + 1;
+
+        $ref = 'MT'.Auth::user()->id.'T'.$string.$add;
         $amount= $data['amount'];
         $cart = Carts::where('user_id',Auth::user()->id)->get();
 

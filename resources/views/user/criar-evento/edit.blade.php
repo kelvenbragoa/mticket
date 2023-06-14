@@ -25,43 +25,50 @@
                     <h2>Editar Evento</h2>
                 </div>
                 <!-- .member-wrap-top -->
-                <div class="listing-box upload-form" id="genaral">
+                <div class="listing-box" id="genaral">
                    
-                    <h3>Bilhetes para o evento</h3>
+                    <h3>Bilhetes para o evento ({{$event->tickets->count()}})</h3>
                     
-                    <a href="{{URL::to('/bilhete/'.$event->id.'/evento')}}" class="btn btn-pill btn-warning"><i class="far fa-plus"></i>Adicionar Bilhetes</a>
+                    <a href="{{URL::to('/bilhete/'.$event->id.'/evento')}}" class="btn btn-pill btn-warning mb-2"><i class="far fa-plus"></i>Adicionar/Editar Bilhetes</a>
                     <table class="member-place-list table-responsive">
                         <thead>
                             <tr>
 
                                 <th>Nome</th>
                                 <th>Preço</th>
+                                <th>Max</th>
                             </tr>
                         </thead>
                         <tbody>
-                                @foreach ($event->tickets as $item)
+                                @forelse ($event->tickets as $item)
                                     <tr>
                                     
                                         <td data-title="Nome">{{$item->name}}</td>
                                     
                                         <td data-title="Descrição"><b>{{$item->price}} MT</b></td>
+
+                                        <td data-title="Max"><b>{{$item->max_qtd}}</b></td>
                                     
                                     </tr>
-                                @endforeach 
+                                @empty
+                                <tr>
+                                    <td colspan="2" align="center">Nenhum Bilhete adicionado</td>
+                                </tr>
+                                    
+                                @endforelse 
                         </tbody>
                     </table>
                 </div>
-                <div class="listing-box upload-form" id="genaral">
+                <div class="listing-box" id="genaral">
                    
-                    <h3>LineUps/Momentos para o Evento</h3>
-                    <a href="{{URL::to('/lineup/'.$event->id.'/evento')}}" class="btn btn-pill btn-warning"><i class="far fa-plus"></i>Adicionar LineUps do Evento</a>
+                    <h3>LineUps/Momentos para o Evento ({{$event->lineups->count()}})</h3>
+                    <a href="{{URL::to('/lineup/'.$event->id.'/evento')}}" class="btn btn-pill btn-warning  mb-2"><i class="far fa-plus"></i>Adicionar/Editar LineUps do Evento</a>
                         
                         <table class="member-place-list table-responsive">
                             <thead>
                                 <tr>
 
                                     <th>Nome</th>
-                                    
                                     <th>Inicio</th>
                                     <th>Fim</th>
                                     
@@ -69,14 +76,18 @@
                             </thead>
                             <tbody>
                                
-                                @foreach ($event->lineups as $item)
+                                @forelse ($event->lineups as $item)
                                 <tr>
                                     
                                     <td data-title="Nome">{{$item->name}}</td>
                                     <td data-title="Inicio">{{$item->start_time}}</td>
                                     <td data-title="Fim">{{$item->end_time}}</td>
                                 </tr>
-                                @endforeach    
+                                @empty
+                                <tr>
+                                    <td colspan="3" align="center">Nenhum LineUp adicionado</td>
+                                </tr>
+                                @endforelse    
                                 
                                     
                                
@@ -144,184 +155,7 @@
                         </div>
                     </div>
 
-                    {{--
-                    <div class="listing-box" id="genaral">
-                        <h3>Bilhetes para o evento</h3>
-                        <a href="{{URL::to('/bilhete/'.$event->id.'/add')}}" class="btn btn-pill btn-warning"><i class="far fa-plus"></i>Adicionar Bilhetes</a>
-                        <table class="member-place-list table-responsive">
-                            <thead>
-                                <tr>
-
-                                    <th>Nome</th>
-                                    <th>Preço</th>
-                                    <th>Inicio</th>
-                                    <th>Fim</th>
-                                    <th>Max</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                               
-                                    <tr>
-                                    
-                                        <td data-title="Nome">Bilhete Normal</td>
-                                       
-                                        <td data-title="Descrição"><b>500 MT</b></td>
-                                        <td data-title="Inicio">22-05-2022 00:00</td>
-                                        <td data-title="Fim">31-05-2022 12:00</td>
-                                        <td data-title="Max">100</td>
-                                    
-                                        <td data-title="Ações" class="place-action">
-                                            <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                            <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    
-                                        <td data-title="Nome">Vip Normal</td>
-                                       
-                                        <td data-title="Descrição"><b>100 MT</b></td>
-                                        <td data-title="Inicio">22-05-2022 00:00</td>
-                                        <td data-title="Fim">31-05-2022 12:00</td>
-                                        <td data-title="Max">100</td>
-                                    
-                                        <td data-title="Ações" class="place-action">
-                                            <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                            <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    
-                                        <td data-title="Nome">Vip Platina</td>
-                                       
-                                        <td data-title="Descrição"><b>100 MT</b></td>
-                                        <td data-title="Inicio">22-05-2022 00:00</td>
-                                        <td data-title="Fim">31-05-2022 12:00</td>
-                                        <td data-title="Max">100</td>
-                                    
-                                        <td data-title="Ações" class="place-action">
-                                            <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                            <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-                                    
-                                        <td data-title="Nome">Bilhete Normal No dia</td>
-                                       
-                                        <td data-title="Descrição"><b>500 MT</b></td>
-                                        <td data-title="Inicio">01-06-2022 08:00</td>
-                                        <td data-title="Fim">02-06-2022 05:00</td>
-                                        <td data-title="Max">100</td>
-                                    
-                                        <td data-title="Ações" class="place-action">
-                                            <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                            <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    
-                                        <td data-title="Nome">Vip Normal No dia</td>
-                                       
-                                        <td data-title="Descrição"><b>100 MT</b></td>
-                                        <td data-title="Inicio">01-06-2022 08:00</td>
-                                        <td data-title="Fim">02-06-2022 05:00</td>
-                                        <td data-title="Max">100</td>
-                                    
-                                        <td data-title="Ações" class="place-action">
-                                            <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                            <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    
-                                        <td data-title="Nome">Vip Platina No dia</td>
-                                       
-                                        <td data-title="Descrição"><b>100 MT</b></td>
-                                        <td data-title="Inicio">01-06-2022 08:00</td>
-                                        <td data-title="Fim">02-06-2022 05:00</td>
-                                        <td data-title="Max">100</td>
-                                    
-                                        <td data-title="Ações" class="place-action">
-                                            <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                            <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                   
-                               
-                               
-                                
-                                
-                            </tbody>
-                        </table>
-                      
-                    </div>
-
-                    <div class="listing-box" id="genaral">
-                        <h3>LineUps/Momentos para o Evento</h3>
-                        <a href="" data-toggle="modal" data-target="#exampleModalCenterLineUp" class="btn btn-pill btn-warning"><i class="far fa-plus"></i>Adicionar LineUps do Evento</a>
-                        @include('user.criar-evento.modal-lineup')
-                      
-                        <table class="member-place-list table-responsive">
-                            <thead>
-                                <tr>
-
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
-                                    <th>Inicio</th>
-                                    <th>Fim</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                               
-                                    <tr>
-                                    
-                                        <td data-title="Nome">Kelven</td>
-                                       
-                                        <td data-title="Descrição"><b>Dj da praça</b></td>
-                                        <td data-title="Inicio">19:00</td>
-                                        <td data-title="Fim">19:30</td>
-                                    
-                                        <td data-title="Ações" class="place-action">
-                                            <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                            <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    
-                                        <td data-title="Nome">Kelven</td>
-                                       
-                                        <td data-title="Descrição"><b>Dj da praça</b></td>
-                                        <td data-title="Inicio">19:00</td>
-                                        <td data-title="Fim">19:30</td>
-                                    
-                                        <td data-title="Ações" class="place-action">
-                                            <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                            <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    
-                                        <td data-title="Nome">Kelven</td>
-                                       
-                                        <td data-title="Descrição"><b>Dj da praça</b></td>
-                                        <td data-title="Inicio">19:00</td>
-                                        <td data-title="Fim">19:30</td>
-                                    
-                                        <td data-title="Ações" class="place-action">
-                                            <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                            <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                               
-                               
-                                
-                                
-                            </tbody>
-                        </table>
-                    </div>--}}
+                  
                    
         
                     <div class="listing-box" id="location">

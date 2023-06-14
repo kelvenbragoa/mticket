@@ -551,14 +551,18 @@
         $('.upload-form').submit(function(e){
             if(fileInput.get(0).files.length){
                 var fileSize = fileInput.get(0).files[0].size; // in bytes
+
+                var fileSizeMb = fileSize/1000000;
+                var maxSizeMB = maxSize/1000000;
+
                 if(fileSize>maxSize){
-                    alert('file size is more then' + maxSize + ' bytes');
+                    alert('Este ficheiro tem mais que ' + maxSizeMB + ' MB');
                     return false;
                 }else{
-                    alert('file size is correct- '+fileSize+' bytes');
+                    
                 }
             }else{
-                alert('choose file, please');
+                alert('Escolhe uma imagem por favor');
                 return false;
             }
         });

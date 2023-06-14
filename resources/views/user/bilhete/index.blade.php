@@ -32,11 +32,11 @@
         @endif
             <div class="member-place-wrap">
                 <div class="member-wrap-top">
-                    <h2>Bilhetes do Evento - {{$event->name}} </h2>  
+                    <h2>Bilhetes do Evento - {{$event->name}} ({{$tickets->count()}})</h2>  
                 </div>
                 <!-- .member-wrap-top -->
-                <a href="{{URL::to('/eventos/'.$event->id.'/edit')}}" title="Genaral"><span class="icon"><i class="la la-angle-left"></i></span><span>Voltar</span></a> <br>
-                <a href="{{URL::to('/bilhete/'.$event->id.'/add')}}" class="btn btn-pill btn-warning"><i class="far fa-plus"></i>Adicionar Bilhetes</a>
+                <a href="{{URL::to('/eventos/'.$event->id.'/edit')}}" class="mb-3" title="Genaral"><span class="icon"><i class="la la-angle-left"></i></span><span>Voltar</span></a> <br>
+                <a href="{{URL::to('/bilhete/'.$event->id.'/add')}}" class="btn btn-pill btn-warning mb-3 mt-3"><i class="far fa-plus"></i>Adicionar Bilhetes</a>
                 
                 <table class="member-place-list table-responsive">
                     <thead>
@@ -77,7 +77,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7">Nenhum Bilhete para este evento !</td>
+                                <td colspan="7" align="center">Nenhum Bilhete para este evento !</td>
                                 
                             </tr>
                         @endforelse

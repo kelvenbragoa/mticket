@@ -23,7 +23,7 @@
                 </div> --}}
             </div>
             <!-- .page-title -->
-            <div class="place-share">
+            {{-- <div class="place-share">
                 <a title="Save" href="#" class="add-wishlist">
                     <i class="la la-bookmark large"></i>
                 </a>
@@ -31,7 +31,7 @@
                     <i class="la la-share-square la-24"></i>
                 </a>
 
-            </div>
+            </div> --}}
             <!-- .place-share -->
             <div class="place-slider__nav slick-nav">
                 <div class="place-slider__prev slick-nav__prev">
@@ -63,7 +63,11 @@
                             <div class="widget-top">
                                 <div class="flex">
                                     <div class="store-detail">
+                                        @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$event->end_date $event->end_time")))
+                                        <span class="close">Encerrado</span>
+                                        @else
                                         <span class="open">A venda</span>
+                                        @endif
                                         <img src="/storage/{{$event->user->image}}" alt="Autor">
 
                                     </div>
@@ -79,14 +83,18 @@
                            <div class="business-info">
                             <h4>Informações</h4>
                             <ul>
-                                <li><i class="las la-clock"></i> <a>{{date('l M Y',strtotime($event->start_date))}}</a></li>
+                                <li><i class="las la-clock"></i> <a>{{date('l',strtotime($event->start_date))}} {{date('d',strtotime($event->start_date))}} {{date('M',strtotime($event->start_date))}} {{date('Y',strtotime($event->start_date))}}</a></li>
                                 <li><i class="las la-tag"></i> <a>{{$event->tickets->count()}} Bilhetes disponíveis</a></li>
                                 <li><i class="las la-map-marked-alt large"></i><a>{{$event->address}} - {{$event->city->name}}</a></li>
                                 <li><i class="la la-phone large"></i> <a href="tel:{{$event->phone}}">{{$event->phone}}</a></li>
                                 <li><i class="la la-globe large"></i> <a href="{{$event->website}}">{{$event->website}}</a></li>
                             </ul>
                             <div class="button-wrap">
-                                <div class="button"><a href="{{URL::to('/checkout/'.$event->id.'/evento')}}" class="btn">Comprar</a></div>
+                                @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$event->end_date $event->end_time")))
+                                    <div class="button"><a href="" class="btn">Evento Encerado</a></div>
+                                @else
+                                    <div class="button"><a href="{{URL::to('/checkout/'.$event->id.'/evento')}}" class="btn">Comprar</a></div>
+                                @endif
 
                             </div>
                         </div>
@@ -348,7 +356,11 @@
                                             </div>
                                         </div>
                                         <h3 class="place-title"><a title="{{$item->name}}" href="{{URL::to('/detalhes/'.$item->id.'/evento')}}">{!! Str::limit($item->name, 20) !!}</a></h3>
-                                        <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                                        @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$item->end_date $item->end_time")))
+                                        <div class="close-now"><i class="las la-door-closed"></i>Encerado</div>
+                                        @else
+                                            <div class="open-now"><i class="las la-door-open"></i>A venda</div>
+                                        @endif
                                         <div class="entry-bottom">
                                             <div class="place-preview">
                                                 <div class="place-rating">

@@ -49,6 +49,10 @@ class Event extends Model
         return $this->hasMany('App\Models\Sell', 'event_id', 'id');
     }
 
+    public function sell_details(){
+        return $this->hasMany('App\Models\SellDetails', 'event_id', 'id');
+    }
+
     public function review(){
         return $this->hasMany('App\Models\Review', 'event_id', 'id');
     }

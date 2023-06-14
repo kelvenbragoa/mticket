@@ -61,7 +61,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$item->end_date $item->end_time")) || $item->max_qtd <= 0)
+                                                    @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$item->end_date $item->end_time")) || $item->max_qtd <= 0 || date('Y-m-d H:i') <= date('Y-m-d H:i',strtotime("$item->start_date $item->start_time")))
                                                     <div class="col-md-4 quantity ">
                                                         
                                                         <a class="btn btn-danger " style="background-color:rgb(212, 212, 212);">Indisponível</a>
