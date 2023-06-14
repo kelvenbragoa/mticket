@@ -75,6 +75,7 @@
                                                         <div>Preço Unitário: <span class="value">{{$item->ticket->price}} MT</span></div>
                                                         <div>Preço Total: <span class="value">{{$item->ticket->price*$item->qty}} MT</span></div>
                                                         <div>Transação: <span class="value">{{$item->transaction->reference}} | {{$item->transaction->method}}</span></div>
+                                                        <div>Data da Compra: <span class="value">{{$item->transaction->created_at->format('d-M-Y')}}</span></div>
                                                         
                                                         <a href="{{URL::to('/meusbilhetes/'.$item->id)}}" class="m-4"> <div ><i class="las la-tag"></i>Ver bilhete</div></a>
  
