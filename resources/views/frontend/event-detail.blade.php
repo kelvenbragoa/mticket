@@ -85,15 +85,15 @@
                             <ul>
                                 <li><i class="las la-clock"></i> <a>{{date('l',strtotime($event->start_date))}} {{date('d',strtotime($event->start_date))}} {{date('M',strtotime($event->start_date))}} {{date('Y',strtotime($event->start_date))}}</a></li>
                                 <li><i class="las la-tag"></i> <a>{{$event->tickets->count()}} Bilhetes disponíveis</a></li>
-                                <li><i class="las la-map-marked-alt large"></i><a>{{$event->address}} - {{$event->city->name}}</a></li>
-                                <li><i class="la la-phone large"></i> <a href="tel:{{$event->phone}}">{{$event->phone}}</a></li>
-                                <li><i class="la la-globe large"></i> <a href="{{$event->website}}">{{$event->website}}</a></li>
+                                @if ($event->address != null)<li><i class="las la-map-marked-alt large"></i><a>{{$event->address}} - {{$event->city->name}}</a></li>@endif
+                                @if ($event->phone != null)<li><i class="la la-phone large"></i> <a href="tel:{{$event->phone}}">{{$event->phone}}</a></li>@endif
+                                @if ($event->website != null)<li><i class="la la-globe large"></i> <a href="{{$event->website}}">{{$event->website}}</a></li>@endif
                             </ul>
                             <div class="button-wrap">
                                 @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$event->end_date $event->end_time")))
-                                    <div class="button"><a href="" class="btn">Evento Encerado</a></div>
+                                    <div class="button mt-2 mb-2"><a href="" class="btn">Evento Encerado</a></div>
                                 @else
-                                    <div class="button"><a href="{{URL::to('/checkout/'.$event->id.'/evento')}}" class="btn">Comprar</a></div>
+                                    <div class="button mt-2 mb-2"><a href="{{URL::to('/checkout/'.$event->id.'/evento')}}" class="btn">Comprar</a></div>
                                 @endif
 
                             </div>
