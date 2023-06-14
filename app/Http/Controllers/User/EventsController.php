@@ -29,12 +29,28 @@ class EventsController extends Controller
     public function search(Request $request){
         $data = $request->all();
 
-        $province = Province::where('name',$data['province'])->first();
-        $category = Category::where('name',$data['category'])->first();
+        if($data['province'] != null && $data['category']!=null){
+            $province = Province::where('name',$data['province'])->first();
+            $category = Category::where('name',$data['category'])->first();
 
-        $events = Event::where('province_id',$province->id)->where('main_category_id',$category->id)->where('status_id',2)->get();
+            $events = Event::where('province_id',$province->id)->where('main_category_id',$category->id)->where('status_id',2)->get();
 
-        return view('frontend.search',compact('events'));
+            return view('frontend.search',compact('events'));
+        }else{
+            if($data['province'] != null){
+                $province = Province::where('name',$data['province'])->first();
+                return redirect('/provincia/'.$province->id.'/eventos');
+            }
+            if($data['category'] != null){
+                $category = Category::where('name',$data['category'])->first();
+                return redirect('/categoria/'.$category->id.'/eventos');
+                
+            }
+            return redirect('/todos-eventos');
+
+        }
+
+        
     }
 
     /**

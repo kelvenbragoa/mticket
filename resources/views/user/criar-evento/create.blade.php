@@ -161,7 +161,7 @@
                         <img class="img_preview" src="images/no-image.png" alt="" />
                         <i class="la la-cloud-upload-alt"></i>
                     </label>
-                    <div class="field-note">Tamanho Máximo: 1 MB.</div>
+                    <div class="field-note">Tamanho Máximo: 1 MB. A imagem deve ser Quadrada 1000px x 1000px</div>
                 </div>
                 
                 <div class="field-group">

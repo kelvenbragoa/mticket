@@ -18,7 +18,7 @@
             <div class="intro__content">
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="intro__text">Encontramos em Chimoio paisagens, fontes e cascatas, embelezadas por um conjunto de montanhas que fazem as delícias de quem gosta de montanhismo.
+                        <div class="intro__text">{{$provincia->description}}
                         </div>
                     </div>
                     <div class="col-lg-6">

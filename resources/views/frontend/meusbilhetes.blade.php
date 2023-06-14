@@ -16,31 +16,7 @@
 
         
         <section class="shopping-cart ">
-    {{-- <div class="container">
-       
-        <div class="row">
-            @foreach ($myticket as $item)
-            <div class="col-md-3 ">
-                <img class="img-fluid mx-auto d-block image rounded mb-4" width="100" height="100" src="/storage/{{$item->ticket->event->image}}">
-            </div>
-            <div class="col-md-8 ">
-                <div class="info ">
-                    <div class="row ">
-                        <div class="col-md-5 product-name ">
-                            <div class="product-name ">
-                                <a href="# ">{{$item->qty}}x{{$item->ticket->name}} - {{$item->ticket->price*$item->qty}} MT</a>
-                                <a href="{{URL::to('/meusbilhetes/'.$item->id)}}">Ver bilhete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-            @endforeach
-        </div> 
-
-     
-    </div>--}}
+    
 
     <div class="container">
        
