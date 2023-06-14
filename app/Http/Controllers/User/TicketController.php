@@ -106,7 +106,7 @@ class TicketController extends Controller
     public function destroy($id)
     {
         //
-        $ticket = Ticket::find($id);
+        $ticket = Ticket::findOrFail($id);
 
         $sell = Sell::where('ticket_id',$ticket->id)->get();
 

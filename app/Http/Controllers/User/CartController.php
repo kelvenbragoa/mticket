@@ -48,6 +48,11 @@ class CartController extends Controller
         //
         $data = $request->all();
 
+        if (!$request->has('quantity')) {
+            return back()->with('messageError','Os bilhetes não estão disponíveis para venda no momento.');
+        } 
+        
+       
         
         $qty = 0;
         for ($i=0; $i < count($data['quantity']) ; $i++) { 
@@ -132,7 +137,7 @@ return redirect()->route('carrinho.index')->with('messageSuccess','Bilhete adici
     {
         //
 
-        $cart = Carts::find($id);
+        $cart = Carts::findOrFail($id);
 
 
         $cart->delete();

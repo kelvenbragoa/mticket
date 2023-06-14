@@ -105,7 +105,7 @@ class LineupController extends Controller
     public function destroy($id)
     {
         //
-        $lineup = LineUp::find($id);
+        $lineup = LineUp::findOrFail($id);
 
        
 
