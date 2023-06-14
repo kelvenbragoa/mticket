@@ -47,7 +47,7 @@ class RootController extends Controller
         $provincia = Province::find($provincia);
         $provinces = Province::limit(4)->get();
         return view('frontend.eventos-provincia',compact('events','provincia','provinces'));
-        
+
     }
 
     public function aboutus(){
