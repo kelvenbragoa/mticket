@@ -7,6 +7,7 @@ use App\Models\Carts;
 use App\Models\Event;
 use App\Models\Sell;
 use App\Models\SellDetails;
+use App\Models\Ticket;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,6 +72,16 @@ class MyTicketController extends Controller
         $ref = 'MT'.Auth::user()->id.'T'.$string.$add;
         $amount= $data['amount'];
         $cart = Carts::where('user_id',Auth::user()->id)->get();
+        $msisdn = $data['mobile'];
+
+        $c2b = $transactionmpesa->c2b(
+            $amount, //valor a cobrar do cliente
+            $msisdn, // número de telefone do cliente vodacom com mpesa registrado
+            $ref, //referencia do pagamento
+            $ref //referencia do pagamento
+        );
+
+        if($c2b->getCode() === 'INS-0') { //codigo de sucesso de pagamento
 
         foreach($cart as $item){
             $sell = Sell::create([
@@ -102,12 +113,82 @@ class MyTicketController extends Controller
         }
 
         foreach($cart as $item){
+            $qtd = $item->qtd;
+            $actual_ticket = Ticket::find($item->ticket_id);
+            $new_qtd = $actual_ticket->max_qtd - $qtd;
+
+            $actual_ticket->update([
+                'max_qtd'=>$new_qtd
+            ]);
+            
             $item->delete();
         }
 
 
 
         return redirect()->route('meusbilhetes.index');
+    }
+
+    if($c2b->getCode() === 'INS-1') {
+
+        return back()->with('messageError', 'Erro interno, volte a tentar novamente');
+
+    }
+
+    if($c2b->getCode() === 'INS-2') {
+        //API INVALIDA
+        return back()->with('messageError', 'Erro interno, volte a tentar novamente');
+
+    }
+
+    if($c2b->getCode() === 'INS-4') {
+        //API INVALIDA, USUARIO NAO ATIVO
+        return back()->with('messageError', 'Erro interno, volte a tentar novamente');
+
+    }
+
+    if($c2b->getCode() === 'INS-5') {
+        //API INVALIDA, USUARIO CANCELOU
+        return back()->with('messageError', 'Transação cancelado pelo usuário');
+
+    }
+
+    if($c2b->getCode() === 'INS-6') {
+        //API INVALIDA, Transaçãp falhou
+        return back()->with('messageError', 'Transação falhou');
+
+    }
+
+    if($c2b->getCode() === 'INS-9') {
+        //API INVALIDA, REQUEST TIMEOUT
+        return back()->with('messageError', 'O tempo expirou. Volte a tentar');
+
+    }
+
+    if($c2b->getCode() === 'INS-10') {
+    
+        return back()->with('messageError', 'Transação duplicada');
+
+    }
+    if($c2b->getCode() === 'INS-16') {
+    
+        return back()->with('messageError', 'Erro interno volte mais tarde');
+
+    }
+
+    if($c2b->getCode() === 'INS-2006') {
+    
+        return back()->with('messageError', 'Saldo insuficiente');
+
+    }
+
+    if($c2b->getCode() === 'INS-2051') {
+    
+        return back()->with('messageError', 'Número de telefone inválido');
+
+    }
+
+
     }
 
     /**
