@@ -15,7 +15,7 @@
                     </li>
                     <li  class="active"><a href="{{route('eventos.index')}}">Meus Eventos</a></li>
                     
-                    <li><a href="{{URL::to('home')}}">Perfil</a></li>
+                    <li><a href="{{URL::to('/perfil')}}">Perfil</a></li>
                 </ul>
             </div>
         </div>

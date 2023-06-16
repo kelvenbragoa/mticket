@@ -101,6 +101,7 @@ class EventsController extends Controller
             'twitter' => $data['twitter'],
             'youtube' => $data['youtube'],
             'status_id' => 3,
+            'tax' => 10,
         ]);
 
         return redirect()->route('painel.index')->with('message','O seu evento foi adicionado com sucesso. Termine a configurações do seu evento no menu "Meus Eventos"');

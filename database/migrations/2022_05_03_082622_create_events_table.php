@@ -37,6 +37,7 @@ class CreateEventsTable extends Migration
             $table->string('twitter')->nullable();
             $table->string('youtube')->nullable();
             $table->integer('status_id')->nullable();
+            $table->integer('tax')->nullable();
             $table->timestamps();
         });
     }

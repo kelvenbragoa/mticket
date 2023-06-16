@@ -4,10 +4,9 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Protocol;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class ProtocolsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +16,6 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users = User::orderBy('name','asc')->get();
-
-      
-        return view('superadmin.user.index',compact('users'));
     }
 
     /**
@@ -31,7 +26,6 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('superadmin.province.create');
     }
 
     /**
@@ -43,16 +37,46 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+
         $data = $request->all();
-        // dd($data);
-        User::create([
-            'name' => $data['name'],
+
+        // $request->validate([
+        //     'mobile' => ['required','numeric'],
+        //     'name' => ['required'],
+        //     'bi' => ['required'],
+            
            
-        ]);
+        // ]);
 
-        
+        $test = Protocol::orderBy('id','desc')->first();
+        $string = substr(str_shuffle(str_repeat($x='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(3/strlen($x)) )),1,6);
 
-        return back()->with('message','Success');
+        if($test == null){
+            $user = $string.'1';
+            Protocol::create([
+                'name'=>$data['name'],
+                'mobile'=>$data['mobile'],
+                'user'=>$user,
+                'bi'=>$data['bi'],
+                'password'=>$data['bi'],
+                'event_id'=>$data['event_id'],
+
+            ]);
+        }else{
+            $user = $string.$test->id+1;
+            Protocol::create([
+                'name'=>$data['name'],
+                'mobile'=>$data['mobile'],
+                'user'=>$user,
+                'bi'=>$data['bi'],
+                'password'=>$data['bi'],
+                'event_id'=>$data['event_id'],
+
+            ]);
+        }
+
+
+        return back()->with('message','Protocolo adicionado com sucesso');
     }
 
     /**
@@ -72,11 +96,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
         //
-
-        return view('superadmin.user.edit',compact('user'));
     }
 
     /**
@@ -86,16 +108,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         //
-        $data = $request->all();
-
-
-        $user->update(
-            $data,
-            );
-        return redirect()->route('user.index')->with('message','Success');
     }
 
     /**

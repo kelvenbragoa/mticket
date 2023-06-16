@@ -15,7 +15,7 @@
                     </li>
                     <li  ><a href="{{route('eventos.index')}}">Meus Eventos</a></li>
                     
-                    <li><a href="{{URL::to('home')}}">Perfil</a></li>
+                    <li><a href="{{URL::to('/perfil')}}">Perfil</a></li>
                 </ul>
             </div>
         </div>
@@ -41,6 +41,9 @@
                             <th>Nome</th>
                             <th>Data</th>
                             <th>Vendas</th>
+                            <th>Taxa</th>
+                            <th>Bruto</th>
+                            <th>Líquido</th>
                             <th>Estado</th>
                             <th>Ações</th>
                         </tr>
@@ -53,6 +56,11 @@
                                 <td data-title="Nome"><b>{{$item->name}}</b></td>
                                 <td data-title="Data">{{date('d-m-Y',strtotime($item->start_date))}}</td>
                                 <td data-title="Vendas">{{$item->sell_details->count()}}</td>
+                                <td data-title="Taxa">{{$item->tax}} %</td>
+                                <td data-title="Bruto">{{number_format($item->sells->sum('total'),2)}} MT</td>
+                                <td data-title="Liquido">
+                                    {{number_format($item->sells->sum('total') - ($item->sells->sum('total')*10)/100,2)}} MT
+                                </td>
                                 <td data-title="Status" class="{{$item->status->alias}}">{{$item->status->name}}</td>
                                 <td data-title="" class="place-action">
                                   

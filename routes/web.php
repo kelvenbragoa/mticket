@@ -43,7 +43,16 @@ Route::get('/provincia/{provincia}/eventos', [App\Http\Controllers\RootControlle
 Route::get('/pesquisar-eventos', [App\Http\Controllers\User\EventsController::class, 'search']);
 Route::resource('profile', 'App\Http\Controllers\ProfileController');
 
+//eventos
 
+
+
+
+Route::get('/detalhes/{evento}/evento', [App\Http\Controllers\User\EventsController::class, 'detailevents']);
+
+
+Route::get('/checkout/{evento}/evento', [App\Http\Controllers\User\CheckOutController::class, 'checkout']);
+Route::resource('checkout', 'App\Http\Controllers\User\CheckOutController');
 //SUPERADMIN CONTROLLERS
 
 Route::group(['middleware'=>['auth','superadmin']], function(){
@@ -54,10 +63,14 @@ Route::group(['middleware'=>['auth','superadmin']], function(){
     Route::resource('user', 'App\Http\Controllers\SuperAdmin\UserController');
     Route::resource('category', 'App\Http\Controllers\SuperAdmin\CategoryController');
     Route::resource('events', 'App\Http\Controllers\SuperAdmin\EventsController');
+    Route::resource('protocols', 'App\Http\Controllers\SuperAdmin\ProtocolsController');
 
 });
 
 
+Route::group(['middleware'=>['auth','user']], function(){
+
+    
 Route::resource('carrinho', 'App\Http\Controllers\User\CartController');
 Route::resource('review', 'App\Http\Controllers\User\ReviewController');
 Route::resource('eventos', 'App\Http\Controllers\User\EventsController');
@@ -82,17 +95,12 @@ Route::get('/bilhete/{evento}/add', [App\Http\Controllers\User\TicketController:
 Route::get('/bilhete/{evento}/evento/{bilhete}/edit', [App\Http\Controllers\User\TicketController::class, 'edit']);
 
 
-//eventos
 
-
-
-
-Route::get('/detalhes/{evento}/evento', [App\Http\Controllers\User\EventsController::class, 'detailevents']);
-
-
-Route::get('/checkout/{evento}/evento', [App\Http\Controllers\User\CheckOutController::class, 'checkout']);
-Route::resource('checkout', 'App\Http\Controllers\User\CheckOutController');
 Route::resource('meusbilhetes', 'App\Http\Controllers\User\MyTicketController');
+
+});
+
+
 
 
 

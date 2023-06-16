@@ -4,18 +4,19 @@
 
     <h1 class="h3 mb-3">Evento</h1>
 
+    @if (Session::has('message'))
+    <div class="alert alert-success">
+        {{Session::get('message')}}
+    </div>
+    @endif
+    @include('superadmin.events.modaledit')
+    @include('superadmin.events.modaladd')
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Evento</h5>
-                </div>
+               
                 <div class="card-body">
-                    @if (Session::has('message'))
-                        <div class="alert alert-success">
-                            {{Session::get('message')}}
-                        </div>
-                    @endif
+                   
 
                     <div class="row mb-2 mb-xl-3">
                         <div class="col-auto d-none d-sm-block">
@@ -32,8 +33,12 @@
                             <p><strong>Descrição do Evento</strong>: {{$event->description}}</p>
                         </div>
                     </div>
-                    @include('superadmin.events.modaledit')
-                    <hr>
+                    
+                </div>
+            </div>
+                <hr>
+                <div class="card">
+                <div class="card-body">
 
                     <div class="row mb-2 mb-xl-3">
                         <div class="col-auto d-none d-sm-block">
@@ -49,9 +54,12 @@
                             <p><strong>Provincia</strong>: {{$event->province->name}}</p>
                         </div>
                     </div>
+                </div>
+            </div>
 
                     <hr>
-
+                    <div class="card">
+                    <div class="card-body">
                     <div class="row mb-2 mb-xl-3">
                         <div class="col-auto d-none d-sm-block">
                             <h3><strong>Categoria do Evento</strong></h3>
@@ -65,9 +73,11 @@
                         </div>
                        
                     </div>
-
+                    </div>
+                    </div>
                     <hr>
-
+                    <div class="card">
+                    <div class="card-body">
                     <div class="row mb-2 mb-xl-3">
                         <div class="col-auto d-none d-sm-block">
                             <h3><strong>Contactos Usuário</strong></h3>
@@ -82,9 +92,11 @@
                         </div>
                        
                     </div>
-
+                    </div>
+                    </div>
                     <hr>
-
+                    <div class="card">
+                    <div class="card-body">
                     <div class="row mb-2 mb-xl-3">
                         <div class="col-auto d-none d-sm-block">
                             <h3><strong>Contactos Evento</strong></h3>
@@ -105,16 +117,25 @@
                         </div>
                        
                     </div>
-
-                    <hr>
-
-                    <div class="row mb-2 mb-xl-3">
-                        <div class="col-auto d-none d-sm-block">
-                            <h3><strong>Protocolos do Evento</strong></h3>
-                        </div>
+                    </div>
                     </div>
 
+                    <hr>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row mb-2 mb-xl-3">
+                                <div class="col-auto d-none d-sm-block">
+                                    <h3><strong>Protocolos do Evento</strong></h3>
+                                </div>
+                            </div>
+                            <a href="" data-toggle="modal" data-target="#modaladd" class="btn btn-pill btn-primary"><i class="far fa-plus"></i>Adicionar</a>
+                           
+                        </div>
+                    <div class="card-body">
+                   
+
                     <div class="row">
+
                         <div class="col-12">
                             <p><strong>Número</strong>: {{$event->protocols->count()}}</p>
                             <div class="table-responsive">
@@ -123,8 +144,9 @@
                                         <tr>
                                             <th style="width:15%;">Nome</th>
                                             <th style="width:15%;">Telefone</th>
-                                            <th style="width:15%;">Email</th>
-                                            <th style="width:15%;">Ação</th>
+                                            <th style="width:15%;">BI</th>
+                                            <th style="width:15%;">Usuario</th>
+                                            <th style="width:15%;">Password</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -132,7 +154,9 @@
                                             <tr>
                                                 <td>{{$item->name}}</td>
                                                 <td>{{$item->mobile}}</td>
-                                                <td>{{$item->email}}</td>
+                                                <td>{{$item->bi}}</td>
+                                                <td>{{$item->user}}</td>
+                                                <td>{{$item->password}}</td>
                                                 {{-- <td class="table-action">
                                                     
                                                      <a href="{{URL::to('/events/'.$item->id.'/edit')}}"><i class="align-middle" data-feather="edit-2"></i></a>
@@ -146,9 +170,11 @@
                             </div>
                         </div>
                     </div>
-
+                    </div>
+                    </div>
                     <hr>
-
+                    <div class="card">
+                    <div class="card-body">
                     <div class="row mb-2 mb-xl-3">
                         <div class="col-auto d-none d-sm-block">
                             <h3><strong>Bilhetes do Evento</strong></h3>
@@ -195,8 +221,11 @@
                         </div>
                     </div>
 
+                    </div>
+                    </div>
                     <hr>
-
+                    <div class="card">
+                    <div class="card-body">
                     <div class="row mb-2 mb-xl-3">
                         <div class="col-auto d-none d-sm-block">
                             <h3><strong>LineUps do Evento</strong></h3>
@@ -241,8 +270,11 @@
 
                    
                 </div>
-            </div>
         </div>
+    </div>
+
+        
+  
     
 
 
