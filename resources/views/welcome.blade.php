@@ -100,7 +100,7 @@
     
                                         </div>
                                         <div class="place-price">
-                                            <span>{{$item->tickets->min('price')}}</span>
+                                            <span>{{$item->tickets->min('price')}}MT</span>
                                         </div>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
 
                                     </div>
                                     <div class="place-price">
-                                        <span>{{$item->tickets->min('price')}}</span>
+                                        <span>{{$item->tickets->min('price')}}MT</span>
                                     </div>
                                 </div>
                             </div>
@@ -331,7 +331,7 @@
 
                                     </div>
                                     <div class="place-price">
-                                        <span>{{$item->tickets->min('price')}}</span>
+                                        <span>{{$item->tickets->min('price')}}MT</span>
                                     </div>
                                 </div>
                             </div>

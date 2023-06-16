@@ -274,6 +274,7 @@ html {
                         $myObj->evento = $event->name;
                         $myObj->ticket = $item->ticket->name;
                         $myObj->data = $event->start_date;
+                        $myObj->id = $item->id;
                         
 
                         $myJSON = json_encode($myObj);

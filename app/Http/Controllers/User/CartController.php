@@ -64,6 +64,7 @@ class CartController extends Controller
         }else{
 
         for ($i=0; $i < count($data['quantity']) ; $i++) { 
+            
         if (Carts::where('user_id',Auth::user()->id )->where('ticket_id',$data['ticket_id'][$i])->where('sell_id',null)->exists()) {
             $rec_data = Carts::where('user_id',Auth::user()->id )->where('ticket_id',$data['ticket_id'][$i])->where('sell_id',null)->first();
             $qtd = $rec_data->qtd + $data['quantity'][$i];

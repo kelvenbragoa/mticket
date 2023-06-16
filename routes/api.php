@@ -23,3 +23,9 @@ Route::get('/category',[\App\Http\Controllers\Api\CategoryController::class,'ind
 Route::get('/category/{id}',[\App\Http\Controllers\Api\CategoryController::class,'show']);
 
 Route::get('/home/{id}', [\App\Http\Controllers\Api\Protocols\HomeController::class, 'index']);
+
+Route::get('/alltickets/{id}', [\App\Http\Controllers\Api\Protocols\TicketsController::class, 'index']);
+Route::get('/donetickets/{id}', [\App\Http\Controllers\Api\Protocols\TicketsController::class, 'done']);
+Route::get('/pendingtickets/{id}', [\App\Http\Controllers\Api\Protocols\TicketsController::class, 'pending']);
+Route::get('/ticket/{id}', [\App\Http\Controllers\Api\Protocols\TicketsController::class, 'ticketdetail']);
+Route::get('/verifyticket/{id}', [\App\Http\Controllers\Api\Protocols\TicketsController::class, 'verifyticket']);
