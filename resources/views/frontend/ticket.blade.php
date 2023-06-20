@@ -274,12 +274,15 @@ html {
                         $myObj->evento = $event->name;
                         $myObj->ticket = $item->ticket->name;
                         $myObj->data = $event->start_date;
+                        $myObj->status = $item->status;
                         $myObj->id = $item->id;
+                        $myObj->id_evento = $item->event->id;
                         
 
                         $myJSON = json_encode($myObj);
                     @endphp
-                    {!!QrCode::color(255, 255, 240)->backgroundColor(76, 174, 255)->generate($myJSON);!!}
+                    {{-- {!!QrCode::color(255, 255, 240)->backgroundColor(76, 174, 255)->generate($myJSON);!!} --}}
+                    {!!QrCode::generate($myJSON);!!}
                     {{-- {!! QrCode::format('png')->merge('https://www.google.com/url?sa=i&url=https%3A%2F%2Fgithub.com%2Ftwbs%2Fbootstrap%2Fdiscussions%2F36709&psig=AOvVaw0CAyQVKARhfVy2_yVUIlwB&ust=1686754537229000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCODIhrrAwP8CFQAAAAAdAAAAABAE')->generate(); !!} --}}
                     {{-- <img src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(100)->generate('https://inosecure.inovatis.co.mz/scan/')) !!}"> --}}
                     {{-- <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code"> --}}
