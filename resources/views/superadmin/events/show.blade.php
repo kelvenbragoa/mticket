@@ -11,6 +11,7 @@
     @endif
     @include('superadmin.events.modaledit')
     @include('superadmin.events.modaladd')
+    @include('superadmin.events.modaladdbarman')
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -151,6 +152,58 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($event->protocols as $item)
+                                            <tr>
+                                                <td>{{$item->name}}</td>
+                                                <td>{{$item->mobile}}</td>
+                                                <td>{{$item->bi}}</td>
+                                                <td>{{$item->user}}</td>
+                                                <td>{{$item->password}}</td>
+                                                {{-- <td class="table-action">
+                                                    
+                                                     <a href="{{URL::to('/events/'.$item->id.'/edit')}}"><i class="align-middle" data-feather="edit-2"></i></a>
+                                                    <a href="{{URL::to('/events/'.$item->id)}}"><i class="align-middle" data-feather="eye"></i></a>
+                                                </td> --}}
+                                            </tr>
+                                            
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row mb-2 mb-xl-3">
+                                <div class="col-auto d-none d-sm-block">
+                                    <h3><strong>Barman do Evento</strong></h3>
+                                </div>
+                            </div>
+                            <a href="" data-toggle="modal" data-target="#modaladdbarman" class="btn btn-pill btn-primary"><i class="far fa-plus"></i>Adicionar</a>
+                           
+                        </div>
+                    <div class="card-body">
+                   
+
+                    <div class="row">
+
+                        <div class="col-12">
+                            <p><strong>Número</strong>: {{$event->barman->count()}}</p>
+                            <div class="table-responsive">
+                                <table class="table display" >
+                                    <thead>
+                                        <tr>
+                                            <th style="width:15%;">Nome</th>
+                                            <th style="width:15%;">Telefone</th>
+                                            <th style="width:15%;">BI</th>
+                                            <th style="width:15%;">Usuario</th>
+                                            <th style="width:15%;">Password</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($event->barman as $item)
                                             <tr>
                                                 <td>{{$item->name}}</td>
                                                 <td>{{$item->mobile}}</td>

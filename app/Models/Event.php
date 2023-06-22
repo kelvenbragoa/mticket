@@ -41,12 +41,20 @@ class Event extends Model
         return $this->hasMany('App\Models\Protocol', 'event_id', 'id');
     }
 
+    public function barman(){
+        return $this->hasMany('App\Models\Barman', 'event_id', 'id');
+    }
+
     public function lineups(){
         return $this->hasMany('App\Models\LineUp', 'event_id', 'id');
     }
 
     public function sells(){
         return $this->hasMany('App\Models\Sell', 'event_id', 'id');
+    }
+
+    public function products(){
+        return $this->hasMany('App\Models\Products', 'event_id', 'id');
     }
 
     public function sell_details(){

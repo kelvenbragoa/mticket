@@ -64,6 +64,7 @@ Route::group(['middleware'=>['auth','superadmin']], function(){
     Route::resource('category', 'App\Http\Controllers\SuperAdmin\CategoryController');
     Route::resource('events', 'App\Http\Controllers\SuperAdmin\EventsController');
     Route::resource('protocols', 'App\Http\Controllers\SuperAdmin\ProtocolsController');
+    Route::resource('barman', 'App\Http\Controllers\SuperAdmin\BarmanController');
 
 });
 
@@ -77,6 +78,7 @@ Route::resource('eventos', 'App\Http\Controllers\User\EventsController');
 Route::resource('vendas', 'App\Http\Controllers\User\SellController');
 Route::resource('painel', 'App\Http\Controllers\User\DashboardController');
 Route::resource('tickets', 'App\Http\Controllers\User\TicketController');
+Route::resource('produtos', 'App\Http\Controllers\User\ProductsController');
 Route::resource('lineup', 'App\Http\Controllers\User\LineupController');
 Route::post('/likeevent/{event_id}',[\App\Http\Controllers\User\EventsController::class,'likeevent']);
 
@@ -93,6 +95,11 @@ Route::get('/lineup/{evento}/evento/{lineup}/edit', [App\Http\Controllers\User\L
 Route::get('/bilhete/{evento}/evento', [App\Http\Controllers\User\TicketController::class, 'index']);
 Route::get('/bilhete/{evento}/add', [App\Http\Controllers\User\TicketController::class, 'create']);
 Route::get('/bilhete/{evento}/evento/{bilhete}/edit', [App\Http\Controllers\User\TicketController::class, 'edit']);
+
+//produtos
+Route::get('/produtos/{evento}/evento', [App\Http\Controllers\User\ProductsController::class, 'index']);
+Route::get('/produtos/{evento}/add', [App\Http\Controllers\User\ProductsController::class, 'create']);
+Route::get('/produtos/{evento}/evento/{produtos}/edit', [App\Http\Controllers\User\ProductsController::class, 'edit']);
 
 
 

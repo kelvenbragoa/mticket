@@ -96,6 +96,44 @@
                             </tbody>
                         </table>
                 </div>
+
+                <div class="listing-box" id="genaral">
+                   
+                    <h3>Bar ({{$event->products->count()}})</h3>
+                    
+                    <a href="{{URL::to('/produtos/'.$event->id.'/evento')}}" class="btn btn-pill btn-warning mb-2"><i class="far fa-plus"></i>Adicionar/Editar Produto</a>
+                    <table class="member-place-list table-responsive">
+                        <thead>
+                            <tr>
+
+                                <th>Nome</th>
+                                <th>Preço Venda</th>
+                                <th>Preço Compra</th>
+                                <th>Qtd</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @forelse ($event->products as $item)
+                                    <tr>
+                                    
+                                        <td data-title="Nome">{{$item->name}}</td>
+                                    
+                                        <td data-title="Preço Venda"><b>{{$item->sell_price}} MT</b></td>
+
+                                        <td data-title="Preço Compra"><b>{{$item->buy_price}} MT</b></td>
+
+                                        <td data-title="Qtd"><b>{{$item->qtd}}</b></td>
+                                    
+                                    </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="4" align="center">Nenhum Produto adicionado</td>
+                                </tr>
+                                    
+                                @endforelse 
+                        </tbody>
+                    </table>
+                </div>
                 
                 <form class="upload-form" method="POST" action="{{ route('eventos.update', $event->id)}}" enctype="multipart/form-data">
                     @csrf
