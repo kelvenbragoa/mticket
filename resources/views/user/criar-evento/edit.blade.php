@@ -52,7 +52,7 @@
                                     </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="2" align="center">Nenhum Bilhete adicionado</td>
+                                    <td colspan="3" align="center">Nenhum Bilhete adicionado</td>
                                 </tr>
                                     
                                 @endforelse 
