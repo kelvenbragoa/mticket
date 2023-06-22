@@ -21,6 +21,7 @@ class CreateSellBarsTable extends Migration
             $table->integer('status');
             $table->string('method');
             $table->string('ref')->nullable();
+            $table->integer('verified_by')->nullable();
             $table->timestamps();
         });
     }

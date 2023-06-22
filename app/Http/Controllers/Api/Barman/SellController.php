@@ -94,12 +94,13 @@ class SellController extends Controller
     }
 
 
-    public function verifyreceipt($id){
+    public function verifyreceipt($id,$userid){
         $ticket = SellBar::find($id);
 
 
         $ticket->update([
-            'status'=>0
+            'status'=>0,
+            'verified_by'=>$userid
         ]);
 
         return response([
