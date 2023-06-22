@@ -39,8 +39,8 @@ class SellController extends Controller
         $id = SellBar::create([
             'user_id' => $data['user_id'],
             'total' => $data['total'],
-            'method' => 'dinheiro',
-            'ref' => 'dinheiro',
+            'method' => $data['method'],
+            'ref' => $data['ref'],
             'status' => 1,
             'event_id' => $data['event_id'],
           
@@ -89,7 +89,22 @@ class SellController extends Controller
 
     public function selldetails($id){
         return response([
-            'selldetail' => SellDetailBar::where('sell_id',$id)->with('product:id,name')->with('sell:id,method,total')->get(),
+            'selldetail' => SellDetailBar::where('sell_id',$id)->with('product:id,name')->with('sell:id,method,total,status')->get(),
         ],200);
+    }
+
+
+    public function verifyreceipt($id){
+        $ticket = SellBar::find($id);
+
+
+        $ticket->update([
+            'status'=>0
+        ]);
+
+        return response([
+
+            'message' => 'Recibo Verificado Com sucesso'
+        ], 200);
     }
 }

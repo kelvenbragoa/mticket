@@ -47,4 +47,42 @@ class AuthController extends Controller
         ],200);
    
     }
+
+
+    public function user($id){
+       
+        $barman = Barman::where('id',$id)->first();
+
+        if($barman == null){
+            return response(
+                [ 'message' => 'Usuario/Password Incorretos'], 403
+             );
+        }
+
+        $event = Event::find($barman->event_id);
+
+        $initial_date = date('l, d M Y',strtotime($event->start_date)) ;
+
+
+
+        $array = array(
+            'id' => $barman->id,
+            'name' => $barman->name,
+            'mobile' => $barman->mobile,
+            'bi' => $barman->bi,
+            'password' => $barman->password,
+            'user' => $barman->user,
+            'event_id' => $barman->event_id,
+            'event_name'=> $barman->event->name,
+            'date'=> $initial_date ,
+           
+        );
+       
+        
+        return response([
+            'user' => $array,
+        ],200);
+
+
+    }
 }

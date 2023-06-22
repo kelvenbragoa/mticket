@@ -46,4 +46,42 @@ class AuthController extends Controller
         ],200);
    
     }
+
+
+    public function user($id){
+       
+        $protocol = Protocol::where('id',$id)->first();
+
+        if($protocol == null){
+            return response(
+                [ 'message' => 'Usuario/Password Incorretos'], 403
+             );
+        }
+
+        $event = Event::find($protocol->event_id);
+
+        $initial_date = date('l, d M Y',strtotime($event->start_date)) ;
+
+
+
+        $array = array(
+            'id' => $protocol->id,
+            'name' => $protocol->name,
+            'mobile' => $protocol->mobile,
+            'bi' => $protocol->bi,
+            'password' => $protocol->password,
+            'user' => $protocol->user,
+            'event_id' => $protocol->event_id,
+            'event_name'=> $protocol->event->name,
+            'date'=> $initial_date ,
+           
+        );
+       
+        
+        return response([
+            'user' => $array,
+        ],200);
+
+
+    }
 }
