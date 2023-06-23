@@ -323,6 +323,71 @@
 
                    
                 </div>
+
+
+                <hr>
+                    <div class="card">
+                    <div class="card-body">
+                    <div class="row mb-2 mb-xl-3">
+                        <div class="col-auto d-none d-sm-block">
+                            <h3><strong>Produtos</strong></h3>
+                            <a href="{{URL::to('/bar-report/'.$event->id)}}" class="btn btn-pill btn-primary"><i class="far fa-arrow-down"></i>Baixar Relatório</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <p><strong>Número Produtos</strong>: {{$event->products->count()}}</p>
+                            <p><strong>Investimento</strong>: {{$investment}} MT</p>
+                            <p><strong>Valor de Venda</strong>: {{$event->sell_bar->sum('total')}} MT</p>
+                            <p><strong>Lucro</strong>: {{$event->sell_bar->sum('total')-$investment}} MT</p>
+                            <p><strong>Margem Mticket(6%)</strong>: @if ($event->sell_bar->sum('total')-$investment < 0) 0 MT @else {{($event->sell_bar->sum('total')-$investment)*6/100}} MT @endif</p>
+                            <div class="table-responsive">
+                                <table class="table display">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:10%;">Nome</th>
+                                            <th style="width:5%;">Qtd</th>
+                                            <th style="width:10%;">Preço de Venda</th>
+                                            <th style="width:10%;">Preço de Compra</th>
+                                            <th style="width:10%;">Qtd Vendas</th>
+                                            <th style="width:15%;">Valor Vendas</th>
+                                            <th style="width:15%;">Lucro</th>
+                                            <th style="width:15%;">Margem Mticket Bar (%6)</th>
+                                            {{-- <th style="width:15%;">Ação</th> --}}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($event->products as $item)
+                                            <tr>
+                                                <td>{{$item->name}}</td>
+                                                <td>{{$item->qtd}}</td>
+                                                <td>{{$item->sell_price}} MT</td>
+                                                <td>{{$item->buy_price}} MT</td>
+                                                <td>{{$item->sells->sum('qtd')}}</td>
+                                                <td>{{$item->sells->sum('qtd') * $item->sell_price}} MT</td>
+                                                <td>{{($item->sells->sum('qtd') * $item->sell_price) - ($item->sells->sum('qtd') * $item->buy_price)}} MT</td>
+                                                <td>{{(($item->sells->sum('qtd') * $item->sell_price) - ($item->sells->sum('qtd') * $item->buy_price))*6/100}} MT</td>
+
+                                                {{-- <td class="table-action">
+                                                    
+                                                     <a href="{{URL::to('/events/'.$item->id.'/edit')}}"><i class="align-middle" data-feather="edit-2"></i></a>
+                                                    <a href="{{URL::to('/events/'.$item->id)}}"><i class="align-middle" data-feather="eye"></i></a> 
+                                                </td> --}}
+                                            </tr>
+
+                                           
+                                            
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                   
+                </div>
         </div>
     </div>
 

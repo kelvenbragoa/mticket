@@ -9,4 +9,8 @@ class Products extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function sells(){
+        return $this->hasMany('App\Models\SellDetailBar', 'product_id', 'id');
+    }
 }

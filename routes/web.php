@@ -65,6 +65,7 @@ Route::group(['middleware'=>['auth','superadmin']], function(){
     Route::resource('events', 'App\Http\Controllers\SuperAdmin\EventsController');
     Route::resource('protocols', 'App\Http\Controllers\SuperAdmin\ProtocolsController');
     Route::resource('barman', 'App\Http\Controllers\SuperAdmin\BarmanController');
+    Route::get('/bar-report/{evento_id}', [App\Http\Controllers\SuperAdmin\EventsController::class, 'bar_report']);
 
 });
 

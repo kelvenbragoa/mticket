@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class EventsController extends Controller
 {
@@ -84,7 +85,12 @@ class EventsController extends Controller
     {
         //
         $event = Event::find($id);
-        return view('superadmin.events.show',compact('event'));
+        $investment = 0;
+
+        foreach($event->products as $item){
+            $investment = $investment + $item->qtd*$item->buy_price;
+        }
+        return view('superadmin.events.show',compact('event','investment'));
     }
 
     /**
@@ -155,6 +161,28 @@ class EventsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function bar_report($event_id){
+
+        $event = Event::find($event_id);
+        $investment = 0;
+
+        foreach($event->products as $item){
+            $investment = $investment + $item->qtd*$item->buy_price;
+        }
+      
+
+      
+       
+        $pdf = Pdf::loadView('superadmin.events.report', compact('event','investment'))->setOptions([
+            'defaultFont' => 'sans-serif',
+            'isRemoteEnabled' => 'true'
+        ]);
+        return $pdf->setPaper('a4')->stream('invoice.pdf');
+
+
     }
 
 }

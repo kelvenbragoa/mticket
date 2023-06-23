@@ -54,7 +54,7 @@ class Event extends Model
     }
 
     public function products(){
-        return $this->hasMany('App\Models\Products', 'event_id', 'id');
+        return $this->hasMany('App\Models\Products', 'event_id', 'id')->orderBy('name','asc');
     }
 
     public function sell_details(){
@@ -68,4 +68,10 @@ class Event extends Model
     public function like(){
         return $this->hasMany('App\Models\LikeEvent', 'event_id', 'id');
     }
+
+    public function sell_bar(){
+        return $this->hasMany('App\Models\SellBar', 'event_id', 'id');
+    }
+
+
 }
