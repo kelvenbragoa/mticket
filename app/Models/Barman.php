@@ -13,4 +13,9 @@ class Barman extends Model
     public function event(){
         return $this->hasOne('App\Models\Event', 'id', 'event_id');
     }
+
+
+    public function sells(){
+        return $this->hasMany('App\Models\SellBar', 'user_id', 'id')->orderBy('created_at','asc');
+    }
 }
