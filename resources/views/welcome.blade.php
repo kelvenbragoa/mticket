@@ -201,7 +201,7 @@
                         </div>
                     </div>
                     @empty
-                        <p>Nenhum evento !</p>
+                        <p>Nenhum evento!</p>
                     @endforelse
                     
                 </div>
