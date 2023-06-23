@@ -73,5 +73,9 @@ class Event extends Model
         return $this->hasMany('App\Models\SellBar', 'event_id', 'id');
     }
 
+    public function sell_bar_detail(){
+        return $this->hasMany('App\Models\SellDetailBar', 'event_id', 'id');
+    }
+
 
 }

@@ -37,6 +37,10 @@
             margin-left: 15px;
         }
 
+        .invoice h2 {
+            
+            margin-left: 15px;
+        }
         .invoice h5 {
             
             margin-left: 15px;
@@ -115,12 +119,12 @@
     <h5><strong>Investimento</strong>: {{$investment}} MT</h5>
     <h5><strong>Valor de Venda</strong>: {{$event->sell_bar->sum('total')}} MT</h5>
     <h5><strong>Lucro</strong>: {{$event->sell_bar->sum('total')-$investment}} MT</h5>
-    <h5><strong>Margem Mticket(6%)</strong>: @if ($event->sell_bar->sum('total')-$investment < 0) 0 MT @else {{($event->sell_bar->sum('total')-$investment)*6/100}} MT @endif</h5>
+    {{-- <h5><strong>Margem Mticket(6%)</strong>: @if ($event->sell_bar->sum('total')-$investment < 0) 0 MT @else {{($event->sell_bar->sum('total')-$investment)*6/100}} MT @endif</h5> --}}
 
     <hr>
     <br>
 
-    <h5>Produtos Registrados</h5>
+    <h2>Produtos Registrados</h2>
     <div>
         <table style="table-layout: fixed; width: 95%;">
             <thead>
@@ -183,8 +187,8 @@
     <hr>
 
     <br>
-    <h5>Barman Operadores do Sistema</h5>
-    <h5>Número de Operadores: {{$event->barman->count()}}</h5>
+    <h2>Barman Operadores do Sistema</h2>
+    <h2>Número de Operadores: {{$event->barman->count()}}</h2>
     <div>
         <table style="table-layout: fixed; width: 95%;">
             <thead>
@@ -239,8 +243,8 @@
     <hr>
 
     <br>
-    <h5>Vendas</h5>
-    <h5>Número de Vendas: {{$event->sell_bar->count()}}</h5>
+    <h2>Vendas</h2>
+    <h2>Número de Vendas: {{$event->sell_bar->count()}}</h2>
 
     <div>
         <table style="table-layout: fixed; width: 95%;">
@@ -299,6 +303,94 @@
                     </td>
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         @if ($item->status == 1)
+                            <span>Não verificada</span>
+                        @else
+                            <span>Verificada</span>
+                        @endif
+                    </td>
+                    
+                   
+                </tr>
+                @endforeach
+                
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <br>
+    <h2>Vendas Detalhadas Por Produto</h2>
+    <h2>Número de Vendas por produto: {{$event->sell_bar_detail->count()}}</h2>
+    <div>
+        <table style="table-layout: fixed; width: 95%;">
+            <thead>
+                <tr>
+                    <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Data
+                    </th>
+                    
+                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Recibo #
+                     </th>
+                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Produto
+                     </th>
+                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Quantidade
+                     </th>
+                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                       Valor
+                    </th>
+
+                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Pagamento
+                     </th>
+
+                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Venda Efetuada por
+                     </th>
+
+                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Venda Verificada por
+                     </th>
+
+                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Estado
+                     </th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($event->sell_bar_detail as $item)
+                <tr>
+                    <td style="border-top: 1px solid #eee; padding: 5px;">
+                        {{$item->sell->created_at->format('d-M H:i')}}
+                    </td>
+                    
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        #{{$item->sell->id}}
+                    </td>
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        {{$item->product->name}}
+                    </td>
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        {{$item->qtd}}
+                    </td>
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        {{$item->total}} MT
+                    </td>
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        {{$item->sell->method}}
+                    </td>
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        {{$item->sell->user->name ?? '-'}}
+                    </td>
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        {{$item->sell->verified_by_user->name ?? '-'}}
+                    </td>
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        @if ($item->sell->status == 1)
                             <span>Não verificada</span>
                         @else
                             <span>Verificada</span>

@@ -10,13 +10,13 @@
             <div class="container">
                 <ul>
                     <li><a href="{{route('painel.index')}}">Dashboard</a></li>
-                    <li>
+                    <li >
                         <a href="{{route('vendas.index')}}">Receita</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="{{route('bar.index')}}">Bar</a>
                     </li>
-                    <li  class="active"><a href="{{route('eventos.index')}}">Meus Eventos</a></li>
+                    <li  ><a href="{{route('eventos.index')}}">Meus Eventos</a></li>
                     
                     <li><a href="{{URL::to('/perfil')}}">Perfil</a></li>
                 </ul>
@@ -40,12 +40,11 @@
                         <tr>
                            
                             
-                            <th>ID</th>
-                            <th>Imagem</th>
+                            <th>#ID</th>
                             <th>Nome</th>
-                            <th>Cidade</th>
-                            <th>Província</th>
-                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Vendas</th>
+                            <th>Valor</th>
                             <th>Estado</th>
                             <th>Ações</th>
                         </tr>
@@ -55,21 +54,21 @@
                             <tr>
                             
                                 <td data-title="ID">{{$item->id}}</td>
-                                <td data-title="Thumb"><img src="/storage/{{$item->image}}" alt="Cartaz"></td>
-                                <td data-title="Place name"><b>{{$item->name}}</b></td>
-                                <td data-title="City">{{$item->city->name}}</td>
-                                <td data-title="City">{{$item->city->name}}</td>
-                                <td data-title="Category">{{$item->category->name}}</td>
-                                <td data-title="Status" class="{{$item->status->alias}}">{{$item->status->name}}</td>
+                                <td data-title="Nome"><b>{{$item->name}}</b></td>
+                                <td data-title="Data">{{date('d-m-Y',strtotime($item->start_date))}}</td>
+                                <td data-title="Vendas">{{$item->sell_bar->count()}}</td>
+                                <td data-title="Valor">{{$item->sell_bar->sum('total')}} MT</td>
+                               
+                                <td data-title="Estado" class="{{$item->status->alias}}">{{$item->status->name}}</td>
                                 <td data-title="" class="place-action">
-                                    <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                    <a href="#" class="view" title="View"><i class="la la-eye"></i></a>
-                                    <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
+                                  
+                                    <a href="{{URL::to('/bar/'.$item->id.'')}}" class="view" title="Ver"><i class="la la-eye"></i></a>
+                          
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                Nenhum evento !
+                                <td colspan="6" align="center">Nenhum evento !</td> 
                             </tr>
                         @endforelse
                         

@@ -13,10 +13,10 @@
                     <li>
                         <a href="{{route('vendas.index')}}">Receita</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="{{route('bar.index')}}">Bar</a>
                     </li>
-                    <li  class="active"><a href="{{route('eventos.index')}}">Meus Eventos</a></li>
+                    <li  ><a href="{{route('eventos.index')}}">Meus Eventos</a></li>
                     
                     <li><a href="{{URL::to('/perfil')}}">Perfil</a></li>
                 </ul>
@@ -30,9 +30,14 @@
         @endif
             <div class="member-place-wrap">
                 <div class="member-wrap-top">
-                    <h2>Meus Eventos</h2>
+                    <h2>Vendas do Evento - {{$event->name}}</h2>
+                    <p>Número de Vendas:{{$sells_bar->count()}}</p>
+                    <p>Receita:{{$sells_bar->sum('total')}} MT</p>
                    
                 </div>
+                
+                <a href="{{URL::to('user-bar-report/'.$event->id)}}" class="btn btn-primary"><h3>Baixar Relatório Completo</h3></a>
+                
                 <!-- .member-wrap-top -->
                 
                 <table class="member-place-list table-responsive">
@@ -40,36 +45,40 @@
                         <tr>
                            
                             
-                            <th>ID</th>
-                            <th>Imagem</th>
-                            <th>Nome</th>
-                            <th>Cidade</th>
-                            <th>Província</th>
-                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Recibo#</th>
+                            <th>Valor</th>
+                            <th>Pagamento</th>
+                            <th>Venda efetuada por</th>
+                            <th>Venda verificada por</th>
                             <th>Estado</th>
-                            <th>Ações</th>
+                         
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($events as $item)
+                        @forelse ($sells_bar as $item)
                             <tr>
                             
-                                <td data-title="ID">{{$item->id}}</td>
-                                <td data-title="Thumb"><img src="/storage/{{$item->image}}" alt="Cartaz"></td>
-                                <td data-title="Place name"><b>{{$item->name}}</b></td>
-                                <td data-title="City">{{$item->city->name}}</td>
-                                <td data-title="City">{{$item->city->name}}</td>
-                                <td data-title="Category">{{$item->category->name}}</td>
-                                <td data-title="Status" class="{{$item->status->alias}}">{{$item->status->name}}</td>
-                                <td data-title="" class="place-action">
-                                    <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                    <a href="#" class="view" title="View"><i class="la la-eye"></i></a>
-                                    <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
+                                <td data-title="Data">{{$item->created_at->format('d-M H:i')}}</td>
+                                <td data-title="ID"><b>#{{$item->id}}</b></td>
+                                <td data-title="Total"><b>{{$item->total}} MT</b></td>
+                                <td data-title="Method"><b>{{$item->method}}</b></td>
+                                <td data-title="Venda por"><b>{{$item->user->name ?? '-'}}</b> </td>
+                                <td data-title="Venda verificada por"><b>{{$item->verified_by_user->name ?? '-'}}</b> </td>
+                                <td data-title="Estado">
+                                    @if ($item->status == 1)
+                                    <span>Não verificada</span>
+
+                                    @else
+                                    <span>Verificada</span>
+                                    @endif
                                 </td>
+                                
+                               
                             </tr>
                         @empty
                             <tr>
-                                Nenhum evento !
+                               <td colspan="5" align="center"> Nenhum venda para este evento !</td>
                             </tr>
                         @endforelse
                         
@@ -78,7 +87,7 @@
                 </table>
                 <div class="d-flex justify-content-center">
                     
-                        {!! $events->links() !!}
+                       
                    
                 </div>
                 <!-- .pagination -->

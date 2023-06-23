@@ -77,11 +77,13 @@ Route::resource('carrinho', 'App\Http\Controllers\User\CartController');
 Route::resource('review', 'App\Http\Controllers\User\ReviewController');
 Route::resource('eventos', 'App\Http\Controllers\User\EventsController');
 Route::resource('vendas', 'App\Http\Controllers\User\SellController');
+Route::resource('bar', 'App\Http\Controllers\User\BarController');
 Route::resource('painel', 'App\Http\Controllers\User\DashboardController');
 Route::resource('tickets', 'App\Http\Controllers\User\TicketController');
 Route::resource('produtos', 'App\Http\Controllers\User\ProductsController');
 Route::resource('lineup', 'App\Http\Controllers\User\LineupController');
 Route::post('/likeevent/{event_id}',[\App\Http\Controllers\User\EventsController::class,'likeevent']);
+Route::get('/user-bar-report/{evento_id}', [App\Http\Controllers\User\BarController::class, 'bar_report']);
 
 //Profiles controller
 Route::resource('profile', 'App\Http\Controllers\User\ProfileController');

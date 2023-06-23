@@ -13,6 +13,9 @@
                     <li>
                         <a href="{{route('vendas.index')}}">Receita</a>
                     </li>
+                    <li>
+                        <a href="{{route('bar.index')}}">Bar</a>
+                    </li>
                     <li><a href="{{route('eventos.index')}}">Meus Eventos</a></li>
                     <li><a href="{{URL::to('/perfil')}}">Perfil</a></li>
                 </ul>
