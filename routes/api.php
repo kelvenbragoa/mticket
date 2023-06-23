@@ -46,6 +46,6 @@ Route::delete('/barman-cart/{id}/user/{userid}',[\App\Http\Controllers\Api\Barma
 Route::post('/barman-sells', [\App\Http\Controllers\Api\Barman\SellController::class, 'store']);
 Route::get('/barman-sells/{id}', [\App\Http\Controllers\Api\Barman\SellController::class, 'index']);
 Route::get('/barman-sells-detail/{id}', [\App\Http\Controllers\Api\Barman\SellController::class, 'selldetails']);
-Route::get('/verifyreceipt/{id}/user/{$userid}', [\App\Http\Controllers\Api\Barman\SellController::class, 'verifyreceipt']);
+Route::get('/verifyreceipt/{id}/user/{userid}', [\App\Http\Controllers\Api\Barman\SellController::class, 'verifyreceipt']);
 
 
