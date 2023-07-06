@@ -42,12 +42,13 @@
                                         <div class="row ">
                                             <div class="col-md-8 product-name ">
                                                 <div class="product-name ">
-                                                    <a href="{{URL::to('/meusbilhetes/'.$item->id)}}">{{$item->event->name}}</a> <br>
-                                                    <a href="{{URL::to('/meusbilhetes/'.$item->id)}}">{{$item->ticket->name}}</a>
+                                                    <a href="{{URL::to('/meusbilhetes/'.$item->id)}}">@if ($item->ticket->is_package == 0) Bilhete -  @else Pacote - @endif {{$item->event->name}}</a> <br>
+                                                    <a href="{{URL::to('/meusbilhetes/'.$item->id)}}">{{$item->ticket->name}}</a> <br>
+                                                    <a href="{{URL::to('/meusbilhetes/'.$item->id)}}">{{$item->ticket->description}}</a>
                                                     <div class="product-info ">
                                                         
                                                         <div>Quantidade: <span class="value">{{$item->qty}}</span></div>
-                                                        <div>Bilhetes Utilizados: <span class="value">{{$item->selldetails->where('status',0)->count()}}</span></div>
+                                                        <div>@if ($item->ticket->is_package == 0) Bilhete  @else Pacote @endif Utilizados: <span class="value">{{$item->selldetails->where('status',0)->count()}}</span></div>
                                                         <div>Preço Unitário: <span class="value">{{$item->ticket->price}} MT</span></div>
                                                         <div>Preço Total: <span class="value">{{$item->ticket->price*$item->qty}} MT</span></div>
                                                         <div>Transação: <span class="value">{{$item->transaction->reference}} | {{$item->transaction->method}}</span></div>

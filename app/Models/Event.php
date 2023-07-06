@@ -34,7 +34,11 @@ class Event extends Model
     }
 
     public function tickets(){
-        return $this->hasMany('App\Models\Ticket', 'event_id', 'id');
+        return $this->hasMany('App\Models\Ticket', 'event_id', 'id')->where('is_package',0);
+    }
+
+    public function packages(){
+        return $this->hasMany('App\Models\Ticket', 'event_id', 'id')->where('is_package',1);
     }
 
     public function protocols(){

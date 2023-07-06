@@ -80,6 +80,7 @@ Route::resource('vendas', 'App\Http\Controllers\User\SellController');
 Route::resource('bar', 'App\Http\Controllers\User\BarController');
 Route::resource('painel', 'App\Http\Controllers\User\DashboardController');
 Route::resource('tickets', 'App\Http\Controllers\User\TicketController');
+Route::resource('package', 'App\Http\Controllers\User\PackageController');
 Route::resource('produtos', 'App\Http\Controllers\User\ProductsController');
 Route::resource('lineup', 'App\Http\Controllers\User\LineupController');
 Route::post('/likeevent/{event_id}',[\App\Http\Controllers\User\EventsController::class,'likeevent']);
@@ -98,6 +99,11 @@ Route::get('/lineup/{evento}/evento/{lineup}/edit', [App\Http\Controllers\User\L
 Route::get('/bilhete/{evento}/evento', [App\Http\Controllers\User\TicketController::class, 'index']);
 Route::get('/bilhete/{evento}/add', [App\Http\Controllers\User\TicketController::class, 'create']);
 Route::get('/bilhete/{evento}/evento/{bilhete}/edit', [App\Http\Controllers\User\TicketController::class, 'edit']);
+
+//pacote
+Route::get('/pacote/{evento}/evento', [App\Http\Controllers\User\PackageController::class, 'index']);
+Route::get('/pacote/{evento}/add', [App\Http\Controllers\User\PackageController::class, 'create']);
+Route::get('/pacote/{evento}/evento/{pacote}/edit', [App\Http\Controllers\User\PackageController::class, 'edit']);
 
 //produtos
 Route::get('/produtos/{evento}/evento', [App\Http\Controllers\User\ProductsController::class, 'index']);

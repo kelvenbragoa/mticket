@@ -81,6 +81,7 @@
                     <label for="lis_category">Quantidade máxima de venda do bilhete</label>
                     <input type="number" id="max_qtd" placeholder="Quantidade máxima do bilhete" name="max_qtd" value="{{$ticket->max_qtd}}">
                     <input type="hidden" id="event_id" value="{{$event->id}}" name="event_id">
+                    <input type="hidden" id="is_package" value="0" name="is_package">
                    
                 </div>
                

@@ -62,6 +62,41 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="listing-box" id="genaral">
+                   
+                    <h3>Pacotes para o evento ({{$event->packages->count()}})</h3>
+                    
+                    <a href="{{URL::to('/pacote/'.$event->id.'/evento')}}" class="btn btn-pill btn-warning mb-2"><i class="far fa-plus"></i>Adicionar/Editar Pacotes</a>
+                    <table class="member-place-list table-responsive">
+                        <thead>
+                            <tr>
+
+                                <th>Nome</th>
+                                <th>Preço</th>
+                                <th>Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @forelse ($event->packages as $item)
+                                    <tr>
+                                    
+                                        <td data-title="Nome">{{$item->name}}</td>
+                                    
+                                        <td data-title="Descrição"><b>{{$item->price}} MT</b></td>
+
+                                        <td data-title="Max"><b>{{$item->description}}</b></td>
+                                    
+                                    </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="3" align="center">Nenhum Pacote adicionado</td>
+                                </tr>
+                                    
+                                @endforelse 
+                        </tbody>
+                    </table>
+                </div>
                 <div class="listing-box" id="genaral">
                    
                     <h3>LineUps/Momentos para o Evento ({{$event->lineups->count()}})</h3>

@@ -4,11 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Packages;
 use App\Models\Sell;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 
-class TicketController extends Controller
+class PackageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +22,8 @@ class TicketController extends Controller
 
         $event = Event::find($evento);
         
-        $tickets = Ticket::where('event_id',$evento)->where('is_package',0)->orderBy('id','desc')->get();
-        return view('user.bilhete.index',compact('tickets','event'));
+        $packages = Ticket::where('event_id',$evento)->where('is_package',1)->orderBy('id','desc')->get();
+        return view('user.pacote.index',compact('packages','event'));
     }
 
     /**
@@ -34,7 +35,7 @@ class TicketController extends Controller
     {
         //
         $event = Event::find($evento);
-        return view('user.bilhete.create',compact('event'));
+        return view('user.pacote.create',compact('event'));
     }
 
     /**
@@ -49,9 +50,21 @@ class TicketController extends Controller
 
         $data = $request->all();
 
-        Ticket::create($data);
+        Ticket::create([
+            'name'=>$data['name'],
+            'price'=>$data['price'],
+            'description'=>$data['description'],
+            'event_id'=>$data['event_id'],
+            'start_date'=>'2022-01-01',
+            'end_date'=>'2022-01-01',
+            'start_time'=>'06:00:00',
+            'end_time'=>'06:00:00',
+            'max_qtd'=>0,
+            'is_package'=>1,
 
-        return back()->with('message','Bilhete criado com sucesso');
+        ]);
+
+        return back()->with('message','Pacote criado com sucesso');
     }
 
     /**
@@ -71,12 +84,12 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($evento, $bilhete)
+    public function edit($evento, $pacote)
     {
         //
         $event = Event::find($evento);
-        $ticket = Ticket::find($bilhete);
-        return view('user.bilhete.edit',compact('event', 'ticket'));
+        $package = Ticket::find($pacote);
+        return view('user.pacote.edit',compact('event', 'package'));
     }
 
     /**
@@ -91,10 +104,10 @@ class TicketController extends Controller
         //
 
         $data = $request->all();
-        $ticket = Ticket::find($id);
+        $package = Ticket::find($id);
 
-        $ticket->update($data);
-        return back()->with('message','Bilhete Editado com sucesso');
+        $package->update($data);
+        return back()->with('message','Pacote Editado com sucesso');
     }
 
     /**
@@ -106,16 +119,16 @@ class TicketController extends Controller
     public function destroy($id)
     {
         //
-        $ticket = Ticket::findOrFail($id);
+        $package = Ticket::findOrFail($id);
 
-        $sell = Sell::where('ticket_id',$ticket->id)->get();
+        $sell = Sell::where('ticket_id',$package->id)->get();
 
         if(count($sell) == 0){
-            $ticket->delete();
-            return back()->with('message','Bilhete apagado com sucesso');
+            $package->delete();
+            return back()->with('message','Pacote apagado com sucesso');
 
         }else{
-            return back()->with('messageError','Impossível apagar este bilhete. Existe vendas relacionadas a este bilhete.');
+            return back()->with('messageError','Impossível apagar este pacote. Existe vendas relacionadas a este pacote.');
         }
     }
 }

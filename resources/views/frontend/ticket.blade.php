@@ -197,6 +197,23 @@ html {
 .right .ticket-number {
     color: gray;
 }
+
+.cardticket {
+   
+    align-items: center;
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 50ch;
+
+}
+
+.cardticket p {
+    color: black
+}
 </style>
 
 @php
@@ -235,6 +252,10 @@ html {
                     <br>
                     <h2>{{Auth::user()->name}}</h2>
                     <h2>{{$item->ticket->name}}</h2>
+                    <div class="cardticket">
+                        <p>{{$item->ticket->description}}</p>
+                    </div>
+                    
                 </div>
                 <div class="time">
 
