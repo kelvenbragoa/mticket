@@ -14,7 +14,8 @@
 		            navigationControl: false,
 		            streetViewControl: false,
 		            // The latitude and longitude to center the map (always required)
-		            center: new google.maps.LatLng(40.450748, -74.436050), // Milltown
+		            center: new google.maps.LatLng(19.826770, 34.837002), // Milltown
+					
 
 		            // How you would like to style the map.
 		            // This is where you would paste any style found on Snazzy Maps.
@@ -269,6 +270,6 @@
 		        var marker = new google.maps.Marker({
 		            position: new google.maps.LatLng(18.689100, 105.691398),
 		            map: map,
-		            title: 'Snazzy!'
+		            title: 'Map!'
 		        });
 		    }

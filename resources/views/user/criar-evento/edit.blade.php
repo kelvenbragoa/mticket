@@ -276,7 +276,7 @@
                         </div>
                         <div class="field-group">
                             <label for="place_website">Website (opcional)</label>
-                            <input type="url" id="website" placeholder="website" name="website" value="{{$event->instagram}}">
+                            <input type="text" id="website" placeholder="website" name="website" value="{{$event->instagram}}">
                         </div>
                     </div>
                     <!-- .listing-box -->
@@ -308,7 +308,6 @@
                                     </div>
                                 </div>
                             </div>
-                         
                         </div>
                     </div>
                   
@@ -326,7 +325,7 @@
                         
                         <div class="field-group">
                             <label for="place_video">Video Youtube (optional)</label>
-                            <input type="url" id="place_video" placeholder="Youtube video url" name="youtube" value="{{$event->youtube}}">
+                            <input type="text" id="place_video" placeholder="Youtube video url" name="youtube" value="{{$event->youtube}}">
                         </div>
                     </div>
                     <!-- .listing-box -->

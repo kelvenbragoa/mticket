@@ -17,7 +17,6 @@ class CreateCardsTable extends Migration
             $table->id();
             $table->string('serial');
             $table->string('identification');
-            $table->integer('type_of_card_id');
             $table->timestamps();
         });
     }

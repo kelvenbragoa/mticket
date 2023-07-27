@@ -19,7 +19,6 @@ class CreateEventCardsTable extends Migration
             $table->integer('event_id');
             $table->integer('status');
             $table->integer('card_id');
-            $table->integer('type_of_card_id');
             $table->float('balance',8,2);
             $table->timestamps();
         });

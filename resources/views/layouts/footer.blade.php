@@ -67,7 +67,7 @@
         </div>
         <!-- .top-footer -->
         <div class="footer__bottom">
-            <p class="footer__bottom__copyright">{{date('Y')}} &copy; <a title="Uxper Team" href="#">connectUS.co.mz</a>. All rights reserved.</p>
+            <p class="footer__bottom__copyright">{{date('Y')}} &copy; <a title="" href="#">connectUS.co.mz</a>. All rights reserved.</p>
         </div>
         <!-- .top-footer -->
     </div>
@@ -84,4 +84,5 @@
 </html>
 
 <script src="{{asset('template2/js/map-single.js')}}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvPDNG6pePr9iFpeRKaOlaZF_l0oT3lWk&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGHY-f9KkfzpAD9K9A-iDs6odjd1bDuNM&callback=initMap" async defer></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
