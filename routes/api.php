@@ -47,5 +47,12 @@ Route::post('/barman-sells', [\App\Http\Controllers\Api\Barman\SellController::c
 Route::get('/barman-sells/{id}', [\App\Http\Controllers\Api\Barman\SellController::class, 'index']);
 Route::get('/barman-sells-detail/{id}', [\App\Http\Controllers\Api\Barman\SellController::class, 'selldetails']);
 Route::get('/verifyreceipt/{id}/user/{userid}', [\App\Http\Controllers\Api\Barman\SellController::class, 'verifyreceipt']);
+Route::get('/barman-register-card/{id}', [\App\Http\Controllers\Api\Barman\CardController::class, 'registerCard']);
+Route::get('/barman-view-card/{id}', [\App\Http\Controllers\Api\Barman\CardController::class, 'viewCard']);
+Route::get('/barman-topup-card/{id}/{top}', [\App\Http\Controllers\Api\Barman\CardController::class, 'topUpCard']);
+
+
+
+
 
 

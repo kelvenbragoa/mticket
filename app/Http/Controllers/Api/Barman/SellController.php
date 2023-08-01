@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\Barman;
 
 use App\Http\Controllers\Controller;
+use App\Models\CardTransaction;
 use App\Models\CartBar;
+use App\Models\EventCard;
 use App\Models\SellBar;
 use App\Models\SellDetailBar;
 use Illuminate\Http\Request;
@@ -36,6 +38,26 @@ class SellController extends Controller
             ],403);
         }
 
+        if($data['method'] == 'cashless'){
+            $card = EventCard::find($data['card_id']);
+
+            $balance_remain = $card->balance - $data['total'];
+            $card->update([
+                'balance'=>$balance_remain
+            ]);
+
+            CardTransaction::create([
+                'card_id'=>$card->id,
+                'event_card_id'=>$card->id,
+                'sell_id'=>0,
+                'total'=>$data['total'],
+                'balance'=>$balance_remain,
+                'type_of_transaction_id'=>1,
+            ]);
+        }
+
+
+
         $id = SellBar::create([
             'user_id' => $data['user_id'],
             'total' => $data['total'],
@@ -43,7 +65,6 @@ class SellController extends Controller
             'ref' => $data['ref'],
             'status' => 1,
             'event_id' => $data['event_id'],
-          
         ])->id;
 
         // dd($id);
@@ -69,8 +90,6 @@ class SellController extends Controller
         }
 
         foreach ($mycart as $item){
-
-           
             $item->delete();
         }
         // //Update
@@ -84,6 +103,9 @@ class SellController extends Controller
             'message' => 'Sua ordem foi efectuada com sucesso. Va até a  Minhas Vendas para visualizar.',
         ],200);
     }
+
+
+
 
 
 
