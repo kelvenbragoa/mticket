@@ -57,7 +57,9 @@ class SellController extends Controller
         $event = Event::find($id);
         $sells = Sell::where('event_id',$id)->paginate(10);
         $sell_details= SellDetails::where('event_id',$id)->paginate(10);
-        return view('user.dashboard.ver-receita',compact('sells','event','sell_details'));
+        $sell_number = Sell::where('event_id',$id)->sum('qty');
+        $sell_amount = Sell::where('event_id',$id)->sum('total');
+        return view('user.dashboard.ver-receita',compact('sells','event','sell_details','sell_number','sell_amount'));
     }
 
     /**

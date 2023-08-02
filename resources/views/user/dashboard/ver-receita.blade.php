@@ -31,8 +31,8 @@
             <div class="member-place-wrap">
                 <div class="member-wrap-top">
                     <h2>Vendas do Evento - {{$event->name}}</h2>
-                    <p>Número de Vendas:{{$sells->sum('qty')}}</p>
-                    <p>Receita:{{$sells->sum('total')}} MT</p>
+                    <p>Número de Vendas:{{$sell_number}}</p>
+                    <p>Receita:{{$sell_amount}} MT</p>
                    
                 </div>
                 <!-- .member-wrap-top -->
@@ -55,10 +55,10 @@
                         @forelse ($sell_details as $item)
                             <tr>
                             
-                                <td data-title="ID">{{$item->id}}</td>
+                                <td data-title="ID">#{{$item->id}}</td>
                                 <td data-title="Bilhete"><b>{{$item->ticket->name}}</b></td>
                                 <td data-title="Cliente"><b>{{$item->user->name ?? 'Venda física'}}</b></td>
-                                <td data-title="Valor"><b>{{$item->ticket->price}}</b></td>
+                                <td data-title="Valor"><b>{{$item->sell->price}}</b></td>
                                 <td data-title="Estado">
                                     @if ($item->status == 1)
                                         <span style="color:green">Disponivel</span>
@@ -79,9 +79,9 @@
                         
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-center">
+                <div class="d-flex pagination justify-content-center">
                     
-                        {!! $sells->links() !!}
+                        {!! $sell_details->links() !!}
                    
                 </div>
                 <!-- .pagination -->
