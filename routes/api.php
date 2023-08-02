@@ -37,6 +37,7 @@ Route::get('/cart/{id}', [\App\Http\Controllers\Api\Protocols\CartsController::c
 Route::post('/sells', [\App\Http\Controllers\Api\Protocols\SellController::class, 'store']);
 Route::get('/sells/{id}', [\App\Http\Controllers\Api\Protocols\SellController::class, 'index']);
 Route::get('/sells-detail/{id}', [\App\Http\Controllers\Api\Protocols\SellController::class, 'selldetails']);
+Route::delete('/cart/{id}/user/{userid}',[\App\Http\Controllers\Api\Protocols\CartsController::class,'destroy']);
 
 //ROTAS BARMAN
 

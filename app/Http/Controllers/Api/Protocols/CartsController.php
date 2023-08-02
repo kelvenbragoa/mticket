@@ -58,4 +58,33 @@ class CartsController extends Controller
             // return back()->with('message','Bilhete adicionado ao carrinho, Clique para verificar');
         }
     }
+
+
+    public function destroy($id,$userid){
+        $cart = Carts::find($id);
+
+        if(!$cart)
+        {
+            return response([
+                'message' => 'Produto não encontrado'
+            ], 403);
+        }
+
+        if($cart->protocol_id != $userid)
+        {
+            return response([
+                'message' => 'Permissão negada.'
+            ], 403);
+
+        }
+
+      
+        Carts::destroy($id);
+
+        return response([
+
+            'message' => 'Produto apagado'
+        ], 200);
+        
+    }
 }
