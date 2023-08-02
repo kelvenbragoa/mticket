@@ -82,4 +82,8 @@ class TicketsController extends Controller
             'message' => 'Bilhete Verificado Com sucesso'
         ], 200);
     }
+
+
+
+    
 }

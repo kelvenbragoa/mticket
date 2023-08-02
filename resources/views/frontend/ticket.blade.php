@@ -290,14 +290,14 @@ html {
                 <div class="barcode">
                     @php
                         $myObj = new stdClass();
-                        $myObj->nome = Auth::user()->name;
-                        $myObj->email = Auth::user()->email;
-                        $myObj->evento = $event->name;
-                        $myObj->ticket = $item->ticket->name;
-                        $myObj->data = $event->start_date;
-                        $myObj->status = $item->status;
-                        $myObj->id = $item->id;
-                        $myObj->id_evento = $item->event->id;
+                        // $myObj->nome = Auth::user()->name;
+                        // $myObj->email = Auth::user()->email;
+                        // $myObj->evento = $event->name;
+                        // $myObj->ticket = $item->ticket->name;
+                        // $myObj->data = $event->start_date;
+                        $myObj->s = $item->status;
+                        $myObj->i = $item->id;
+                        $myObj->ie = $item->event->id;
                         
 
                         $myJSON = json_encode($myObj);

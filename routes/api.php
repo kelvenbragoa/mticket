@@ -30,8 +30,13 @@ Route::get('/donetickets/{id}', [\App\Http\Controllers\Api\Protocols\TicketsCont
 Route::get('/pendingtickets/{id}', [\App\Http\Controllers\Api\Protocols\TicketsController::class, 'pending']);
 Route::get('/ticket/{id}', [\App\Http\Controllers\Api\Protocols\TicketsController::class, 'ticketdetail']);
 Route::get('/verifyticket/{id}', [\App\Http\Controllers\Api\Protocols\TicketsController::class, 'verifyticket']);
-
-
+Route::get('/products/{id}', [\App\Http\Controllers\Api\Protocols\ProductsController::class, 'index']);
+Route::get('/product/{id}', [\App\Http\Controllers\Api\Protocols\ProductsController::class, 'productdetail']);
+Route::post('carts', [\App\Http\Controllers\Api\Protocols\CartsController::class, 'store']);
+Route::get('/cart/{id}', [\App\Http\Controllers\Api\Protocols\CartsController::class, 'index']);
+Route::post('/sells', [\App\Http\Controllers\Api\Protocols\SellController::class, 'store']);
+Route::get('/sells/{id}', [\App\Http\Controllers\Api\Protocols\SellController::class, 'index']);
+Route::get('/sells-detail/{id}', [\App\Http\Controllers\Api\Protocols\SellController::class, 'selldetails']);
 
 //ROTAS BARMAN
 

@@ -21,4 +21,8 @@ class SellDetails extends Model
     public function user(){
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
+
+    public function sell(){
+        return $this->hasOne('App\Models\Sell', 'id', 'sell_id');
+    }
 }

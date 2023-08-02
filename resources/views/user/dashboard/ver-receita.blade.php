@@ -57,7 +57,7 @@
                             
                                 <td data-title="ID">{{$item->id}}</td>
                                 <td data-title="Bilhete"><b>{{$item->ticket->name}}</b></td>
-                                <td data-title="Cliente"><b>{{$item->user->name}}</b></td>
+                                <td data-title="Cliente"><b>{{$item->user->name ?? 'Venda física'}}</b></td>
                                 <td data-title="Valor"><b>{{$item->ticket->price}}</b></td>
                                 <td data-title="Estado">
                                     @if ($item->status == 1)
