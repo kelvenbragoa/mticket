@@ -4,7 +4,7 @@
     <link rel="shortcut icon" href="{{asset('template2/images/ttttt.png')}}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyTicket</title>
+    <title>MTicket</title>
     <link rel="stylesheet" type="text/css" href="{{asset('template_login/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('template_login/css/fontawesome-all.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('template_login/css/iofrm-style.css')}}">
