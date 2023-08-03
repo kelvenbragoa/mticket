@@ -17,7 +17,7 @@ class SellController extends Controller
         
 
         return response([
-            'sells' => Sell::with('ticket:id,name')->where('protocol_id',$userid)->orderBy('id', 'desc')->get()
+            'sells' => Sell::with('ticket:id,name')->with('user')->where('protocol_id',$userid)->orderBy('id', 'desc')->get()
         ],200);
 
     }
@@ -87,7 +87,7 @@ class SellController extends Controller
 
     public function selldetails($id){
         return response([
-            'selldetail' => SellDetails::where('sell_id',$id)->with('ticket:id,name')->with('sell.transaction')->with('sell')->get(),
+            'selldetail' => SellDetails::where('sell_id',$id)->with('ticket:id,name')->with('sell.transaction')->with('user')->with('sell')->get(),
         ],200);
     }
 }

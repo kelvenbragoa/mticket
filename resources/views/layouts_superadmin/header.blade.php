@@ -9,9 +9,9 @@
 	<meta name="author" content="Inogest">
 	<meta name="keywords" content="gestão, management, erp, human resource, inogest, inovatis, tecnologia, mozambique">
 
-	<link rel="shortcut icon" href="storage/img/sys/logoinogesticon.png" />
+	<link rel="shortcut icon" href="{{asset('template2/images/ttttt.png')}}">
 
-	<title>MyTicket</title>
+	<title>Mticket</title>
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js') }}" defer></script>
 	<!-- Styles -->

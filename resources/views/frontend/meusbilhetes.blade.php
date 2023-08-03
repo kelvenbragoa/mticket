@@ -54,7 +54,7 @@
                                                         <div>Transação: <span class="value">{{$item->transaction->reference}} | {{$item->transaction->method}}</span></div>
                                                         <div>Data da Compra: <span class="value">{{$item->transaction->created_at->format('d-M-Y')}}</span></div>
                                                         
-                                                        <a href="{{URL::to('/meusbilhetes/'.$item->id)}}" class="m-4"> <div ><i class="las la-tag"></i>Ver bilhete</div></a>
+                                                        <a href="{{URL::to('/meusbilhetes/'.$item->id)}}" class="m-4 text-info"> <div ><i class="las la-tag"></i>Ver bilhete</div></a>
  
                                                     </div>
                                                 </div>

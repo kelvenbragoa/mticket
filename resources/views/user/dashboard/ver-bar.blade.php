@@ -31,12 +31,12 @@
             <div class="member-place-wrap">
                 <div class="member-wrap-top">
                     <h2>Vendas do Evento - {{$event->name}}</h2>
-                    <p>Número de Vendas:{{$sells_bar->count()}}</p>
-                    <p>Receita:{{$sells_bar->sum('total')}} MT</p>
+                    <p>Número de Vendas:{{$sells_bar_count->count()}}</p>
+                    <p>Receita:{{$sells_bar_count->sum('total')}} MT</p>
                    
                 </div>
                 
-                <a href="{{URL::to('user-bar-report/'.$event->id)}}" class="btn btn-primary"><h3>Baixar Relatório Completo</h3></a>
+                <a href="{{URL::to('user-bar-report/'.$event->id)}}" class="btn btn-primary m-3"><h3>Baixar Relatório Completo</h3></a>
                 
                 <!-- .member-wrap-top -->
                 
@@ -71,7 +71,7 @@
 
                                     @else
                                     <span>Verificada</span>
-                                    @endif
+                                    @endif 
                                 </td>
                                 
                                
@@ -87,9 +87,9 @@
                 </table>
                 <div class="d-flex justify-content-center">
                     
-                       
-                   
-                </div>
+                    {!! $sells_bar->links() !!}
+               
+            </div>
                 <!-- .pagination -->
             </div>
             <!-- .member-place-wrap -->

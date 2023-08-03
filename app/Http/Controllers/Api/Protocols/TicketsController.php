@@ -24,7 +24,7 @@ class TicketsController extends Controller
         );
 
         return response([
-            'all_tickets' => SellDetails::where('event_id',$event->id)->with('event:id,name,start_date')->with('ticket:id,name,price')->with('user:id,name,mobile,email')->get(),
+            'all_tickets' => SellDetails::where('event_id',$event->id)->with('event:id,name,start_date')->with('ticket:id,name,price')->with('user:id,name,mobile,email')->with('sell')->with('sell.transaction')->orderBy('id','desc')->get(),
         ],200);
 
     }
@@ -39,7 +39,7 @@ class TicketsController extends Controller
         );
 
         return response([
-            'pending_tickets' => SellDetails::where('event_id',$event->id)->with('event:id,name,start_date')->with('ticket:id,name,price')->with('user:id,name,mobile,email')->where('status',1)->get(),
+            'pending_tickets' => SellDetails::where('event_id',$event->id)->with('event:id,name,start_date')->with('ticket:id,name,price')->with('user:id,name,mobile,email')->with('sell')->with('sell.transaction')->where('status',1)->orderBy('id','desc')->get(),
         ],200);
 
     }
@@ -54,7 +54,7 @@ class TicketsController extends Controller
         );
 
         return response([
-            'done_tickets' => SellDetails::where('event_id',$event->id)->with('event:id,name,start_date')->with('ticket:id,name,price')->with('user:id,name,mobile,email')->where('status',0)->get(),
+            'done_tickets' => SellDetails::where('event_id',$event->id)->with('event:id,name,start_date')->with('ticket:id,name,price')->with('user:id,name,mobile,email')->with('sell')->with('sell.transaction')->where('status',0)->orderBy('id','desc')->get(),
         ],200);
     }
 
@@ -64,7 +64,7 @@ class TicketsController extends Controller
         
 
         return response([
-            'ticket' => SellDetails::where('id',$id)->with('event:id,name,start_date')->with('ticket:id,name,price')->with('user:id,name,mobile,email')->get(),
+            'ticket' => SellDetails::where('id',$id)->with('event:id,name,start_date')->with('ticket:id,name,price')->with('user:id,name,mobile,email')->with('sell')->with('sell.transaction')->orderBy('id','desc')->get(),
         ],200);
     }
 

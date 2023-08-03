@@ -57,9 +57,10 @@ class BarController extends Controller
     {
         //
         $event = Event::find($id);
-        $sells_bar = SellBar::where('event_id',$id)->get();
+        $sells_bar_count = SellBar::where('event_id',$id)->get();
+        $sells_bar = SellBar::where('event_id',$id)->paginate(10);
         $sell_bar_details= SellDetailBar::where('event_id',$id)->get();
-        return view('user.dashboard.ver-bar',compact('sells_bar','event','sell_bar_details'));
+        return view('user.dashboard.ver-bar',compact('sells_bar','event','sell_bar_details','sells_bar_count'));
     }
 
     /**

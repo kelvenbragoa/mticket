@@ -74,11 +74,11 @@
 
                                 </div>
                             </div>
-                            <div class="map-detail">
+                            {{-- <div class="map-detail">
                                 <div id="map"></div>
                                 <div class="map-local"><i class="las la-directions"></i></div>
                                 <a href="#" class="direction btn" target="_blank">Direções<i class="las la-external-link-alt"></i></a>
-                            </div>
+                            </div> --}}
 
                            <div class="business-info">
                             <h4>Informações</h4>

@@ -5085,17 +5085,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      status: this.like
+      status: this.like,
+      count: 4
     };
   },
   methods: {
     likeEvent: function likeEvent() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/likeevent/' + this.event_id).then(this.status = !this.status);
+      var _this = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/likeevent/' + this.event_id).then(function (response) {
+        _this.count = response.data.like;
+        _this.status = !_this.status;
+      });
     }
   },
   computed: {
     buttonText: function buttonText() {
-      return this.status ? 'Desgostar' : 'Gostar';
+      return this.status ? 'Desgostar(' + this.count + ')' : 'Gostar(' + this.count + ')';
     }
   }
 });

@@ -189,13 +189,21 @@ class EventsController extends Controller
         $like = LikeEvent::where('user_id',Auth::user()->id)->where('event_id',$event_id)->first();
 
         if($like == null){
-            return LikeEvent::create([
+             LikeEvent::create([
                 'user_id'=> Auth::user()->id,
                 'event_id'=>$event_id
             ]);
+            $actual_like = LikeEvent::where('event_id',$event_id)->count();
+            return [
+                'like'=>$actual_like
+            ];
 
         }else{
-            return $like->delete();
+            $like->delete();
+            $actual_like = LikeEvent::where('event_id',$event_id)->count();
+            return [
+                'like'=>$actual_like
+            ];
         }
 
 

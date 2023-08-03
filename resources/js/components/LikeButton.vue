@@ -16,19 +16,23 @@ import axios from 'axios';
 
         data: function(){
             return {
-                status: this.like
+                status: this.like,
+                count:4
             }
         },
         methods:{
             likeEvent(){
-               axios.post('/likeevent/'+this.event_id).then(
+               axios.post('/likeevent/'+this.event_id).then((response)=>{
+                this.count = response.data.like
                 this.status = !this.status
+               }
+                
                )
             }
         },
         computed:{
             buttonText(){
-                return (this.status) ? 'Desgostar' : 'Gostar'
+                return (this.status) ? 'Desgostar('+this.count+')' : 'Gostar('+this.count+')'
             }
         }
     }

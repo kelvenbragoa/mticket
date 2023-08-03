@@ -63,8 +63,8 @@
                                 <td data-title="Status" class="{{$item->status->alias}}">{{$item->status->name}}</td>
                                 <td data-title="" class="place-action">
                                     <a href="{{URL::to('/eventos/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                    <a href="#" class="view" title="View"><i class="la la-eye"></i></a>
-                                    <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
+                                    {{-- <a href="#" class="view" title="View"><i class="la la-eye"></i></a>
+                                    <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a> --}}
                                 </td>
                             </tr>
                         @empty

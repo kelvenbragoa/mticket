@@ -37,8 +37,8 @@
                 <div class="col-lg-3">
                     <aside class="footer__top__nav footer__top__nav--contact">
                         <h3>Contacte nós</h3>
-                        <p>Email: support@mticket.co.mz</p>
-                        <p>Phone: +258 84 0000</p>
+                        <p>Email: suporte@mticket.co.mz</p>
+                        <p>Telefone: +258 84 228 0974</p>
                         <ul>
                             <li class="facebook">
                                 <a title="Facebook" href="#">
