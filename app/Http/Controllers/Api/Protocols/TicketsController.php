@@ -83,6 +83,16 @@ class TicketsController extends Controller
         ], 200);
     }
 
+    public function status($id){
+        $ticket = SellDetails::find($id);
+
+        return response([
+
+            'status' => $ticket->status
+        ], 200);
+
+    }
+
 
 
     

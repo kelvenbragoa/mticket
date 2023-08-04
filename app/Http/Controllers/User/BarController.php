@@ -117,4 +117,24 @@ class BarController extends Controller
 
 
     }
+
+    public function ticket_report($event_id){
+
+        $event = Event::find($event_id);
+        $investment = 0;
+
+        foreach($event->products as $item){
+            $investment = $investment + $item->qtd*$item->buy_price;
+        }
+      
+
+      
+       
+        $pdf = Pdf::loadView('superadmin.events.report', compact('event','investment'))->setOptions([
+            'defaultFont' => 'sans-serif',
+            'isRemoteEnabled' => 'true'
+        ]);
+        return $pdf->setPaper('a4')->stream('invoice.pdf');
+        
+    }
 }

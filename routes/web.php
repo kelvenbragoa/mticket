@@ -85,6 +85,7 @@ Route::resource('produtos', 'App\Http\Controllers\User\ProductsController');
 Route::resource('lineup', 'App\Http\Controllers\User\LineupController');
 Route::post('/likeevent/{event_id}',[\App\Http\Controllers\User\EventsController::class,'likeevent']);
 Route::get('/user-bar-report/{evento_id}', [App\Http\Controllers\User\BarController::class, 'bar_report']);
+Route::get('/user-ticket-report/{evento_id}', [App\Http\Controllers\User\BarController::class, 'ticket_report']);
 
 //Profiles controller
 Route::resource('profile', 'App\Http\Controllers\User\ProfileController');

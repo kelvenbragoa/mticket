@@ -36,6 +36,7 @@
                    
                 </div>
                 <!-- .member-wrap-top -->
+                <a href="{{URL::to('user-ticket-report/'.$event->id)}}" class="btn btn-primary m-3"><h3>Baixar Relatório Completo</h3></a>
                 
                 <table class="member-place-list table-responsive">
                     <thead>

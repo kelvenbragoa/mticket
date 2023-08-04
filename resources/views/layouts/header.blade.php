@@ -244,14 +244,14 @@
                                             </div>
                                              @auth
                                              <div class="right-header__button btn">
-                                                <a title="Add place" href="{{URL::to('/perfil')}}">
+                                                <a title="" href="{{URL::to('/perfil')}}">
 
                                                     <span>Perfil</span>
                                                 </a>
                                             </div>
                                             @else
                                             <div class="right-header__button btn">
-                                                <a title="Add place" href="{{URL::to('/login')}}">
+                                                <a title="" href="{{URL::to('/login')}}">
 
                                                     <span>Login</span>
                                                 </a>

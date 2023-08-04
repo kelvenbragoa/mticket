@@ -38,7 +38,7 @@ Route::post('/sells', [\App\Http\Controllers\Api\Protocols\SellController::class
 Route::get('/sells/{id}', [\App\Http\Controllers\Api\Protocols\SellController::class, 'index']);
 Route::get('/sells-detail/{id}', [\App\Http\Controllers\Api\Protocols\SellController::class, 'selldetails']);
 Route::delete('/cart/{id}/user/{userid}',[\App\Http\Controllers\Api\Protocols\CartsController::class,'destroy']);
-
+Route::get('/get-status/{id}', [\App\Http\Controllers\Api\Protocols\TicketsController::class, 'status']);
 //ROTAS BARMAN
 
 Route::post('/barman-login', [\App\Http\Controllers\Api\Barman\AuthController::class, 'login']);
@@ -56,6 +56,8 @@ Route::get('/verifyreceipt/{id}/user/{userid}', [\App\Http\Controllers\Api\Barma
 Route::get('/barman-register-card/{id}', [\App\Http\Controllers\Api\Barman\CardController::class, 'registerCard']);
 Route::get('/barman-view-card/{id}', [\App\Http\Controllers\Api\Barman\CardController::class, 'viewCard']);
 Route::get('/barman-topup-card/{id}/{top}', [\App\Http\Controllers\Api\Barman\CardController::class, 'topUpCard']);
+Route::get('/barman-get-status/{id}', [\App\Http\Controllers\Api\Barman\SellController::class, 'status']);
+
 
 
 
