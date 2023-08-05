@@ -76,7 +76,7 @@ class ProductsController extends Controller
         //
         $event = Event::find($evento);
         $produto = Products::find($produtos);
-        return view('user.produtos.edit',compact('event', 'ticket'));
+        return view('user.produtos.edit',compact('event', 'produto'));
     }
 
     /**
