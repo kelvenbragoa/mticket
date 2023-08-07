@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Sell;
 use App\Models\SellBar;
+use App\Models\SellDetailBar;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -87,7 +88,7 @@ class EventsController extends Controller
     {
         //
         $event = Event::find($id);
-        $sells_amount = SellBar::where('event_id',$event->id)->get();
+        $sells_amount = SellDetailBar::where('event_id',$event->id)->get();
         $investment = 0;
 
         foreach($event->products as $item){

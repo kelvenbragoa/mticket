@@ -348,8 +348,8 @@
                     <div class="row">
                         <div class="col-12">
                             <p><strong>Número Produtos</strong>: {{$event->products->count()}}</p>
-                            <p><strong>Investimento</strong>: {{$investment}} MT</p>
-                            <p><strong>Valor de Venda</strong>: {{$sells_amount->sum('total')}} MT</p>
+                            {{-- <p><strong>Investimento</strong>: {{$investment}} MT</p> --}}
+                            {{-- <p><strong>Valor de Venda</strong>: {{$sells_amount->sum('total')}} MT</p> --}}
 
                             
                             {{-- <p><strong>Lucro</strong>: {{$event->sell_bar->sum('total')-$investment}} MT</p> --}}
@@ -370,6 +370,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $valor_total = 0;
+                                        @endphp
+
                                         @foreach ($event->products as $item)
                                             <tr>
                                                 <td>{{$item->name}}</td>
@@ -390,8 +394,12 @@
 
                                            
                                             
+                                        @php
+                                            $valor_total = $valor_total + $item->sells->sum('qtd') * $item->sell_price;
+                                        @endphp
                                         @endforeach
                                     </tbody>
+                                    <p><strong>Valor de Venda</strong>: {{$valor_total}} MT</p>
                                 </table>
                             </div>
                         </div>
