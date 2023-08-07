@@ -23,8 +23,8 @@ class EventReportController extends Controller
 
         $tickets_local_true = SellDetails::where('event_id',$event->id)->where('user_id',0)->where('status',1)->get();
         $tickets_local_false = SellDetails::where('event_id',$event->id)->where('user_id',0)->where('status',0)->get();
-        $tickets_online_true = SellDetails::where('event_id',$event->id)->where('user_id','!=',0)->where('status',1)->get();
-        $tickets_online_false = SellDetails::where('event_id',$event->id)->where('user_id','!=',0)->where('status',0)->get();
+        $tickets_online_true = SellDetails::where('event_id',$event->id)->where('user_id','!=',0)->where('user_id','!=',55)->where('status',1)->get();
+        $tickets_online_false = SellDetails::where('event_id',$event->id)->where('user_id','!=',0)->where('user_id','!=',55)->where('status',0)->get();
         $invites_online_true = SellDetails::where('event_id',$event->id)->where('user_id',55)->where('status',1)->get();
         $invites_online_false = SellDetails::where('event_id',$event->id)->where('user_id',55)->where('status',0)->get();
 
