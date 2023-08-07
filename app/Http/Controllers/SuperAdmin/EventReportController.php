@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\superadmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CardTransaction;
 use App\Models\Event;
+use App\Models\EventCard;
 use App\Models\Sell;
 use App\Models\SellDetails;
 use App\Models\Ticket;
@@ -50,5 +52,25 @@ class EventReportController extends Controller
             'invites_online_false',
         
         ));
+    }
+
+
+    public function card_report($id){
+        $card = EventCard::where('event_id',$id)->get();
+        $topup = CardTransaction::where('event_id',$id)->where('type_of_transaction_id',0)->get();
+
+        return view('superadmin.events.card-report',compact(
+            'card'
+        ));
+    }
+
+
+    public function updatecard(){
+        $card = CardTransaction::get();
+        foreach($card as $item){
+            $item->update([
+                'event_id'=>$item->card->event_id
+            ]);
+        }
     }
 }
