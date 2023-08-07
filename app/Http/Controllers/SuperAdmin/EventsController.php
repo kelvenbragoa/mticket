@@ -4,6 +4,8 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Sell;
+use App\Models\SellBar;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -85,12 +87,13 @@ class EventsController extends Controller
     {
         //
         $event = Event::find($id);
+        $sells_amount = SellBar::where('event_id',$event->id)->get();
         $investment = 0;
 
         foreach($event->products as $item){
             $investment = $investment + $item->qtd*$item->buy_price;
         }
-        return view('superadmin.events.show',compact('event','investment'));
+        return view('superadmin.events.show',compact('event','investment','sells_amount'));
     }
 
     /**
