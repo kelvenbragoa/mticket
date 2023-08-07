@@ -18,7 +18,7 @@ class EventReportController extends Controller
 
         $event = Event::find($id);
         $tickets_local = Sell::where('event_id',$event->id)->where('user_id',0)->get();
-        $tickets_online = Sell::where('event_id',$event->id)->where('user_id','!=',0)->get();
+        $tickets_online = Sell::where('event_id',$event->id)->where('user_id','!=',0)->where('user_id','!=',55)->get();
         $invites_online = Sell::where('event_id',$event->id)->where('user_id',55)->get();
 
         $tickets_local_true = SellDetails::where('event_id',$event->id)->where('user_id',0)->where('status',1)->get();
