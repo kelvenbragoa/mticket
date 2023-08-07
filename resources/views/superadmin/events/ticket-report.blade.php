@@ -20,7 +20,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Bilhetes Físicos</h5>
                                                 <h1 class="mt-1 mb-3">{{$tickets_local->sum('qty')}}</h1>
-                                                <h1 class="mt-1 mb-3">{{$tickets_local->sum('total')}} MT</h1>
+                                                <h1 class="mt-1 mb-3">{{$tickets_local_amount}} MT</h1>
                                             </div>
                                         </div>
                                     </div>
