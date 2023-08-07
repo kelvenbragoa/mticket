@@ -31,7 +31,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Total recargas</h5>
-                                                <h1 class="mt-1 mb-3">{{$card->count()}}</h1>
+                                                <h1 class="mt-1 mb-3">{{$topup->sum('total')}} MT</h1>
                                                 
                                             </div>
                                         </div>

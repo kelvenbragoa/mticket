@@ -60,7 +60,8 @@ class EventReportController extends Controller
         $topup = CardTransaction::where('event_id',$id)->where('type_of_transaction_id',0)->get();
 
         return view('superadmin.events.card-report',compact(
-            'card'
+            'card',
+            'topup'
         ));
     }
 
