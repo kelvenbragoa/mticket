@@ -18,8 +18,8 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{URL::to('/event-ticket-report/'.$event->id)}}" class="btn btn-pill btn-primary"><i class="far fa-activity"></i>Relátorio de Bilheteria</a>
-                    <a href="{{route('province.create')}}" class="btn btn-pill btn-primary"><i class="far fa-activity"></i>Relátorio do Bar</a>
-                    <a href="{{route('province.create')}}" class="btn btn-pill btn-primary"><i class="far fa-activity"></i>Relátorio do Cartões</a>
+                    <a href="{{URL::to('/event-ticket-report/'.$event->id)}}" class="btn btn-pill btn-primary"><i class="far fa-activity"></i>Relátorio do Bar</a>
+                    <a href="{{URL::to('/event-ticket-report/'.$event->id)}}" class="btn btn-pill btn-primary"><i class="far fa-activity"></i>Relátorio do Cartões</a>
                    
                 </div>
                 

@@ -52,6 +52,39 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Bilhetes Físicos</h5>
+                                                <h5 class="mt-1 mb-3">Validados: {{$tickets_local_true->count()}}</h5>
+                                                <h5 class="mt-1 mb-3">Não validados: {{$tickets_local_false->count()}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Bilhetes Online</h5>
+                                                <h5 class="mt-1 mb-3">Validados: {{$tickets_online_true->count()}}</h5>
+                                                <h5 class="mt-1 mb-3">Não validados: {{$tickets_online_false->count()}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Convites Online</h5>
+                                                <h5 class="mt-1 mb-3">Validados: {{$invites_online_true->count()}}</h5>
+                                                <h5 class="mt-1 mb-3">Não validados {{$invites_online_false->count()}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                             
+                                </div>
                             </div>
                         </div>
                     </div>
