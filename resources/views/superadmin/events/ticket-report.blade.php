@@ -42,6 +42,15 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-2">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Total Bilhetes</h5>
+                                                <h1 class="mt-1 mb-3">{{$tickets_local->sum('qty') + $tickets_online->sum('qty')}}</h1>
+                                                <h1 class="mt-1 mb-3">{{$tickets_local->sum('total') + $tickets_online->sum('total')}} MT</h1>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
