@@ -408,7 +408,7 @@
                 <div class="row mb-2 mb-xl-3">
                     <div class="col-auto d-none d-sm-block">
                         <h3><strong>Vendas Bilhetes e Pacotes</strong></h3>
-                        {{-- <a href="{{URL::to('/bar-report/'.$event->id)}}" class="btn btn-pill btn-primary"><i class="far fa-arrow-down"></i>Baixar Relatório</a> --}}
+                        <a href="{{URL::to('/ticket-report/'.$event->id)}}" class="btn btn-pill btn-primary"><i class="far fa-arrow-down"></i>Baixar Relatório</a>
                     </div>
                 </div>
 

@@ -11,8 +11,7 @@
                     <h5 class="card-title">Relatório de Bilheteria </h5>
                 </div>
 
-                <p>Done ticket api: {{$done_tickets}}</p>
-                <p>Done ticket: </p>
+               
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xl-12 col-xxl-12 d-flex">
@@ -82,7 +81,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Convites Online</h5>
                                                 <h5 class="mt-1 mb-3">Não Validados: {{$invites_online_true->count()}}</h5>
-                                                <h5 class="mt-1 mb-3">Validados {{$invites_online_false->count()}}</h5>
+                                                <h5 class="mt-1 mb-3">Validados: {{$invites_online_false->count()}}</h5>
                                             </div>
                                         </div>
                                     </div>

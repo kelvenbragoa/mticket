@@ -114,13 +114,18 @@
 
 <div class="invoice">
     <h3 style="text-align:center" >Relatório das vendas bilhetes</h3>
-    <h5><strong>Número de vendas fisicas</strong>: {{$event->products->count()}}</h5>
-    <h5><strong>Número de vendas online</strong>: {{$investment}} MT</h5>
-    <h5><strong>Valor arrecadado fisico</strong>: {{$event->sell_bar->sum('total')}} MT</h5>
-    <h5><strong>Valor arrecadodo online</strong>: {{$event->sell_bar->sum('total')-$investment}} MT</h5>
-    {{-- <h5><strong>Margem Mticket(6%)</strong>: @if ($event->sell_bar->sum('total')-$investment < 0) 0 MT @else {{($event->sell_bar->sum('total')-$investment)*6/100}} MT @endif</h5> --}}
+    <h5><strong>Número de vendas fisicas</strong>: {{$tickets_local->sum('qty')}} ({{$tickets_local_amount}} MT)</h5>
+    <h5><strong>Número de vendas online</strong>: {{$tickets_online->sum('qty')}} ({{$tickets_online->sum('total')}} MT)</h5>
+    <h5><strong>Convites Online</strong>: {{$invites_online->sum('qty')}} ({{$invites_online->sum('total')}} MT)</h5>
+    <h5><strong>Total Fisico e online</strong>: {{$tickets_local->sum('qty') + $tickets_online->sum('qty')}} ({{$tickets_local->sum('total') + $tickets_online->sum('total')}} MT)</h5>
+    
 
     <hr>
+
+    <h5><strong>Bilhetes Físicos</strong>: Validados: {{$tickets_local_false->count()}} , Não validados: {{$tickets_local_true->count()}}</h5>
+    <h5><strong>Bilhetes Online</strong>: Validados: {{$tickets_online_false->count()}} , Não validados: {{$tickets_online_true->count()}}</h5>
+    <h5><strong>Convites Online</strong>: Validados: {{$invites_online_false->count()}} , Não validados: {{$invites_online_true->count()}}</h5>
+
     <br>
 
     <h2>Bilhetes Registrados</h2>
@@ -129,109 +134,22 @@
             <thead>
                 <tr>
                     <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Nome
+                        Ticket/Pacote
                     </th>
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Qtd
-                    </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                       Preço de Venda
-                    </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Preço de Compra
-                    </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Qtd Venda
-                    </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Valor Venda
-                    </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Lucro
+                        Vendas
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($event->products as $item)
+                @foreach ($event->tickets as $item)
                 <tr>
                     <td style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->name}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->qtd}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->sell_price}} MT
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->buy_price}} MT
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->sells->sum('qtd')}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->sells->sum('qtd') * $item->sell_price}} MT
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{($item->sells->sum('qtd') * $item->sell_price) - ($item->sells->sum('qtd') * $item->buy_price)}} MT
-                    </td>
-                   
-                </tr>
-                @endforeach
-                
-            </tbody>
-        </table>
-    </div>
-
-    <hr>
-
-    <br>
-    <h2>Protocolos Operadores do Sistema</h2>
-    <h2>Número de Operadores: {{$event->barman->count()}}</h2>
-    <div>
-        <table style="table-layout: fixed; width: 95%;">
-            <thead>
-                <tr>
-                    <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Nome
-                    </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Telefone
-                    </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                       Usuário
-                    </th>
-
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Número de Vendas
-                     </th>
-
-                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Valor de Vendas
-                     </th>
-                  
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($event->barman as $item)
-                <tr>
-                    <td style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->name}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->mobile}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->user}}
                     </td>
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sells->count()}}
                     </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->sells->sum('total')}} MT
-                    </td>
-                    
-                   
                 </tr>
                 @endforeach
                 
@@ -241,74 +159,37 @@
 
     <hr>
 
-    <br>
-    <h2>Vendas Físicas</h2>
-    <h2>Número de Vendas: {{$event->sell_bar->count()}}</h2>
-
+    <h2>Venda Bilhetes</h2>
+    <h5><strong>Número Bilhetes</strong>: {{$event->tickets->count()}}</h5>
+    <h5><strong>Número Pacotes</strong>: {{$event->packages->count()}}</h5>
+    <h5><strong>Valor</strong>: {{$event->sells->sum('total')}}</h5>
     <div>
         <table style="table-layout: fixed; width: 95%;">
             <thead>
                 <tr>
                     <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Data
+                        Ticket/Pacote
                     </th>
-                    
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Recibo #
-                     </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                       Valor
+                        Preço
                     </th>
-
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Pagamento
-                     </th>
-
-                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Venda Efetuada por
-                     </th>
-
-                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Venda Verificada por
-                     </th>
-
-                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Estado
-                     </th>
-                  
+                        Usuário/Id
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($event->sell_bar as $item)
+                @foreach ($event->sell_details as $item)
                 <tr>
                     <td style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->created_at->format('d-M H:i')}}
-                    </td>
-                    
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        #{{$item->id}}
+                        {{$item->ticket->name}}
                     </td>
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->total}} MT
+                        {{$item->sell->price}} MT
                     </td>
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->method}}
+                        {{$item->user->name}}
                     </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->user->name ?? '-'}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->verified_by_user->name ?? '-'}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        @if ($item->status == 1)
-                            <span>Não verificada</span>
-                        @else
-                            <span>Verificada</span>
-                        @endif
-                    </td>
-                    
-                   
                 </tr>
                 @endforeach
                 
@@ -316,82 +197,10 @@
         </table>
     </div>
 
-    <hr>
 
-    <h2>Vendas Online</h2>
-    <h2>Número de Vendas: {{$event->sell_bar->count()}}</h2>
 
-    <div>
-        <table style="table-layout: fixed; width: 95%;">
-            <thead>
-                <tr>
-                    <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Data
-                    </th>
-                    
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Recibo #
-                     </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                       Valor
-                    </th>
 
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Pagamento
-                     </th>
-
-                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Venda Efetuada por
-                     </th>
-
-                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Venda Verificada por
-                     </th>
-
-                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Estado
-                     </th>
-                  
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($event->sell_bar as $item)
-                <tr>
-                    <td style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->created_at->format('d-M H:i')}}
-                    </td>
-                    
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        #{{$item->id}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->total}} MT
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->method}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->user->name ?? '-'}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->verified_by_user->name ?? '-'}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        @if ($item->status == 1)
-                            <span>Não verificada</span>
-                        @else
-                            <span>Verificada</span>
-                        @endif
-                    </td>
-                    
-                   
-                </tr>
-                @endforeach
-                
-            </tbody>
-        </table>
-    </div>
-
+   
    
 </div>
 
