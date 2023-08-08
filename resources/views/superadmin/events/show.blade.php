@@ -23,7 +23,6 @@
                    
                 </div>
                 
-               
                 <div class="card-body">
                    
 
@@ -383,13 +382,7 @@
                                                 <td>{{$item->sells->sum('qtd')}}</td>
                                                 <td>{{$item->sells->sum('qtd') * $item->sell_price}} MT</td>
                                                 <td>{{($item->sells->sum('qtd') * $item->sell_price) - ($item->sells->sum('qtd') * $item->buy_price)}} MT</td>
-                                                {{-- <td>{{(($item->sells->sum('qtd') * $item->sell_price) - ($item->sells->sum('qtd') * $item->buy_price))*6/100}} MT</td> --}}
-
-                                                {{-- <td class="table-action">
-                                                    
-                                                     <a href="{{URL::to('/events/'.$item->id.'/edit')}}"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="{{URL::to('/events/'.$item->id)}}"><i class="align-middle" data-feather="eye"></i></a> 
-                                                </td> --}}
+                                                
                                             </tr>
 
                                            

@@ -13,11 +13,13 @@ class HomeController extends Controller
     //
     public function index($id){
 
-        $event = Event::find($id);
 
+        $event = Event::find($id);
         $all_tickets = SellDetails::where('event_id',$event->id)->count();
         $pending_tickets = SellDetails::where('event_id',$event->id)->where('status',1)->count();
         $done_tickets = SellDetails::where('event_id',$event->id)->where('status',0)->count();
+
+
 
         $array[] = array(
             'all_tickets' => $all_tickets,
@@ -25,9 +27,13 @@ class HomeController extends Controller
             'done_tickets' => $done_tickets,
         );
 
+
         return response([
             'home' => $array,
         ],200);
+        
 
     }
+
+
 }

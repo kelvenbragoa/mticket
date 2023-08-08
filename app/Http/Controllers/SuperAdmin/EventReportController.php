@@ -30,15 +30,21 @@ class EventReportController extends Controller
         $invites_online_true = SellDetails::where('event_id',$event->id)->where('user_id',55)->where('status',1)->get();
         $invites_online_false = SellDetails::where('event_id',$event->id)->where('user_id',55)->where('status',0)->get();
 
+
+        $pending_tickets = SellDetails::where('event_id',$event->id)->where('status',1)->count();
+
+
+
         $tickets_local_amount = 0;
 
+        
         foreach($tickets_local as $item){
             $tickets_local_amount =$tickets_local_amount + $item->qty*$item->price;
         }
 
    
         
-
+        $done_tickets = SellDetails::where('event_id',$event->id)->where('status',0)->count();
         return view('superadmin.events.ticket-report',compact(
             'tickets_local',
             'tickets_online',
@@ -50,6 +56,8 @@ class EventReportController extends Controller
             'tickets_online_false',
             'invites_online_true',
             'invites_online_false',
+            'pending_tickets',
+            'done_tickets'
         
         ));
     }

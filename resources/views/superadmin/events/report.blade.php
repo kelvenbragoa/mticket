@@ -114,6 +114,7 @@
 <br/>
 
 <div class="invoice">
+
     <h3 style="text-align:center" >Relatório do venda dos produtos do bar</h3>
     <h5><strong>Número Produtos</strong>: {{$event->products->count()}}</h5>
     <h5><strong>Investimento</strong>: {{$investment}} MT</h5>
@@ -279,9 +280,12 @@
                   
                 </tr>
             </thead>
+
             <tbody>
+
                 @foreach ($event->sell_bar as $item)
                 <tr>
+
                     <td style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->created_at->format('d-M H:i')}}
                     </td>
@@ -289,18 +293,23 @@
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         #{{$item->id}}
                     </td>
+
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->total}} MT
                     </td>
+
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->method}}
                     </td>
+
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->user->name ?? '-'}}
                     </td>
+
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->verified_by_user->name ?? '-'}}
                     </td>
+
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         @if ($item->status == 1)
                             <span>Não verificada</span>
@@ -308,11 +317,11 @@
                             <span>Verificada</span>
                         @endif
                     </td>
-                    
-                   
+
                 </tr>
                 @endforeach
-                
+
+
             </tbody>
         </table>
     </div>
@@ -362,7 +371,9 @@
                 </tr>
             </thead>
             <tbody>
+                
                 @foreach ($event->sell_bar_detail as $item)
+
                 <tr>
                     <td style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sell->created_at->format('d-M H:i')}}
@@ -377,15 +388,19 @@
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->qtd}}
                     </td>
+
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->total}} MT
                     </td>
+
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sell->method}}
                     </td>
+
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sell->user->name ?? '-'}}
                     </td>
+
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sell->verified_by_user->name ?? '-'}}
                     </td>
@@ -396,9 +411,9 @@
                             <span>Verificada</span>
                         @endif
                     </td>
-                    
-                   
+
                 </tr>
+
                 @endforeach
                 
             </tbody>

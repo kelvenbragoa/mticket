@@ -10,6 +10,9 @@
                 <div class="card-header">
                     <h5 class="card-title">Relatório de Bilheteria </h5>
                 </div>
+
+                <p>Done ticket api: {{$done_tickets}}</p>
+                <p>Done ticket: </p>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xl-12 col-xxl-12 d-flex">
