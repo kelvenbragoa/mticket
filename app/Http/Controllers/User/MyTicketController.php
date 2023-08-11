@@ -208,9 +208,31 @@ class MyTicketController extends Controller
 
         $event = Event::find($sell->event_id);
 
+       
+        return view('frontend.viewticket',compact('detail','event','sell'));
+        // return view('frontend.ticket',compact('detail','event'));
+    }
 
-     
-        return view('frontend.ticket',compact('detail','event'));
+    public function download($id)
+    {
+        //
+        $sell = Sell::find($id);
+
+        // $detail = $sell->selldetails;
+
+        $detail = SellDetails::where('sell_id',$id)->get();
+
+        $event = Event::find($sell->event_id);
+
+       
+        
+
+        $pdf = Pdf::loadView('frontend.ticket', compact('detail','event'))->setOptions([
+            'defaultFont' => 'sans-serif',
+            'isRemoteEnabled' => 'true'
+        ]);
+        return $pdf->setPaper('a4')->download('ticket.pdf');
+        // return view('frontend.ticket',compact('detail','event'));
     }
 
     /**

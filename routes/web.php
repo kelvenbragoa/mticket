@@ -120,6 +120,7 @@ Route::get('/produtos/{evento}/evento/{produtos}/edit', [App\Http\Controllers\Us
 
 
 Route::resource('meusbilhetes', 'App\Http\Controllers\User\MyTicketController');
+Route::get('/meusbilhetes/{evento}/download', [App\Http\Controllers\User\MyTicketController::class, 'download']);
 
 });
 

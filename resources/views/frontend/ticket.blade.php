@@ -1,19 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bilhete</title>
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" /> --}}
+    <style>
+        @page {
+            margin: 0px;
+        }
+        .break-page{
+          page-break-after: always;
+        }
+
+        html {
+            margin: 70px ;
+            color: black;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            margin: 10px;
+            font-family: "Staatliches", cursive;
+            background: #ffff;
+        
+        }
+
+        .ticket {
+
+        },
+        .image {
+        height: 250px;
+        width: 250px;
+        background-image: url("/storage/{{$event->image}}");
+        background-size: contain;
+        opacity: 0.85;
+    },
+    .date {
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+        padding: 5px 0;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    },
+    .date .june-29 {
+        color: #d83565;
+        font-size: 12px;
+    },
+    .show-name {
+        font-size: 10px;
+        font-family: "Open Sans", cursive;
+        color: #000000;
+    },
+    .show-name h1 {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        /* color: #04aff4; */
+        color: black;
+    },
+    .cardticket {
+       
+       align-items: center;
+       padding: 10px 30px;
+       display: flex;
+       flex-direction: column;
+       text-align: center;
+       justify-content: space-between;
+       align-items: center;
+       max-width: 50ch;
+   
+   }
+   
+   .cardticket p {
+       color: black
+   },
+   .time {
+        padding: 10px 0;
+        /* color: #04aff4; */
+        color: black;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-weight: 700;
+    }
+    
+    .time span {
+        font-weight: 400;
+        color: gray;
+    }
+    
+    .left .time {
+        font-size: 12px;
+    },
+    .location {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        padding-top: 8px;
+        border-top: 1px solid gray;
+    }
+    
+    .location .separator {
+        font-size: 12px;
+    },
+    .barcode {
+        height: 100px;
+    }
+    
+    .barcode img {
+        height: 100%;
+    },
+    .ticket-number2 {
+        color: gray;
+    },
+    .ticket-number1 {
+        height: 250px;
+        width: 250px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding: 5px;
+    },
+    .admit-one {
+        position: absolute;
+        color: darkgray;
+        height: 250px;
+        padding: 0 10px;
+        letter-spacing: 0.15em;
+        display: flex;
+        text-align: center;
+        justify-content: space-around;
+        writing-mode: vertical-rl;
+        transform: rotate(-180deg);
+    }
+    
+    .admit-one span:nth-child(2) {
+        color: white;
+        font-weight: 700;
+    }
+    
+   
+ 
+    </style>
+</head>
+<body>
+
+
+    @php
+    $i = 1;
+    @endphp
+
+    @foreach ($detail as $item)
+    <div class="ticket">
+        <table width="95%">
+            <tr>
+                <td rowspan="3">
+                    <div class="image">
+                        <img width="240px" height="240px" src="https://mticket.co.mz/storage/{{$event->image}}" alt="">
+                        
+                        
+                    </div>
+                 
+                    
+                </td>
+                <td align="center" > 
+                    <p class="date" style="justify-content: space-arround">
+                    <span>{{date('l',strtotime($item->event->start_date))}}</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span class="june-29">{{date('d-m',strtotime($item->event->start_date))}}</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span>{{date('Y',strtotime($item->event->start_date))}}</span>
+                    </p>
+                </td>
+                <td class="show-name" align="center"><h2>{{$item->event->name}}</h2></td>
+            </tr>
+            <tr>
+                
+                <td align="center" class="show-name">
+                    <h1>{{$item->event->name}}</h1>
+                    <h2>{{Auth::user()->name}}</h2>
+                    <h2>{{$item->ticket->name}}</h2>
+                    <span class="card-ticket">{{$item->ticket->description}}</span>
+                    <p class="time">{{date('H:i',strtotime($item->event->start_time))}}</p>
+
+                </td>
+                <td align="center">
+                    <div class="time">
+                        <p>{{date('H:i',strtotime($item->event->start_time))}}<span>ATÉ</span> {{date('H:i',strtotime($item->event->end_time))}}</p>
+                        {{-- <p>DOORS <span>@</span> {{date('H:i',strtotime($item->event->start_time))}}</p> --}}
+                    </div>
+                    <div class="barcode">
+                        @php
+                            $myObj = new stdClass();
+                            // $myObj->nome = Auth::user()->name;
+                            // $myObj->email = Auth::user()->email;
+                            // $myObj->evento = $event->name;
+                            // $myObj->ticket = $item->ticket->name;
+                            // $myObj->data = $event->start_date;
+                            $myObj->s = $item->status;
+                            $myObj->i = $item->id;
+                            $myObj->ie = $item->event->id;
+                            
+    
+                            $myJSON = json_encode($myObj);
+                        @endphp
+                        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(100)->generate($myJSON)) !!}">
+                        <p class="ticket-number2">
+                            #0{{$item->id}}
+                        </p>
+                        {{-- {!!QrCode::generate($myJSON);!!} --}}
+                    </div>
+                </td>
+            </tr>
+           
+           
+         
+            <tr>
+                
+                <td align="center">
+                    <p class="location"><span>{{$item->event->address}},</span>
+                        <span>{{$item->event->province->name}}, Moçambique</span>
+                    </p>
+                </td>
+                
+            </tr>
+        </table>
+        
+    </div>
+    <br>
+    <br>
+    <br>
+    @php
+    $i = $i + 1;
+    @endphp
+    @endforeach
+
+
+
+   
+    
+</body>
+</html>
+
+
+{{-- <!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Mticket</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <link rel="stylesheet" href="./style.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="./style.css"> 
 
 </head>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"); */
 * {
     margin: 0;
     padding: 0;
@@ -29,6 +278,7 @@ html {
     color: black;
     font-size: 14px;
     letter-spacing: 0.1em;
+    margin: 10px;
 }
 
 .ticket {
@@ -285,16 +535,11 @@ html {
                 </div>
                 <div class="time">
                     <p>{{date('H:i',strtotime($item->event->start_time))}}<span>ATÉ</span> {{date('H:i',strtotime($item->event->end_time))}}</p>
-                    {{-- <p>DOORS <span>@</span> {{date('H:i',strtotime($item->event->start_time))}}</p> --}}
                 </div>
                 <div class="barcode">
                     @php
                         $myObj = new stdClass();
-                        // $myObj->nome = Auth::user()->name;
-                        // $myObj->email = Auth::user()->email;
-                        // $myObj->evento = $event->name;
-                        // $myObj->ticket = $item->ticket->name;
-                        // $myObj->data = $event->start_date;
+                        
                         $myObj->s = $item->status;
                         $myObj->i = $item->id;
                         $myObj->ie = $item->event->id;
@@ -302,11 +547,7 @@ html {
 
                         $myJSON = json_encode($myObj);
                     @endphp
-                    {{-- {!!QrCode::color(255, 255, 240)->backgroundColor(76, 174, 255)->generate($myJSON);!!} --}}
                     {!!QrCode::generate($myJSON);!!}
-                    {{-- {!! QrCode::format('png')->merge('https://www.google.com/url?sa=i&url=https%3A%2F%2Fgithub.com%2Ftwbs%2Fbootstrap%2Fdiscussions%2F36709&psig=AOvVaw0CAyQVKARhfVy2_yVUIlwB&ust=1686754537229000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCODIhrrAwP8CFQAAAAAdAAAAABAE')->generate(); !!} --}}
-                    {{-- <img src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(100)->generate('https://inosecure.inovatis.co.mz/scan/')) !!}"> --}}
-                    {{-- <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code"> --}}
                 </div>
                 <p class="ticket-number">
                     #0{{$item->id}}
@@ -327,4 +568,4 @@ html {
 @endforeach
 
 
-</html>
+</html> --}}
