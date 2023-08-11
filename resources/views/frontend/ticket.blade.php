@@ -21,12 +21,12 @@
             letter-spacing: 0.1em;
             margin: 10px;
             font-family: "Staatliches", cursive;
-            background: #ffff;
+            background: #ffffff;
         
         }
 
         .ticket {
-
+            background: #f3f3f3;
         },
         .image {
         height: 250px;

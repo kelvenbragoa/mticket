@@ -231,7 +231,7 @@ class MyTicketController extends Controller
             'defaultFont' => 'sans-serif',
             'isRemoteEnabled' => 'true'
         ]);
-        return $pdf->setPaper('a4')->download('ticket.pdf');
+        return $pdf->setPaper('a4')->stream('ticket.pdf');
         // return view('frontend.ticket',compact('detail','event'));
     }
 
