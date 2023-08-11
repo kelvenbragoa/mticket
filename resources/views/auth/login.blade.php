@@ -49,7 +49,7 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             
-                            <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" placeholder="Endereço E-mail" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" placeholder="Endereço E-mail / Telefone" value="{{ old('email') }}" required autocomplete="email" autofocus>
                            
                             @error('email')
                                 <small style="color:red">

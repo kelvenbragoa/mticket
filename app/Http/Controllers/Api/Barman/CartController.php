@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Barman;
 
 use App\Http\Controllers\Controller;
 use App\Models\CartBar;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,21 +25,37 @@ class CartController extends Controller
     public function store(Request $request){
 
         $data = $request->all();
+        $product = Products::find($data['product_id']);
         if (CartBar::where('user_id',$data['user_id'] )->where('product_id',$data['product_id'])->where('sell_id',null)->where('event_id',$data['event_id'])->exists()) {
-            $rec_data = CartBar::where('user_id',$data['user_id'] )->where('product_id',$data['product_id'])->where('sell_id',null)->first();
-            $qtd = $rec_data->qtd + $data['qtd'];
-            // dd($qtd);
-            //  update($qtd,$rec_data->id );
-            DB::table('cart_bars')
-              ->where('id', $rec_data->id )
-              ->update(['qtd' => $qtd]);
 
-              return response([
-                'message' => 'Foi acrescentada a quantidade do seu produto',
-                
-            ], 200);
+            if($data['qtd'] > $product->qtd){
+                return response([
+                    'message' => 'Produto Não adicionado. Estoque está baixo',
+                    
+                ], 200);
+            }else{
+                $rec_data = CartBar::where('user_id',$data['user_id'] )->where('product_id',$data['product_id'])->where('sell_id',null)->first();
+                $qtd = $rec_data->qtd + $data['qtd'];
+                // dd($qtd);
+                //  update($qtd,$rec_data->id );
+                DB::table('cart_bars')
+                ->where('id', $rec_data->id )
+                ->update(['qtd' => $qtd]);
+
+                return response([
+                    'message' => 'Foi acrescentada a quantidade do seu produto',
+                    
+                ], 200);
+            }
         }else{
 
+
+            if($data['qtd'] > $product->qtd){
+                return response([
+                    'message' => 'Produto Não adicionado. Estoque está baixo',
+                    
+                ], 200);
+            }else{
             CartBar::create([
                 'user_id' => $data['user_id'],
                 'product_id' => $data['product_id'],
@@ -51,6 +68,7 @@ class CartController extends Controller
             'message' => 'Produto adicionado com sucesso',
             
         ], 200);
+        }
         }
        }
 

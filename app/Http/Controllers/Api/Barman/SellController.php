@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CardTransaction;
 use App\Models\CartBar;
 use App\Models\EventCard;
+use App\Models\Products;
 use App\Models\SellBar;
 use App\Models\SellDetailBar;
 use Illuminate\Http\Request;
@@ -37,6 +38,28 @@ class SellController extends Controller
                 'message' => 'Nenhuma venda efetuada.',
             ],403);
         }
+
+        $mycartverfify = CartBar::where('user_id', $data['user_id'] )->where('sell_id',null)->get();
+
+        $products_out_of_stock = 0;
+
+        foreach($mycartverfify as $item){
+            $product = Products::find($item->product_id);
+
+            if($item->qtd > $product->qtd){
+                $products_out_of_stock = $products_out_of_stock + 1;
+            }
+
+
+        }
+
+
+        if($products_out_of_stock > 0){
+            return response([
+                'message' => 'Venda não concluída. Existem '.$products_out_of_stock.' que já está sem Estoque. Apague os produtos e volta a adicionar.',
+            ],200);
+            
+        }else{
 
         if($data['method'] == 'cashless'){
             $card = EventCard::find($data['card_id']);
@@ -76,6 +99,8 @@ class SellController extends Controller
         // ADICIONA TODO CARRINHO NULO A VENDA
         foreach ($mycart as $item){
 
+            $product_delete_qtd = Products::find($item->product_id);
+            
             SellDetailBar::create([
                 'sell_id' => $id,
                 'user_id' => $data['user_id'],
@@ -86,6 +111,10 @@ class SellController extends Controller
                 'price' => $item->product->sell_price,
                
                 'total' => $item->qtd*$item->product->sell_price,
+            ]);
+
+            $product_delete_qtd->update([
+                'qtd'=>$product_delete_qtd->qtd - $item->qtd
             ]);
         }
 
@@ -102,6 +131,7 @@ class SellController extends Controller
         return response([
             'message' => 'Sua ordem foi efectuada com sucesso. Va até a  Minhas Vendas para visualizar.',
         ],200);
+        }
     }
 
 
@@ -139,5 +169,47 @@ class SellController extends Controller
             'status' => $sellbar->status
         ], 200);
 
+    }
+
+
+
+    public function destroy($id,$userid){
+        $sell = SellBar::find($id);
+
+        if(!$sell)
+        {
+            return response([
+                'message' => 'Venda não encontrada'
+            ], 403);
+        }
+
+        if($sell->user_id != $userid)
+        {
+            return response([
+                'message' => 'Permissão negada.'
+            ], 403);
+        }
+
+        $sellbardetail = SellDetailBar::where('sell_id',$id)->get();
+
+        foreach($sellbardetail as $item){
+            $product_to_increase_qtd = Products::find($item->product_id);
+
+            $product_to_increase_qtd->update([
+                'qtd'=>$product_to_increase_qtd->qtd+$item->qtd
+            ]);
+            
+            $item->delete();
+        }
+
+
+
+      
+        SellBar::destroy($id);
+
+        return response([
+
+            'message' => 'Venda apagada com sucesso!'
+        ], 200);
     }
 }
