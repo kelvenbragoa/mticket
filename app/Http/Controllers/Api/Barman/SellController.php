@@ -159,6 +159,7 @@ class SellController extends Controller
 
             'message' => 'Recibo Verificado Com sucesso'
         ], 200);
+        
     }
 
     public function status($id){
