@@ -65,6 +65,12 @@ class SellController extends Controller
             $card = EventCard::find($data['card_id']);
 
             $balance_remain = $card->balance - $data['total'];
+
+            if($data['total']>$card->balance){
+                return response([
+                    'message' => 'Venda não concluída. Saldo insuficiente',
+                ],200);
+            }
             $card->update([
                 'balance'=>$balance_remain
             ]);
