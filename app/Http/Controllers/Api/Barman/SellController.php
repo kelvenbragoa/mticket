@@ -76,6 +76,7 @@ class SellController extends Controller
         }else{
 
         if($data['method'] == 'cashless'){
+
             $card = EventCard::find($data['card_id']);
 
             $balance_remain = $card->balance - $data['total'];
@@ -84,19 +85,21 @@ class SellController extends Controller
                 return response([
                     'message' => 'Venda não concluída. Saldo insuficiente no cartão',
                 ],200);
+            }else{
+                $card->update([
+                    'balance'=>$balance_remain
+                ]);
+    
+                CardTransaction::create([
+                    'card_id'=>$card->id,
+                    'event_card_id'=>$card->id,
+                    'sell_id'=>0,
+                    'total'=>$data['total'],
+                    'balance'=>$balance_remain,
+                    'type_of_transaction_id'=>1,
+                ]);
             }
-            $card->update([
-                'balance'=>$balance_remain
-            ]);
-
-            CardTransaction::create([
-                'card_id'=>$card->id,
-                'event_card_id'=>$card->id,
-                'sell_id'=>0,
-                'total'=>$data['total'],
-                'balance'=>$balance_remain,
-                'type_of_transaction_id'=>1,
-            ]);
+           
         }
 
 
