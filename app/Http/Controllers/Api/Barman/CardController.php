@@ -49,12 +49,37 @@ class CardController extends Controller
         // $second_transaction = CardTransaction::where('event_card_id',$id)->orderBy('id','desc')->skip(1)->first();
         $first_transaction = CardTransaction::where('event_card_id',$id)->orderBy('id','desc')->first();
 
-        $minutes = now()->diffInMinutes($first_transaction->created_at);
+        if($first_transaction == null){
 
-     
+            CardTransaction::create([
+                'card_id'=>$card->id,
+                'event_card_id'=>$card->id,
+                'event_id'=>$card->event_id,
+                'sell_id'=>0,
+                'total'=>$top,
+                'balance'=>$newBalance,
+                'type_of_transaction_id'=>0,
+            ]);
+    
+            $card->update([
+                'balance'=>$newBalance,
+                'status'=>1,
+            ]);
+    
+            $newcard = EventCard::find($id);
+    
+            
+    
+    
+            return response([
+                'card' => [$newcard],
+                'message'=>'Cartão recarregado com '.$top.'MT. Saldo atual '.$newBalance.'MT',
+            ],200);
 
+        }else{
         if($first_transaction->total == $top && $first_transaction->type_of_transaction_id == 0){
-            if($minutes > 0){
+            $seconds = now()->diffInSeconds($first_transaction->created_at);
+            if($seconds > 15){
 
                 CardTransaction::create([
                     'card_id'=>$card->id,
@@ -75,8 +100,8 @@ class CardController extends Controller
                 $newcard = EventCard::find($id);
 
                 return response([
-                    'card' => $newcard,
-                    'message'=>'Cartão recarregado com '.$top.'. Saldo atual '.$newBalance,
+                    'card' => [$newcard],
+                    'message'=>'Cartão recarregado com '.$top.'MT. Saldo atual '.$newBalance.'MT',
                 ],200);
 
             }else{
@@ -84,7 +109,7 @@ class CardController extends Controller
                 $newcard = EventCard::find($id);
                 return response([
                     'card' => [$newcard],
-                    'message'=>'Erro. Parece que houve uma duplicação de recarregamento. Aguarde 1 minuto e tente novamente'
+                    'message'=>'Erro. Parece que houve uma duplicação de recarregamento. Aguarde um momento e tente novamente'
                     
                 ], 200);
             }
@@ -112,9 +137,10 @@ class CardController extends Controller
     
             return response([
                 'card' => [$newcard],
-                'message'=>'Cartão recarregado com '.$top.'. Saldo atual '.$newBalance,
+                'message'=>'Cartão recarregado com '.$top.'MT. Saldo atual '.$newBalance.'MT',
             ],200);
         }
+    }
 
         
 

@@ -39,6 +39,20 @@ class SellController extends Controller
             ],403);
         }
 
+        $last_sell = SellBar::where('user_id',$data['user_id'])->where('event_id',$data['event_id'])->where('total',$data['total'])->where('method',$data['method'])->orderBy('id','desc')->first();
+
+        if($last_sell != null){
+
+            $seconds = now()->diffInSeconds($last_sell->created_at);
+
+            if($seconds < 60){
+                return response([
+                    'message' => 'Verifique as suas vendas.',
+                ],200);
+            }
+
+        }
+
         $mycartverfify = CartBar::where('user_id', $data['user_id'] )->where('sell_id',null)->get();
 
         $products_out_of_stock = 0;
@@ -68,7 +82,7 @@ class SellController extends Controller
 
             if($data['total']>$card->balance){
                 return response([
-                    'message' => 'Venda não concluída. Saldo insuficiente',
+                    'message' => 'Venda não concluída. Saldo insuficiente no cartão',
                 ],200);
             }
             $card->update([
