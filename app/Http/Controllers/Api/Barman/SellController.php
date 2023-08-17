@@ -45,7 +45,7 @@ class SellController extends Controller
 
             $seconds = now()->diffInSeconds($last_sell->created_at);
 
-            if($seconds < 60){
+            if($seconds < 15){
                 return response([
                     'message' => 'Verifique as suas vendas.',
                 ],200);
