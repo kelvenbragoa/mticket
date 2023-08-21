@@ -152,6 +152,7 @@
                                 <label for="mobile">Telefone(ex:84000000):</label>
                                 <input class="form-control" name="mobile" maxlength="9" required>
                                 <input class="form-control" type="hidden" name="amount" value="{{$total}}" required>
+                                <p>Ao clicar em comprar, não saia da página até terminar o processo do pagamento do seu bilhete</p>
 
                                 <button class="btn btn-primary btn-lg btn-block " type="submit">Comprar</button>
                             </form>

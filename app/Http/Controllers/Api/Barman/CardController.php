@@ -27,6 +27,8 @@ class CardController extends Controller
         return response([
             'card' => [$card],
         ],200);
+
+        
     }
 
     public function viewCard($id){
