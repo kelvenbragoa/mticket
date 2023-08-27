@@ -207,6 +207,7 @@
                                             <th style="width:15%;">BI</th>
                                             <th style="width:15%;">Usuario</th>
                                             <th style="width:15%;">Password</th>
+                                            <th>Acao</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -217,11 +218,11 @@
                                                 <td>{{$item->bi}}</td>
                                                 <td>{{$item->user}}</td>
                                                 <td>{{$item->password}}</td>
-                                                {{-- <td class="table-action">
+                                                <td class="table-action">
                                                     
-                                                     <a href="{{URL::to('/events/'.$item->id.'/edit')}}"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="{{URL::to('/events/'.$item->id)}}"><i class="align-middle" data-feather="eye"></i></a>
-                                                </td> --}}
+                                                     {{-- <a href="{{URL::to('/events/'.$item->id.'/edit')}}"><i class="align-middle" data-feather="edit-2"></i></a> --}}
+                                                    <a href="{{URL::to('/barman-report/'.$item->id)}}"><i class="align-middle" data-feather="eye"></i></a>
+                                                </td>
                                             </tr>
                                             
                                         @endforeach

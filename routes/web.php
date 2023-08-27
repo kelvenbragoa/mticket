@@ -71,6 +71,8 @@ Route::group(['middleware'=>['auth','superadmin']], function(){
     Route::get('/event-card-report/{evento_id}', [App\Http\Controllers\SuperAdmin\EventReportController::class, 'card_report']);
     Route::get('/updateallcard', [App\Http\Controllers\SuperAdmin\EventReportController::class, 'updatecard']);
 
+    Route::get('/barman-report/{barman_id}', [App\Http\Controllers\SuperAdmin\EventsController::class, 'barmanreport']);
+
 
 
 });

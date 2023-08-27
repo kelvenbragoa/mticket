@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barman;
 use App\Models\Event;
 use App\Models\Sell;
 use App\Models\SellBar;
@@ -243,6 +244,14 @@ class EventsController extends Controller
         return $pdf->setPaper('a4')->stream('invoice.pdf');
 
 
+    }
+
+
+    public function barmanreport($id){
+        $barman = Barman::find($id);
+        $sells  = SellBar::where('verified_by',$id)->get();
+        $sells_made  = SellBar::where('user_id',$id)->get();
+        return view('superadmin.events.barma-report',compact('barman','sells','sells_made'));
     }
 
 }
