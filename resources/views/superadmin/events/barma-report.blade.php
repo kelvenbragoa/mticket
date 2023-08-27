@@ -19,8 +19,8 @@
                             <div class="w-100">
                                 <div class="row">
                                     <p>Nome: {{$barman->name}}</p>
-                                    <p>Vendas Feitas:{{$sells_made->count()}} </p>
-                                    <p>Vendas verificadas: {{$sells->count()}}</p>
+                                    <p>Vendas Feitas:{{$sells_made->count()}} . Valor: {{$sells_made->sum('total')}} MT</p>
+                                    <p>Vendas verificadas: {{$sells->count()}}.  Valor: {{$sells->sum('total')}} MT</p>
 
                                     <p>Vendas verificadas</p>
                                     <div class="table-responsive">
