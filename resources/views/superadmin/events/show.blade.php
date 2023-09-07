@@ -207,6 +207,7 @@
                                             <th style="width:15%;">BI</th>
                                             <th style="width:15%;">Usuario</th>
                                             <th style="width:15%;">Password</th>
+                                            <th style="width:15%;">BAR</th>
                                             <th>Acao</th>
                                         </tr>
                                     </thead>
@@ -218,6 +219,7 @@
                                                 <td>{{$item->bi}}</td>
                                                 <td>{{$item->user}}</td>
                                                 <td>{{$item->password}}</td>
+                                                <td>{{$item->barstore->name ?? ''}}</td>
                                                 <td class="table-action">
                                                     
                                                      {{-- <a href="{{URL::to('/events/'.$item->id.'/edit')}}"><i class="align-middle" data-feather="edit-2"></i></a> --}}

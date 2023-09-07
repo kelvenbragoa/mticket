@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Barman;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barman;
+use App\Models\BarStore;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,7 @@ class AuthController extends Controller
              );
         }
         $event = Event::find($barman->event_id);
+        $bar_store_name = BarStore::find($barman->bar_store_id);
 
         $initial_date = date('l, d M Y',strtotime($event->start_date)) ;
 
@@ -38,6 +40,8 @@ class AuthController extends Controller
             'event_id' => $barman->event_id,
             'event_name'=> $barman->event->name,
             'date'=> $initial_date ,
+            'bar_store_id'=>$barman->bar_store_id,
+            'bar_store_name'=>$bar_store_name->name,
            
         );
        

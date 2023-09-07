@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barman;
+use App\Models\BarStore;
 use App\Models\Event;
 use App\Models\Sell;
 use App\Models\SellBar;
@@ -91,12 +92,13 @@ class EventsController extends Controller
         //
         $event = Event::find($id);
         $sells_amount = SellDetailBar::where('event_id',$event->id)->get();
+        $barstores = BarStore::where('event_id',$id)->get();
         $investment = 0;
 
         foreach($event->products as $item){
             $investment = $investment + $item->qtd*$item->buy_price;
         }
-        return view('superadmin.events.show',compact('event','investment','sells_amount'));
+        return view('superadmin.events.show',compact('event','investment','sells_amount','barstores'));
     }
 
     /**

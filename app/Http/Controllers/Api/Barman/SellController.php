@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Barman;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barman;
 use App\Models\CardTransaction;
 use App\Models\CartBar;
 use App\Models\EventCard;
@@ -111,6 +112,7 @@ class SellController extends Controller
             'ref' => $data['ref'],
             'status' => 1,
             'event_id' => $data['event_id'],
+            'bar_store_id' => $data['bar_store_id'],
         ])->id;
 
         // dd($id);
@@ -132,8 +134,8 @@ class SellController extends Controller
                 'status' => 1,
                 'qtd' => $item->qtd,
                 'price' => $item->product->sell_price,
-               
                 'total' => $item->qtd*$item->product->sell_price,
+                'bar_store_id'=>$data['bar_store_id']
             ]);
 
             $product_delete_qtd->update([
@@ -235,5 +237,39 @@ class SellController extends Controller
 
             'message' => 'Venda apagada com sucesso!'
         ], 200);
+    }
+
+
+
+    public function operation($id){
+
+        $barman = Barman::find($id);
+        $sells_verified  = SellBar::where('verified_by',$id)->get();
+        $sells_made  = SellBar::where('user_id',$id)->get();
+
+        $sells_made_dinheiro  = SellBar::where('user_id',$id)->where('method','dinheiro')->get();
+        $sells_made_cartao  = SellBar::where('user_id',$id)->where('method','cartao')->get();
+        $sells_made_mpesa  = SellBar::where('user_id',$id)->where('method','mpesa')->get();
+        $sells_made_emola  = SellBar::where('user_id',$id)->where('method','emola')->get();
+        $sells_made_cashless  = SellBar::where('user_id',$id)->where('method','cashless')->get();
+
+
+
+
+        $array[] = array(
+            'sell_made' => $sells_made->count(),
+            'sell_verified' => $sells_verified->count(),
+            'amount_sell_made' => $sells_made->sum('total'),
+            'amount_sell_verified'=>$sells_verified->sum('total'),
+            'amount_sell_dinheiro'=>$sells_made_dinheiro->sum('total'),
+            'amount_sell_cartao'=>$sells_made_cartao->sum('total'),
+            'amount_sell_mpesa'=>$sells_made_mpesa->sum('total'),
+            'amount_sell_emola'=>$sells_made_emola->sum('total'),
+            'amount_sell_cashless'=>$sells_made_cashless->sum('total'),
+        );
+
+        return response([
+            'operation' => $array,
+        ],200); 
     }
 }

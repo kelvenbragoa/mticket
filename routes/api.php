@@ -19,6 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::post('mpesarequest', [\App\Http\Controllers\Api\Payment\MpesaController::class, 'mpesapayment']);
+
 //ROTAS PROTOCOLO
 Route::post('/protocol-login', [\App\Http\Controllers\Api\Protocols\AuthController::class, 'login']);
 Route::get('/protocol-user/{id}', [\App\Http\Controllers\Api\Protocols\AuthController::class, 'user']);
@@ -44,7 +46,7 @@ Route::get('/get-status/{id}', [\App\Http\Controllers\Api\Protocols\TicketsContr
 Route::post('/barman-login', [\App\Http\Controllers\Api\Barman\AuthController::class, 'login']);
 Route::get('/barman-user/{id}', [\App\Http\Controllers\Api\Barman\AuthController::class, 'user']);
 Route::get('/barman-home/{id}', [\App\Http\Controllers\Api\Barman\HomeController::class, 'index']);
-Route::get('/barman-products/{id}', [\App\Http\Controllers\Api\Barman\ProductsController::class, 'index']);
+Route::get('/barman-products/{id}/barstore/{bar_store_id}', [\App\Http\Controllers\Api\Barman\ProductsController::class, 'index']);
 Route::get('/barman-product/{id}', [\App\Http\Controllers\Api\Barman\ProductsController::class, 'productdetail']);
 Route::post('barman-carts', [\App\Http\Controllers\Api\Barman\CartController::class, 'store']);
 Route::get('barman-cart/{id}', [\App\Http\Controllers\Api\Barman\CartController::class, 'index']);
@@ -58,6 +60,7 @@ Route::get('/barman-register-card/{id}', [\App\Http\Controllers\Api\Barman\CardC
 Route::get('/barman-view-card/{id}', [\App\Http\Controllers\Api\Barman\CardController::class, 'viewCard']);
 Route::get('/barman-topup-card/{id}/{top}', [\App\Http\Controllers\Api\Barman\CardController::class, 'topUpCard']);
 Route::get('/barman-get-status/{id}', [\App\Http\Controllers\Api\Barman\SellController::class, 'status']);
+Route::get('/barman-operation/{id}', [\App\Http\Controllers\Api\Barman\SellController::class, 'operation']);
 
 
 

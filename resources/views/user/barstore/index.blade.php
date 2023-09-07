@@ -35,37 +35,29 @@
         @endif
             <div class="member-place-wrap">
                 <div class="member-wrap-top">
-                    <h2>Produtos do Evento - {{$event->name}} ({{$produtos->count()}})</h2>  
+                    <h2>Bares do Evento - {{$event->name}} ({{$barstores->count()}})</h2>  
                 </div>
                 <!-- .member-wrap-top -->
                 <a href="{{URL::to('/eventos/'.$event->id.'/edit')}}" class="mb-3" title="Genaral"><span class="icon"><i class="la la-angle-left"></i></span><span>Voltar</span></a> <br>
-                <a href="{{URL::to('/produtos/'.$event->id.'/add')}}" class="btn btn-pill btn-warning mb-3 mt-3"><i class="far fa-plus"></i>Adicionar Produtos</a>
+                <a href="{{URL::to('/barstore/'.$event->id.'/add')}}" class="btn btn-pill btn-warning mb-3 mt-3"><i class="far fa-plus"></i>Adicionar Bar</a>
                 
                 <table class="member-place-list table-responsive">
                     <thead>
                         <tr>
                            
                             
-                            <th>Nome</th>
-                            <th>Preço de Compra</th>
-                            <th>Preço de Venda</th>
-                            <th>Qtd</th>
-                            <th>Bar</th>
+                            <th>Nome do Bar</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($produtos as $item)
+                        @forelse ($barstores as $item)
                             <tr>
                             
                                 <td data-title="Nome">{{$item->name}}</td>
-                                <td data-title="Preço">{{$item->buy_price}} MT</td>
-                                <td data-title="Preço">{{$item->sell_price}} MT</td>
-                                <td data-title="Preço">{{$item->qtd}}</td>
-                                <td data-title="Preço">{{$item->barstore->name ?? ''}}</td>
                                 <td data-title="" class="place-action">
-                                    <a href="{{URL::to('/produtos/'.$event->id.'/evento/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
-                                    <form method="POST" action="{{ route('produtos.destroy', $item->id)}}">
+                                    <a href="{{URL::to('/barstore/'.$event->id.'/evento/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
+                                    <form method="POST" action="{{ route('barstore.destroy', $item->id)}}">
                                         @csrf
                                         @method('DELETE')
                                     <button title="Delete" onclick="this.form.submit();" style="background:none;

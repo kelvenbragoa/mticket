@@ -137,9 +137,40 @@
 
                 <div class="listing-box" id="genaral">
                    
-                    <h3>Bar ({{$event->products->count()}})</h3>
+                    <h3>Bar ({{$event->barstores->count()}})</h3>
+                    
+                    <a href="{{URL::to('/barstore/'.$event->id.'/evento')}}" class="btn btn-pill btn-warning mb-2"><i class="far fa-plus"></i>Adicionar/Editar Bar</a>
+                    <table class="member-place-list table-responsive">
+                        <thead>
+                            <tr>
+
+                                <th>Nome</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @forelse ($event->barstores as $item)
+                                    <tr>
+                                    
+                                        <td data-title="Nome">{{$item->name}}</td>
+                                    
+                                    </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="1" align="center">Nenhum Bar adicionado</td>
+                                </tr>
+                                    
+                                @endforelse 
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="listing-box" id="genaral">
+                   
+                    <h3>Produtos do Bar ({{$event->products->count()}})</h3>
                     
                     <a href="{{URL::to('/produtos/'.$event->id.'/evento')}}" class="btn btn-pill btn-warning mb-2"><i class="far fa-plus"></i>Adicionar/Editar Produto</a>
+                    
                     <table class="member-place-list table-responsive">
                         <thead>
                             <tr>
@@ -148,6 +179,7 @@
                                 <th>Preço Venda</th>
                                 <th>Preço Compra</th>
                                 <th>Qtd</th>
+                                <th>Bar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -161,6 +193,7 @@
                                         <td data-title="Preço Compra"><b>{{$item->buy_price}} MT</b></td>
 
                                         <td data-title="Qtd"><b>{{$item->qtd}}</b></td>
+                                        <td data-title="Qtd"><b>{{$item->barstore->name ?? ''}}</b></td>
                                     
                                     </tr>
                                 @empty

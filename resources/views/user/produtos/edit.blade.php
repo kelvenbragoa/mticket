@@ -50,6 +50,18 @@
                     <input type="number" id="qtd" placeholder="Preço" name="qtd" value="{{$produto->qtd}}">
                    
                 </div>
+
+                <div class="field-group field-select">
+                    <label for="lis_category">Bar</label>
+                    <select name="bar_store_id">
+                        <option value="" disabled>Selecionar</option>
+                        @foreach ($barstores as $item)
+                            <option value="{{$item->id}}" @if ($item->id == $produto->bar_store_id) selected @endif >{{$item->name}}</option>
+                        @endforeach
+                    </select>
+                   
+                </div>
+                
                 
                
              

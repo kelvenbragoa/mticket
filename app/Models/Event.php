@@ -61,6 +61,10 @@ class Event extends Model
         return $this->hasMany('App\Models\Products', 'event_id', 'id')->orderBy('name','asc');
     }
 
+    public function barstores(){
+        return $this->hasMany('App\Models\BarStore', 'event_id', 'id')->orderBy('name','asc');
+    }
+
     public function sell_details(){
         return $this->hasMany('App\Models\SellDetails', 'event_id', 'id');
     }

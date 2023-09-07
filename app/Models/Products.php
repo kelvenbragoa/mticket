@@ -13,4 +13,8 @@ class Products extends Model
     public function sells(){
         return $this->hasMany('App\Models\SellDetailBar', 'product_id', 'id');
     }
+
+    public function barstore(){
+        return $this->hasOne('App\Models\BarStore', 'id', 'bar_store_id');
+    }
 }

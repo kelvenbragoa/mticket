@@ -86,6 +86,7 @@ Route::resource('review', 'App\Http\Controllers\User\ReviewController');
 Route::resource('eventos', 'App\Http\Controllers\User\EventsController');
 Route::resource('vendas', 'App\Http\Controllers\User\SellController');
 Route::resource('bar', 'App\Http\Controllers\User\BarController');
+Route::resource('barstore', 'App\Http\Controllers\User\BarStoreController');
 Route::resource('painel', 'App\Http\Controllers\User\DashboardController');
 Route::resource('tickets', 'App\Http\Controllers\User\TicketController');
 Route::resource('package', 'App\Http\Controllers\User\PackageController');
@@ -118,6 +119,11 @@ Route::get('/pacote/{evento}/evento/{pacote}/edit', [App\Http\Controllers\User\P
 Route::get('/produtos/{evento}/evento', [App\Http\Controllers\User\ProductsController::class, 'index']);
 Route::get('/produtos/{evento}/add', [App\Http\Controllers\User\ProductsController::class, 'create']);
 Route::get('/produtos/{evento}/evento/{produtos}/edit', [App\Http\Controllers\User\ProductsController::class, 'edit']);
+
+//barstore
+Route::get('/barstore/{evento}/evento', [App\Http\Controllers\User\BarStoreController::class, 'index']);
+Route::get('/barstore/{evento}/add', [App\Http\Controllers\User\BarStoreController::class, 'create']);
+Route::get('/barstore/{evento}/evento/{barstore}/edit', [App\Http\Controllers\User\BarStoreController::class, 'edit']);
 
 
 

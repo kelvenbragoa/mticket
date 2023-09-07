@@ -18,4 +18,8 @@ class Barman extends Model
     public function sells(){
         return $this->hasMany('App\Models\SellBar', 'user_id', 'id')->orderBy('created_at','asc');
     }
+
+    public function barstore(){
+        return $this->hasOne('App\Models\BarStore', 'id', 'bar_store_id');
+    }
 }

@@ -59,6 +59,7 @@ class BarmanController extends Controller
                 'bi'=>$data['bi'],
                 'password'=>$data['bi'],
                 'event_id'=>$data['event_id'],
+                'bar_store_id'=>$data['bar_store_id'],
 
             ]);
         }else{
@@ -70,6 +71,7 @@ class BarmanController extends Controller
                 'bi'=>$data['bi'],
                 'password'=>$data['bi'],
                 'event_id'=>$data['event_id'],
+                'bar_store_id'=>$data['bar_store_id'],
 
             ]);
         }

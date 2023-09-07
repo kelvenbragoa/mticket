@@ -30,6 +30,17 @@
                 <input type="hidden" class="form-control" id="event_id" name="event_id" value="{{$event->id}}" required>
               </div>
 
+              <div class="form-group">
+                <label for="bar_store_id" class="col-form-label">Bar:</label>
+                <select class="form-control" id="bar_store_id" name="bar_store_id" placeholder="Bar" required>
+                  @foreach ($barstores as $item)
+                    <option value="{{$item->id}}">{{$item->name}}</option>
+                  @endforeach
+                  
+                </select>
+               
+              </div>
+
             </div>
             <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

@@ -5,11 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\BarStore;
 use App\Models\Event;
-use App\Models\Products;
-use App\Models\SellBar;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class BarStoreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +17,10 @@ class ProductsController extends Controller
     public function index($evento)
     {
         //
-
         $event = Event::find($evento);
         
-        $produtos = Products::where('event_id',$evento)->orderBy('id','desc')->get();
-        return view('user.produtos.index',compact('produtos','event'));
+        $barstores = BarStore::where('event_id',$evento)->orderBy('id','desc')->get();
+        return view('user.barstore.index',compact('barstores','event'));
     }
 
     /**
@@ -35,8 +32,7 @@ class ProductsController extends Controller
     {
         //
         $event = Event::find($evento);
-        $barstores = BarStore::where('event_id',$evento)->get();
-        return view('user.produtos.create',compact('event','barstores'));
+        return view('user.barstore.create',compact('event'));
     }
 
     /**
@@ -48,12 +44,11 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //
-
         $data = $request->all();
 
-        Products::create($data);
+        BarStore::create($data);
 
-        return back()->with('message','Produto criado com sucesso');
+        return back()->with('message','Bar criado com sucesso');
     }
 
     /**
@@ -73,13 +68,12 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($evento, $produtos)
+    public function edit($evento, $barstore)
     {
         //
         $event = Event::find($evento);
-        $produto = Products::find($produtos);
-        $barstores = BarStore::where('event_id',$evento)->get();
-        return view('user.produtos.edit',compact('event', 'produto','barstores'));
+        $barstore = BarStore::find($barstore);
+        return view('user.barstore.edit',compact('event', 'barstore'));
     }
 
     /**
@@ -92,12 +86,11 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         //
-
         $data = $request->all();
-        $produto = Products::find($id);
+        $barstore = BarStore::find($id);
 
-        $produto->update($data);
-        return back()->with('message','Produto Editado com sucesso');
+        $barstore->update($data);
+        return back()->with('message','Bar Editado com sucesso');
     }
 
     /**
@@ -109,16 +102,6 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
-        $produto = Products::findOrFail($id);
-
-        $sell = SellBar::where('ticket_id',$produto->id)->get();
-
-        if(count($sell) == 0){
-            $produto->delete();
-            return back()->with('message','Produto apagado com sucesso');
-
-        }else{
-            return back()->with('messageError','Impossível apagar este produtos. Existe vendas relacionadas a este produtos.');
-        }
+        
     }
 }

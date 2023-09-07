@@ -29,25 +29,34 @@
                 <h3>Produtos</h3>
                 <div class="field-group field-select">
                     <label for="lis_category">Nome</label>
-                    <input type="text" id="name" placeholder="Nome do evento" name="name">
+                    <input type="text" id="name" placeholder="Nome do produto" name="name">
                    
                 </div>
                 <div class="field-group field-select">
                     <label for="lis_category">Preço de Compra</label>
-                    <input type="number" id="buy_price" placeholder="Preço" name="buy_price">
+                    <input type="number" id="buy_price" placeholder="Preço de compra" name="buy_price">
                    
                 </div>
 
                 <div class="field-group field-select">
                     <label for="lis_category">Preço de Venda</label>
-                    <input type="number" id="sell_price" placeholder="Preço" name="sell_price">
-                   
+                    <input type="number" id="sell_price" placeholder="Preço de venda" name="sell_price">
                 </div>
 
                 <div class="field-group field-select">
                     <label for="lis_category">Quantidade</label>
-                    <input type="number" id="qtd" placeholder="Preço" name="qtd">
+                    <input type="number" id="qtd" placeholder="Quantidade" name="qtd">
                     <input type="hidden" id="event_id" value="{{$event->id}}" name="event_id">
+                </div>
+
+                <div class="field-group field-select">
+                    <label for="lis_category">Bar</label>
+                    <select name="bar_store_id">
+                        <option value="" disabled>Selecionar</option>
+                        @foreach ($barstores as $item)
+                            <option value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
+                    </select>
                    
                 </div>
                 
