@@ -326,7 +326,7 @@
         </table>
     </div>
 
-    {{-- <hr>
+    <hr>
 
     <br>
     <h2>Vendas Detalhadas Por Produto</h2>
@@ -418,7 +418,7 @@
                 
             </tbody>
         </table>
-    </div> --}}
+    </div>
 {{-- 
     <hr>
 

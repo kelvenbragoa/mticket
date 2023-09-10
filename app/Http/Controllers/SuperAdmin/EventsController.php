@@ -188,7 +188,7 @@ class EventsController extends Controller
             'defaultFont' => 'sans-serif',
             'isRemoteEnabled' => 'true'
         ]);
-        return $pdf->setPaper('a4')->stream('invoice.pdf');
+        return $pdf->setPaper('a4')->download('invoice.pdf');
 
 
     }
