@@ -327,7 +327,7 @@
     </div>
 
     <hr>
-
+{{-- 
     <br>
     <h2>Vendas Detalhadas Por Produto</h2>
     <h2>Número de Vendas por produto: {{$event->sell_bar_detail->count()}}</h2>
@@ -418,7 +418,7 @@
                 
             </tbody>
         </table>
-    </div>
+    </div> --}}
 {{-- 
     <hr>
 
