@@ -384,7 +384,7 @@
                                                 <td>{{$item->buy_price}} MT</td>
                                                 <td>{{$item->sells->sum('qtd')}}</td>
                                                 <td>{{$item->sells->sum('qtd') * $item->sell_price}} MT</td>
-                                                <td>{{($item->sells->sum('qtd') * $item->sell_price) - ($item->sells->sum('qtd') * $item->buy_price)}} MT</td>
+                                                <td>{{($item->sells->sum('qtd') * $item->sell_price) - ( ($item->sells->sum('qtd') * $item->buy_price) + ($item->qtd*$item->buy_price))}} MT</td>
                                                 
                                             </tr>
 
