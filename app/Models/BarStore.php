@@ -11,7 +11,7 @@ class BarStore extends Model
     protected $guarded = [];
 
     public function sells(){
-        return $this->hasMany('App\Models\SellBar', 'bar_store_id', 'id');
+        return $this->hasMany('App\Models\SellDetailBar', 'bar_store_id', 'id');
     }
  
 }
