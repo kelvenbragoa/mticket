@@ -171,6 +171,9 @@
                     <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Nome
                     </th>
+                    <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Stock Inicial
+                    </th>
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Qtd
                     </th>
@@ -199,6 +202,9 @@
                 <tr>
                     <td style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->name}}
+                    </td>
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        {{$item->qtd + $item->sells->sum('qtd')}}
                     </td>
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->qtd}}

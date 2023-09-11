@@ -361,6 +361,7 @@
                                     <thead>
                                         <tr>
                                             <th style="width:10%;">Nome</th>
+                                            <th style="width:10%;">Stock Inicial</th>
                                             <th style="width:5%;">Qtd</th>
                                             <th style="width:10%;">Preço de Venda</th>
                                             <th style="width:10%;">Preço de Compra</th>
@@ -380,6 +381,7 @@
                                         @foreach ($event->products as $item)
                                             <tr>
                                                 <td>{{$item->name}}</td>
+                                                <td>{{$item->qtd + $item->sells->sum('qtd')}}</td>
                                                 <td>{{$item->qtd}}</td>
                                                 <td>{{$item->sell_price}} MT</td>
                                                 <td>{{$item->buy_price}} MT</td>
