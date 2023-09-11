@@ -413,14 +413,13 @@
                     <div class="card-body">
                     <div class="row mb-2 mb-xl-3">
                         <div class="col-auto d-none d-sm-block">
-                            <h3><strong>Produtos</strong></h3>
-                            <a href="{{URL::to('/bar-report/'.$event->id)}}" class="btn btn-pill btn-primary"><i class="far fa-arrow-down"></i>Baixar Relatório</a>
+                            <h3><strong>Bares</strong></h3>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-12">
-                            <p><strong>Bares</strong>: {{$event->barstores->count()}}</p>
+                            <p><strong>Bares</strong>: {{ $event->barstores->count() }}</p>
                           
                             <div class="table-responsive">
                                 <table class="table display">
@@ -429,8 +428,7 @@
                                             <th style="width:10%;">Nome</th>
                                             <th style="width:10%;">Qtd Vendas</th>
                                             <th style="width:15%;">Valor Vendas</th>
-                                            {{-- <th style="width:15%;">Margem Mticket Bar (%6)</th> --}}
-                                            {{-- <th style="width:15%;">Ação</th> --}}
+                                          
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -438,11 +436,12 @@
 
                                         @foreach ($event->barstores as $item)
                                             <tr>
-                                                <td>{{$item->name}}</td>
-                                                <td>{{$item->sells->sum('qtd')}}</td>
-                                                <td>{{$item->sells->sum('total')}} MT</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->sells->sum('qtd') }}</td>
+                                                <td>{{$item->sells->sum('total') }} MT</td>
                                                 
                                             </tr>
+                                        @endforeach
                                     </tbody>
                                    
                                 </table>
