@@ -151,6 +151,9 @@
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Lucro
                     </th>
+                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Bar
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -175,8 +178,13 @@
                         {{$item->sells->sum('qtd') * $item->sell_price}} MT
                     </td>
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{($item->sells->sum('qtd') * $item->sell_price) - ($item->sells->sum('qtd') * $item->buy_price)}} MT
+                        {{($item->sells->sum('qtd') * $item->sell_price) - ( ($item->sells->sum('qtd') * $item->buy_price) + ($item->qtd*$item->buy_price)) }} MT
                     </td>
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        <td>{{$item->barstore->name}}</td>
+                    </td>
+                    
+                    
                    
                 </tr>
                 @endforeach

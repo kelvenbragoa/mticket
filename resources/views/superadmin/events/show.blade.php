@@ -367,6 +367,7 @@
                                             <th style="width:10%;">Qtd Vendas</th>
                                             <th style="width:15%;">Valor Vendas</th>
                                             <th style="width:15%;">Lucro</th>
+                                            <th style="width:15%;">Bar</th>
                                             {{-- <th style="width:15%;">Margem Mticket Bar (%6)</th> --}}
                                             {{-- <th style="width:15%;">Ação</th> --}}
                                         </tr>
@@ -385,6 +386,7 @@
                                                 <td>{{$item->sells->sum('qtd')}}</td>
                                                 <td>{{$item->sells->sum('qtd') * $item->sell_price}} MT</td>
                                                 <td>{{($item->sells->sum('qtd') * $item->sell_price) - ( ($item->sells->sum('qtd') * $item->buy_price) + ($item->qtd*$item->buy_price))}} MT</td>
+                                                <td>{{$item->barstore->name}}</td>
                                                 
                                             </tr>
 
