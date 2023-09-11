@@ -180,6 +180,8 @@ class EventsController extends Controller
         foreach($event->products as $item){
             $investment = $investment + ($item->qtd*$item->buy_price) + ($item->sells->sum('qtd') * $item->buy_price);
         }
+
+        
       
 
       
