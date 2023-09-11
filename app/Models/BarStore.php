@@ -9,5 +9,9 @@ class BarStore extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function sells(){
+        return $this->hasMany('App\Models\SellBar', 'bar_store_id', 'id');
+    }
  
 }
