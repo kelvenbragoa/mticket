@@ -125,6 +125,45 @@
     <hr>
     <br>
 
+    <h2>Bares Registrados</h2>
+    <div>
+        <table style="table-layout: fixed; width: 95%;">
+            <thead>
+                <tr>
+                    <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Nome
+                    </th>
+                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Qtd Vendas
+                    </th>
+                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                       Valor de Venda
+                    </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($event->barstores as $item)
+                <tr>
+                    <td style="border-top: 1px solid #eee; padding: 5px;">
+                        {{$item->name}}
+                    </td>
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        {{ $item->sells->sum('qtd') }}
+                    </td>
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        {{ $item->sells->sum('total') }} MT
+                    </td>
+                   
+                </tr>
+                @endforeach
+                
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
     <h2>Produtos Registrados</h2>
     <div>
         <table style="table-layout: fixed; width: 95%;">
