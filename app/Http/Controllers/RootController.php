@@ -18,7 +18,7 @@ class RootController extends Controller
         
         $categories= Category::orderBy('name','asc')->get();
 
-        $events= Event::where('status_id',2)->orderBy('id','desc')->get();
+        $events= Event::where('status_id',2)->orderBy('created_at','desc')->get();
 
        
        
