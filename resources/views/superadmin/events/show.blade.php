@@ -165,11 +165,7 @@
                                                 <td>{{$item->bi}}</td>
                                                 <td>{{$item->user}}</td>
                                                 <td>{{$item->password}}</td>
-                                                {{-- <td class="table-action">
-                                                    
-                                                     <a href="{{URL::to('/events/'.$item->id.'/edit')}}"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="{{URL::to('/events/'.$item->id)}}"><i class="align-middle" data-feather="eye"></i></a>
-                                                </td> --}}
+                                                
                                             </tr>
                                             
                                         @endforeach

@@ -8,6 +8,7 @@ use App\Models\CardTransaction;
 use App\Models\CartBar;
 use App\Models\EventCard;
 use App\Models\Products;
+use App\Models\Refund;
 use App\Models\SellBar;
 use App\Models\SellDetailBar;
 use Illuminate\Http\Request;
@@ -17,10 +18,11 @@ class SellController extends Controller
 {
 
   
-    //
+    // TIPO DE TRANSACAO 0 TOPUP
+    // 1 VENDA
+    // 2 DEVOLUCAO.
     public function index($userid){
         
-
         return response([
             'sells' => SellBar::where('user_id',$userid)->orderBy('created_at', 'desc')->get()
         ],200);
@@ -91,13 +93,15 @@ class SellController extends Controller
                     'balance'=>$balance_remain
                 ]);
     
-                CardTransaction::create([
+                $transaction = CardTransaction::create([
                     'card_id'=>$card->id,
                     'event_card_id'=>$card->id,
+                    'event_id'=>$card->event_id,
                     'sell_id'=>0,
                     'total'=>$data['total'],
                     'balance'=>$balance_remain,
                     'type_of_transaction_id'=>1,
+                    'user_id' => $data['user_id'],
                 ]);
             }
            
@@ -115,6 +119,14 @@ class SellController extends Controller
             'bar_store_id' => $data['bar_store_id'],
         ])->id;
 
+        if($data['method'] == 'cashless'){
+            $transaction->update([
+                'sell_id'=>$id
+            ]);
+        }
+
+       
+
         // dd($id);
         // OBTEM TODO CARRINHO NULO
         // $mycart = DB::table('cart_bars')->where('user_id', $data['user_id'] )->where('sell_id',null)->get();
@@ -125,7 +137,6 @@ class SellController extends Controller
         foreach ($mycart as $item){
 
             $product_delete_qtd = Products::find($item->product_id);
-            
             SellDetailBar::create([
                 'sell_id' => $id,
                 'user_id' => $data['user_id'],
@@ -216,6 +227,8 @@ class SellController extends Controller
             ], 403);
         }
 
+
+
         $sellbardetail = SellDetailBar::where('sell_id',$id)->get();
 
         foreach($sellbardetail as $item){
@@ -228,13 +241,29 @@ class SellController extends Controller
             $item->delete();
         }
 
+        if($sell->method == 'cashless'){
+            $transaction = CardTransaction::where('sell_id', $sell->id)->first();
+            $card = EventCard::find($transaction->event_card_id);
+
+            $card->update([
+                'balance'=> $card->balance+$sell->total
+            ]);
+
+            $transactions = CardTransaction::where('sell_id', $sell->id)->get();
+
+            foreach($transactions as $item){
+                //por fazer
+                $item->delete();
+            }
+
+        }
+
 
 
       
         SellBar::destroy($id);
 
         return response([
-
             'message' => 'Venda apagada com sucesso!'
         ], 200);
     }
@@ -253,6 +282,17 @@ class SellController extends Controller
         $sells_made_emola  = SellBar::where('user_id',$id)->where('method','emola')->get();
         $sells_made_cashless  = SellBar::where('user_id',$id)->where('method','cashless')->get();
 
+        $event_cards_registered = EventCard::where('user_id',$id)->get();
+        $event_cards_active = EventCard::where('user_id',$id)->where('status',1)->get();
+        $event_cards_inactive = EventCard::where('user_id',$id)->where('status',0)->get();
+
+        $amount_recharge = CardTransaction::where('user_id',$id)->where('type_of_transaction_id',0)->get();
+        $amount_refund1 = CardTransaction::where('user_id',$id)->where('type_of_transaction_id',2)->get();
+        $amount_refund2 = Refund::where('user_id',$id)->where('status',1)->get();
+
+        $amount_refund_total = $amount_refund1->sum('total') + $amount_refund2->sum('refund');
+
+
 
 
 
@@ -266,6 +306,12 @@ class SellController extends Controller
             'amount_sell_mpesa'=>$sells_made_mpesa->sum('total'),
             'amount_sell_emola'=>$sells_made_emola->sum('total'),
             'amount_sell_cashless'=>$sells_made_cashless->sum('total'),
+
+            'amount_refund'=>$amount_refund_total,
+            'amount_recharge'=>$amount_recharge->sum('total'),
+            'cards_registered'=>$event_cards_registered->count(),
+            'cards_active'=>$event_cards_active->count(),
+            'cards_inactive'=>$event_cards_inactive->count(),
         );
 
         return response([

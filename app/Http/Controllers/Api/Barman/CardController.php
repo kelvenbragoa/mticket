@@ -5,13 +5,49 @@ namespace App\Http\Controllers\Api\Barman;
 use App\Http\Controllers\Controller;
 use App\Models\CardTransaction;
 use App\Models\EventCard;
+use App\Models\Refund;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
     //
 
-    public function registerCard($id){
+    public function refund($id,$userid){
+        $card = EventCard::with('user')->find($id);
+
+        $refund = Refund::where('event_card_id',$id)->first();
+
+        $balance = $card->balance;
+
+        $card_transaction = CardTransaction::create([
+            'card_id'=>$card->id,
+            'event_card_id'=>$card->id,
+            'event_id'=>$card->event_id,
+            'sell_id'=>0,
+            'total'=>$balance,
+            'balance'=>0,
+            'type_of_transaction_id'=>2,
+            'user_id'=>$userid,
+        ]);
+
+        $card->update([
+            'balance'=>0,
+            'status'=>0,
+
+        ]);
+
+        $refund->update([
+            'status'=>1
+        ]);
+
+        return response([
+            'card' => [$card],
+            'message'=>'Devolução feita com sucesso',
+        ],200);
+
+    }
+
+    public function registerCard($id,$userid){
 
         $card = EventCard::create([
             'name'=>'USER',
@@ -19,13 +55,16 @@ class CardController extends Controller
             'status'=>0,
             'card_id'=>0,
             'balance'=>0,
+            'user_id'=>$userid,
         ]);
+
+        $newcard = EventCard::with('user')->find($card->id);
 
         
 
 
         return response([
-            'card' => [$card],
+            'card' => [$newcard],
         ],200);
 
         
@@ -33,19 +72,19 @@ class CardController extends Controller
 
     public function viewCard($id){
 
-        $card = EventCard::where('id',$id)->get();
-
-        
-
+        $card = EventCard::where('id',$id)->with('user')->get();
 
         return response([
             'card' => $card,
         ],200);
     }
 
-    public function topUpCard($id,$top){
 
-        $card = EventCard::find($id);
+    public function topUpCard($id,$top,$userid){
+
+        $card = EventCard::with('user')->find($id);
+
+        
         $newBalance = $card->balance + $top;
 
         // $second_transaction = CardTransaction::where('event_card_id',$id)->orderBy('id','desc')->skip(1)->first();
@@ -53,35 +92,92 @@ class CardController extends Controller
 
         if($first_transaction == null){
 
-            CardTransaction::create([
+            $card_transaction = CardTransaction::create([
                 'card_id'=>$card->id,
                 'event_card_id'=>$card->id,
                 'event_id'=>$card->event_id,
                 'sell_id'=>0,
                 'total'=>$top,
-                'balance'=>$newBalance,
+                'balance'=>$newBalance-100,
                 'type_of_transaction_id'=>0,
+                'user_id'=>$userid,
             ]);
     
             $card->update([
-                'balance'=>$newBalance,
+                'balance'=>$newBalance-100,
                 'status'=>1,
             ]);
+
+            Refund::create([
+                'user_id'=>$userid,
+                'event_card_id'=>$card->id,
+                'event_id'=>$card->event_id,
+                'card_transaction_id'=>$card_transaction->id,
+                'total'=>$top,
+                'status'=>0,
+                'refund'=>100,
+                'balance'=>$newBalance-100,
+            ]);
     
-            $newcard = EventCard::find($id);
+            $newcard = EventCard::with('user')->find($id);
+
+            $refund = $newBalance - 100;
     
             
     
     
             return response([
                 'card' => [$newcard],
-                'message'=>'Cartão recarregado com '.$top.'MT. Saldo atual '.$newBalance.'MT',
+                'message'=>'Cartão recarregado com '.$top.'MT. Saldo atual '.$refund.'MT. Taxa de caução 100 MT',
             ],200);
 
         }else{
-        if($first_transaction->total == $top && $first_transaction->type_of_transaction_id == 0){
-            $seconds = now()->diffInSeconds($first_transaction->created_at);
-            if($seconds > 15){
+
+            if($card->status == 0){
+                return response([
+                    'card' => [$card],
+                    'message'=>'Não foi possível carregar porque o cartão já foi devolvido',
+                ],200);
+            }
+
+            if($first_transaction->total == $top && $first_transaction->type_of_transaction_id == 0){
+                $seconds = now()->diffInSeconds($first_transaction->created_at);
+                if($seconds > 15){
+
+                    CardTransaction::create([
+                        'card_id'=>$card->id,
+                        'event_card_id'=>$card->id,
+                        'event_id'=>$card->event_id,
+                        'sell_id'=>0,
+                        'total'=>$top,
+                        'balance'=>$newBalance,
+                        'type_of_transaction_id'=>0,
+                        'user_id'=>$userid,
+                    ]);
+
+            
+                    $card->update([
+                        'balance'=>$newBalance,
+                        'status'=>1,
+                    ]);
+            
+                    $newcard = EventCard::with('user')->find($id);
+
+                    return response([
+                        'card' => [$newcard],
+                        'message'=>'Cartão recarregado com '.$top.'MT. Saldo atual '.$newBalance.'MT',
+                    ],200);
+
+                }else{
+
+                    $newcard = EventCard::with('user')->find($id);
+                    return response([
+                        'card' => [$newcard],
+                        'message'=>'Erro. Parece que houve uma duplicação de recarregamento. Aguarde um momento e tente novamente'
+                        
+                    ], 200);
+                }
+            }else{
 
                 CardTransaction::create([
                     'card_id'=>$card->id,
@@ -91,57 +187,24 @@ class CardController extends Controller
                     'total'=>$top,
                     'balance'=>$newBalance,
                     'type_of_transaction_id'=>0,
+                    'user_id'=>$userid,
                 ]);
-
         
                 $card->update([
                     'balance'=>$newBalance,
                     'status'=>1,
                 ]);
         
-                $newcard = EventCard::find($id);
-
+                $newcard = EventCard::with('user')->find($id);
+        
+                
+        
+        
                 return response([
                     'card' => [$newcard],
                     'message'=>'Cartão recarregado com '.$top.'MT. Saldo atual '.$newBalance.'MT',
                 ],200);
-
-            }else{
-
-                $newcard = EventCard::find($id);
-                return response([
-                    'card' => [$newcard],
-                    'message'=>'Erro. Parece que houve uma duplicação de recarregamento. Aguarde um momento e tente novamente'
-                    
-                ], 200);
             }
-        }else{
-
-            CardTransaction::create([
-                'card_id'=>$card->id,
-                'event_card_id'=>$card->id,
-                'event_id'=>$card->event_id,
-                'sell_id'=>0,
-                'total'=>$top,
-                'balance'=>$newBalance,
-                'type_of_transaction_id'=>0,
-            ]);
-    
-            $card->update([
-                'balance'=>$newBalance,
-                'status'=>1,
-            ]);
-    
-            $newcard = EventCard::find($id);
-    
-            
-    
-    
-            return response([
-                'card' => [$newcard],
-                'message'=>'Cartão recarregado com '.$top.'MT. Saldo atual '.$newBalance.'MT',
-            ],200);
-        }
     }
 
         

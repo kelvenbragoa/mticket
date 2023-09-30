@@ -56,11 +56,12 @@ Route::get('/barman-sells/{id}', [\App\Http\Controllers\Api\Barman\SellControlle
 Route::get('/barman-sells-detail/{id}', [\App\Http\Controllers\Api\Barman\SellController::class, 'selldetails']);
 Route::delete('/barman-sell/{id}/user/{userid}',[\App\Http\Controllers\Api\Barman\SellController::class,'destroy']);
 Route::get('/verifyreceipt/{id}/user/{userid}', [\App\Http\Controllers\Api\Barman\SellController::class, 'verifyreceipt']);
-Route::get('/barman-register-card/{id}', [\App\Http\Controllers\Api\Barman\CardController::class, 'registerCard']);
+Route::get('/barman-register-card/{id}/{userid}', [\App\Http\Controllers\Api\Barman\CardController::class, 'registerCard']);
 Route::get('/barman-view-card/{id}', [\App\Http\Controllers\Api\Barman\CardController::class, 'viewCard']);
-Route::get('/barman-topup-card/{id}/{top}', [\App\Http\Controllers\Api\Barman\CardController::class, 'topUpCard']);
+Route::get('/barman-topup-card/{id}/{top}/{userid}', [\App\Http\Controllers\Api\Barman\CardController::class, 'topUpCard']);
 Route::get('/barman-get-status/{id}', [\App\Http\Controllers\Api\Barman\SellController::class, 'status']);
 Route::get('/barman-operation/{id}', [\App\Http\Controllers\Api\Barman\SellController::class, 'operation']);
+Route::get('/barman-refund-card/{id}/{userid}', [\App\Http\Controllers\Api\Barman\CardController::class, 'refund']);
 
 
 

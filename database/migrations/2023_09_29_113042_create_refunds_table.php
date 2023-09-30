@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCardTransactionsTable extends Migration
+class CreateRefundsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,19 @@ class CreateCardTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('card_transactions', function (Blueprint $table) {
+        Schema::create('refunds', function (Blueprint $table) {
+            
             $table->id();
-            $table->integer('card_id');
+            $table->integer('user_id');
             $table->integer('event_card_id');
-            $table->integer('sell_id');
+            $table->integer('card_transaction_id');
+            $table->integer('status');
+            $table->integer('event_id');
             $table->float('total',8,2);
+            $table->float('refund',8,2);
             $table->float('balance',8,2);
-            $table->integer('type_of_transaction_id');
             $table->timestamps();
+
         });
     }
 
@@ -32,6 +36,6 @@ class CreateCardTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('card_transactions');
+        Schema::dropIfExists('refunds');
     }
 }
