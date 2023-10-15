@@ -120,7 +120,7 @@ class RootController extends Controller
 
         // dd("terminado");
 
-        $sells_details = SellDetailBar::where('bar_store_id',3)->get();
+        $sells_details = SellDetailBar::where('bar_store_id',18)->get();
 
         foreach($sells_details as $sell_detail){
             $product = Products::find($sell_detail->product_id);
@@ -131,7 +131,7 @@ class RootController extends Controller
             ]);   
         }
 
-        $sellsbars = SellBar::where('bar_store_id',3)->get();
+        $sellsbars = SellBar::where('bar_store_id',18)->get();
 
         foreach($sellsbars as $sellbar){
 
