@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Products;
 use App\Models\Province;
 use App\Models\SellBar;
 use App\Models\SellDetailBar;
@@ -97,27 +98,52 @@ class RootController extends Controller
     }
 
 
-    public function updatedata(){
+    public function updatedataprice(){
 
-        $sellsbars = SellBar::where('bar_store_id',18)->get();
+        // $sellsbars = SellBar::where('bar_store_id',18)->get();
+
+        
 
         
 
-        
+        // foreach($sellsbars as $sellbar){
+
+        //     $details = SellDetailBar::where('sell_id',$sellbar->id)->get();
+
+        //     foreach($details as $detail){
+        //         $detail->update([
+        //             'created_at'=>$sellbar->created_at
+        //         ]);
+        //     }
+            
+        // }
+
+        // dd("terminado");
+
+        $sells_details = SellDetailBar::where('bar_store_id',3)->get();
+
+        foreach($sells_details as $sell_detail){
+            $product = Products::find($sell_detail->product_id);
+
+            $sell_detail->update([
+                'price'=>$product->sell_price,
+                'total'=>$product->sell_price * $sell_detail->qtd,
+            ]);   
+        }
+
+        $sellsbars = SellBar::where('bar_store_id',3)->get();
 
         foreach($sellsbars as $sellbar){
 
-            $details = SellDetailBar::where('sell_id',$sellbar->id)->get();
+            $selldetailsbar = SellDetailBar::where('sell_id',$sellbar->id)->get();
 
-            foreach($details as $detail){
-                $detail->update([
-                    'created_at'=>$sellbar->created_at
-                ]);
-            }
-            
+            $sellbar->update([
+                'total'=>$selldetailsbar->sum('total')
+            ]);
         }
 
-        dd("terminado");
+
+        
 
         
 
