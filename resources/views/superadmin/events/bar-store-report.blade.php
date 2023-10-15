@@ -226,7 +226,7 @@
 
                 <tr>
                     <td style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->sell->created_at->format('d-M H:i')}}
+                        {{$item->created_at->format('d-M H:i')}}
                     </td>
                     
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
