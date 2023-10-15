@@ -188,10 +188,11 @@
                     <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Data
                     </th>
+                    <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        Bar
+                    </th>
                     
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Recibo #
-                     </th>
+                
                      <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Produto
                      </th>
@@ -228,21 +229,15 @@
                     <td style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->created_at->format('d-M H:i')}}
                     </td>
-                    
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        #{{$item->sell->id}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->product->name}}
+                        {{$barstore->name}}
                     </td>
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->qtd}}
                     </td>
-
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->total}} MT
                     </td>
-
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sell->method}}
                     </td>
