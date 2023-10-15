@@ -229,15 +229,21 @@
                     <td style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->created_at->format('d-M H:i')}}
                     </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                    <td style="border-top: 1px solid #eee; padding: 5px;">
                         {{$barstore->name}}
+                    </td>
+                    
+                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                        {{$item->product->name}}
                     </td>
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->qtd}}
                     </td>
+
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->total}} MT
                     </td>
+
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sell->method}}
                     </td>
