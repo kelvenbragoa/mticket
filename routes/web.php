@@ -47,8 +47,8 @@ Route::resource('profile', 'App\Http\Controllers\ProfileController');
 //eventos
 
 
-
-Route::get('/damasio', [App\Http\Controllers\RootController::class, 'damasio']);
+Route::get('/updatedata', [App\Http\Controllers\RootController::class, 'updatedata']);
+// Route::get('/damasio', [App\Http\Controllers\RootController::class, 'damasio']);
 Route::get('/detalhes/{evento}/evento', [App\Http\Controllers\User\EventsController::class, 'detailevents']);
 
 

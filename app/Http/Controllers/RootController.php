@@ -8,6 +8,7 @@ use App\Models\Province;
 use App\Models\SellBar;
 use App\Models\SellDetailBar;
 use App\Models\SellDetails;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RootController extends Controller
@@ -96,6 +97,13 @@ class RootController extends Controller
     }
 
 
+    public function updatedata(){
+
+        $sellsbars = SellBar::whereDate('created_at',Carbon::today())->get();
+
+        dd($sellsbars->count());
+
+    }
     
 
     public function damasio (){
