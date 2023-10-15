@@ -30,24 +30,24 @@
                 <h3>Bilhete</h3>
                 <div class="field-group field-select">
                     <label for="lis_category">Nome</label>
-                    <input type="text" id="name" placeholder="Nome do evento" name="name" value="{{$produto->name}}">
+                    <input type="text" id="name" placeholder="Nome" name="name" value="{{$produto->name}}">
                    
                 </div>
                 <div class="field-group field-select">
                     <label for="lis_category">Preço de Compra</label>
-                    <input type="number" id="buy_price" placeholder="Preço" name="buy_price" value="{{$produto->buy_price}}">
+                    <input type="number" id="buy_price" placeholder="Preço de Compra" name="buy_price" value="{{$produto->buy_price}}">
                    
                 </div>
 
                 <div class="field-group field-select">
                     <label for="lis_category">Preço de Venda</label>
-                    <input type="number" id="sell_price" placeholder="Preço" name="sell_price" value="{{$produto->sell_price}}">
+                    <input type="text" id="sell_price" placeholder="Preço de Venda" name="sell_price" value="{{$produto->sell_price}}">
                    
                 </div>
 
                 <div class="field-group field-select">
-                    <label for="lis_category">Preço de Venda</label>
-                    <input type="number" id="qtd" placeholder="Preço" name="qtd" value="{{$produto->qtd}}">
+                    <label for="lis_category">Quantidade</label>
+                    <input type="number" id="qtd" placeholder="Quantidade" name="qtd" value="{{$produto->qtd}}">
                    
                 </div>
 

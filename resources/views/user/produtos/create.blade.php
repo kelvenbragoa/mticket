@@ -34,13 +34,13 @@
                 </div>
                 <div class="field-group field-select">
                     <label for="lis_category">Preço de Compra</label>
-                    <input type="number" id="buy_price" placeholder="Preço de compra" name="buy_price">
+                    <input type="text" id="buy_price" placeholder="Preço de compra" name="buy_price">
                    
                 </div>
 
                 <div class="field-group field-select">
                     <label for="lis_category">Preço de Venda</label>
-                    <input type="number" id="sell_price" placeholder="Preço de venda" name="sell_price">
+                    <input type="text" id="sell_price" placeholder="Preço de venda" name="sell_price">
                 </div>
 
                 <div class="field-group field-select">
