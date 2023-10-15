@@ -117,12 +117,13 @@
 
     <h3 style="text-align:center" >Relatório do venda dos produtos do bar</h3>
     <h5><strong>Bar:</strong> {{$barstore->name}}</h5>
+    <h5><strong>Valor total: {{$barstore->sells->sum('total') }} MT</strong></h5>
    
 
     <hr>
     <br>
 
-    <h2>Operadores do Bar</h2>
+    {{-- <h2>Operadores do Bar</h2>
     <br>
     <h2>Barman Operadores do Sistema</h2>
     <h2>Número de Operadores: {{$barstore->barman->count()}}</h2>
@@ -175,7 +176,7 @@
                 
             </tbody>
         </table>
-    </div>
+    </div> --}}
 
 
     <hr>
@@ -205,7 +206,7 @@
                         Pagamento
                      </th>
 
-                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                     {{-- <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Venda Efetuada por
                      </th>
 
@@ -215,7 +216,7 @@
 
                      <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Estado
-                     </th>
+                     </th> --}}
                   
                 </tr>
             </thead>
@@ -246,7 +247,7 @@
                         {{$item->sell->method}}
                     </td>
 
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                    {{-- <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sell->user->name ?? '-'}}
                     </td>
 
@@ -259,7 +260,7 @@
                         @else
                             <span>Verificada</span>
                         @endif
-                    </td>
+                    </td> --}}
 
                 </tr>
 
