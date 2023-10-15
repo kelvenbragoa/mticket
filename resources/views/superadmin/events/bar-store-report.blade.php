@@ -232,6 +232,8 @@
 
     <hr>
 
+    <h2>Vendas</h2>
+
     <div>
         <table style="table-layout: fixed; width: 95%;">
             <thead>
