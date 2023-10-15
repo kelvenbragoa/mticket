@@ -21,4 +21,8 @@ class BarStore extends Model
     public function sell_bar_detail(){
         return $this->hasMany('App\Models\SellDetailBar', 'bar_store_id', 'id')->orderBy('created_at','asc');
     }
+
+    public function products(){
+        return $this->hasMany('App\Models\Products', 'bar_store_id', 'id')->orderBy('name','asc');
+    }
 }
