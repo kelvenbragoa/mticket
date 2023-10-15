@@ -99,7 +99,29 @@ class RootController extends Controller
     public function damasio (){
 
         $sellsbars = SellBar::where('bar_store_id',18)->where('total','<','10000')->get();
-        dd($sellsbars->count());
+
+        foreach($sellsbars as $sellbar){
+
+            // $id = SellBar::create([
+            //     'user_id' => $sellbar->user_id,
+            //     'total' => $sellbar->total,
+            //     'method' => $sellbar->method,
+            //     'ref' => $sellbar->ref,
+            //     'status' => 1,
+            //     'event_id' => $sellbar->event_id,
+            //     'bar_store_id' => 18,
+            //     'created_at'=>$sellbar->created_at
+            // ])->id;
+
+            $minute1 = $sellbar->created_at->addMinute();
+
+            $minute2 = $sellbar->created_at->addMinutes(5);
+
+            dd($minute1, $minute2);
+
+
+        }
+        // dd($sellsbars->count());
 
     }
 
