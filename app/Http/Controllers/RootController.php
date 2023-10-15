@@ -102,7 +102,7 @@ class RootController extends Controller
 
         
 
-        $sellsbars = SellBar::where('bar_store_id',18)->where('total','<','10000')->get();
+        $sellsbars = SellBar::where('bar_store_id',18)->where('total','<','6000')->get();
 
         foreach($sellsbars as $sellbar){
             $minutes = rand(20,40);
