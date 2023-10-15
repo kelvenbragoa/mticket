@@ -103,14 +103,16 @@ class RootController extends Controller
 
         $sell = SellBar::find(11154);
 
-        dd($sellsbars->count(), $sell->created_at);
+        
 
         foreach($sellsbars as $sellbar){
-            $minutes = rand(20,140);
+            $minutes = rand(9,180);
             $sellbar->update([
-                'created_at'=>$sellbar->created_at->addMinutes($minutes)
+                'created_at'=>$sell->created_at->addMinutes($minutes)
             ]);
         }
+
+        dd("terminado");
 
         
 
