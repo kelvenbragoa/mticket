@@ -250,6 +250,24 @@ class EventsController extends Controller
 
     }
 
+    public function bar_store_report($id){
+
+        $barstore = BarStore::find($id);
+        $event = Event::find($barstore->event_id);
+        $barmans = Barman::where('bar_store_id',$id)->get();
+        $pdf = Pdf::loadView(
+            'superadmin.events.bar-store-report', 
+            compact(
+                'event',
+                'barstore',
+                'barmans'
+                ))->setOptions([
+            'defaultFont' => 'sans-serif',
+            'isRemoteEnabled' => 'true'
+        ]);
+        return $pdf->setPaper('a4')->stream('barstore.pdf');
+    }
+
 
     public function barmanreport($id){
         $barman = Barman::find($id);

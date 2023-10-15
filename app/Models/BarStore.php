@@ -14,4 +14,11 @@ class BarStore extends Model
         return $this->hasMany('App\Models\SellDetailBar', 'bar_store_id', 'id');
     }
  
+    public function barman(){
+        return $this->hasMany('App\Models\Barman', 'bar_store_id', 'id');
+    }
+
+    public function sell_bar_detail(){
+        return $this->hasMany('App\Models\SellDetailBar', 'bar_store_id', 'id');
+    }
 }
