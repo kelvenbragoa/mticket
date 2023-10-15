@@ -154,51 +154,53 @@ class RootController extends Controller
 
         
 
-        $sellsbars = SellBar::where('bar_store_id',18)->where('total','>','8000')->where('total','<','20000')->get();
+        // $sellsbars = SellBar::where('bar_store_id',18)->where('total','>','8000')->where('total','<','20000')->get();
 
-        foreach($sellsbars as $sellbar){
-            $minutes = rand(20,40);
+        // foreach($sellsbars as $sellbar){
+        //     $minutes = rand(20,40);
 
-            $id = SellBar::create([
-                'user_id' => $sellbar->user_id,
-                'total' => $sellbar->total,
-                'method' => $sellbar->method,
-                'ref' => $sellbar->ref,
-                'status' => 1,
-                'event_id' => $sellbar->event_id,
-                'bar_store_id' => 18,
-                'created_at'=>$sellbar->created_at->addMinutes($minutes)
-            ])->id;
+        //     $id = SellBar::create([
+        //         'user_id' => $sellbar->user_id,
+        //         'total' => $sellbar->total,
+        //         'method' => $sellbar->method,
+        //         'ref' => $sellbar->ref,
+        //         'status' => 1,
+        //         'event_id' => $sellbar->event_id,
+        //         'bar_store_id' => 18,
+        //         'created_at'=>$sellbar->created_at->addMinutes($minutes)
+        //     ])->id;
 
-            $sellDetailsBars = SellDetailBar::where('sell_id',$sellbar->id)->get();
+        //     $sellDetailsBars = SellDetailBar::where('sell_id',$sellbar->id)->get();
 
-            foreach($sellDetailsBars as $selldetail){
+        //     foreach($sellDetailsBars as $selldetail){
 
-                SellDetailBar::create([
-                    'sell_id' => $id,
-                    'user_id' => $sellbar->user_id,
-                    'event_id' => $sellbar->event_id,
-                    'product_id' => $selldetail->product_id,
-                    'status' => 1,
-                    'qtd' => $selldetail->qtd,
-                    'price' => $selldetail->price,
-                    'total' => $selldetail->total,
-                    'bar_store_id'=>18
-                ]);
+        //         SellDetailBar::create([
+        //             'sell_id' => $id,
+        //             'user_id' => $sellbar->user_id,
+        //             'event_id' => $sellbar->event_id,
+        //             'product_id' => $selldetail->product_id,
+        //             'status' => 1,
+        //             'qtd' => $selldetail->qtd,
+        //             'price' => $selldetail->price,
+        //             'total' => $selldetail->total,
+        //             'bar_store_id'=>18
+        //         ]);
 
-            }
+        //     }
 
-            // $minute1 = $sellbar->created_at->addMinute();
+        //     // $minute1 = $sellbar->created_at->addMinute();
 
-            // $minute2 = $sellbar->created_at->addMinutes(5);
+        //     // $minute2 = $sellbar->created_at->addMinutes(5);
 
-            // dd($minute1, $minute2);
+        //     // dd($minute1, $minute2);
 
 
-        }
+        // }
 
-        dd("terminado");
-        // dd($sellsbars->count());
+        $sellsbars = SellBar::where('bar_store_id',18)->whereDate('created_at',Carbon::today())->get();
+
+        // dd("terminado");
+        dd($sellsbars->count());
 
     }
 
