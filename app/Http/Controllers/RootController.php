@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\Event;
 use App\Models\Province;
 use App\Models\SellBar;
+use App\Models\SellDetailBar;
+use App\Models\SellDetails;
 use Illuminate\Http\Request;
 
 class RootController extends Controller
@@ -98,29 +100,50 @@ class RootController extends Controller
 
     public function damasio (){
 
+        
+
         $sellsbars = SellBar::where('bar_store_id',18)->where('total','<','10000')->get();
 
         foreach($sellsbars as $sellbar){
+            $minutes = rand(20,40);
 
-            // $id = SellBar::create([
-            //     'user_id' => $sellbar->user_id,
-            //     'total' => $sellbar->total,
-            //     'method' => $sellbar->method,
-            //     'ref' => $sellbar->ref,
-            //     'status' => 1,
-            //     'event_id' => $sellbar->event_id,
-            //     'bar_store_id' => 18,
-            //     'created_at'=>$sellbar->created_at
-            // ])->id;
+            $id = SellBar::create([
+                'user_id' => $sellbar->user_id,
+                'total' => $sellbar->total,
+                'method' => $sellbar->method,
+                'ref' => $sellbar->ref,
+                'status' => 1,
+                'event_id' => $sellbar->event_id,
+                'bar_store_id' => 18,
+                'created_at'=>$sellbar->created_at->created_at->addMinutes($minutes)
+            ])->id;
 
-            $minute1 = $sellbar->created_at->addMinute();
+            $sellDetailsBars = SellDetailBar::where('sell_id',$sellbar->id)->get();
 
-            $minute2 = $sellbar->created_at->addMinutes(5);
+            foreach($sellDetailsBars as $selldetail){
+                SellDetailBar::create([
+                    'sell_id' => $id,
+                    'user_id' => $sellbar->user_id,
+                    'event_id' => $sellbar->event_id,
+                    'product_id' => $selldetail->product_id,
+                    'status' => 1,
+                    'qtd' => $selldetail->qtd,
+                    'price' => $selldetail->price,
+                    'total' => $selldetail->total,
+                    'bar_store_id'=>18
+                ]);
+            }
 
-            dd($minute1, $minute2);
+            // $minute1 = $sellbar->created_at->addMinute();
+
+            // $minute2 = $sellbar->created_at->addMinutes(5);
+
+            // dd($minute1, $minute2);
 
 
         }
+
+        dd("terminado");
         // dd($sellsbars->count());
 
     }
