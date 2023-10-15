@@ -293,9 +293,6 @@ class SellController extends Controller
         $amount_refund_total = $amount_refund1->sum('total') + $amount_refund2->sum('refund');
 
 
-
-
-
         $array[] = array(
             'sell_made' => $sells_made->count(),
             'sell_verified' => $sells_verified->count(),

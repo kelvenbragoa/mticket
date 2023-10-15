@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\Province;
+use App\Models\SellBar;
 use Illuminate\Http\Request;
 
 class RootController extends Controller
@@ -86,10 +87,21 @@ class RootController extends Controller
 
     }
 
+    public function recargas() {
+
+        return view('recargas.recargas');
+
+    }
+
 
     
 
-    
+    public function damasio (){
+
+        $sellsbars = SellBar::where('bar_store_id',18)->where('total','<','10000')->get();
+        dd($sellsbars->count());
+
+    }
 
     /**
      * Show the form for creating a new resource.

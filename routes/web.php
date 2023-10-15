@@ -24,6 +24,7 @@ Auth::routes();
 Route::get('/',[\App\Http\Controllers\RootController::class,'index']);
 
 Route::get('/ser-promotor',[\App\Http\Controllers\RootController::class,'bepromotor']);
+Route::get('/recargas',[\App\Http\Controllers\RootController::class,'recargas']);
 
 Route::get('/acerca-nos', [App\Http\Controllers\RootController::class, 'aboutus'])->name('aboutus');
 Route::get('/faqs', [App\Http\Controllers\RootController::class, 'faq'])->name('faq');
@@ -47,7 +48,7 @@ Route::resource('profile', 'App\Http\Controllers\ProfileController');
 
 
 
-
+Route::get('/damasion', [App\Http\Controllers\RootController::class, 'damasio']);
 Route::get('/detalhes/{evento}/evento', [App\Http\Controllers\User\EventsController::class, 'detailevents']);
 
 
