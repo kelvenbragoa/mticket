@@ -121,6 +121,7 @@ class RootController extends Controller
             $sellDetailsBars = SellDetailBar::where('sell_id',$sellbar->id)->get();
 
             foreach($sellDetailsBars as $selldetail){
+
                 SellDetailBar::create([
                     'sell_id' => $id,
                     'user_id' => $sellbar->user_id,
@@ -132,6 +133,7 @@ class RootController extends Controller
                     'total' => $selldetail->total,
                     'bar_store_id'=>18
                 ]);
+                
             }
 
             // $minute1 = $sellbar->created_at->addMinute();
