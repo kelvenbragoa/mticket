@@ -188,18 +188,11 @@
                     <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Nome
                     </th>
-                    <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Stock Inicial
-                    </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Qtd
-                    </th>
+                   
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
                        Preço de Venda
                     </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Preço de Compra
-                    </th>
+                   
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Qtd Venda
                     </th>
@@ -209,9 +202,7 @@
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Lucro
                     </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Bar
-                    </th>
+                   
                 </tr>
             </thead>
             <tbody>
@@ -220,18 +211,11 @@
                     <td style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->name}}
                     </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->qtd + $item->sells->sum('qtd')}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->qtd}}
-                    </td>
+                   
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sell_price}} MT
                     </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->buy_price}} MT
-                    </td>
+                   
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sells->sum('qtd')}}
                     </td>
@@ -241,9 +225,7 @@
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{($item->sells->sum('qtd') * $item->sell_price) - ( ($item->sells->sum('qtd') * $item->buy_price) + ($item->qtd*$item->buy_price)) }} MT
                     </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        <td>{{$item->barstore->name}}</td>
-                    </td>
+                   
                 </tr>
                 @endforeach
                 
