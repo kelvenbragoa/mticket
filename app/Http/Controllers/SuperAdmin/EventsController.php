@@ -255,6 +255,7 @@ class EventsController extends Controller
         $barstore = BarStore::find($id);
         $event = Event::find($barstore->event_id);
         $barmans = Barman::where('bar_store_id',$id)->get();
+        
         $pdf = Pdf::loadView(
             'superadmin.events.bar-store-report', 
             compact(
