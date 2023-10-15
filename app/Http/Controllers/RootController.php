@@ -115,7 +115,7 @@ class RootController extends Controller
                 'status' => 1,
                 'event_id' => $sellbar->event_id,
                 'bar_store_id' => 18,
-                'created_at'=>$sellbar->created_at->created_at->addMinutes($minutes)
+                'created_at'=>$sellbar->created_at->addMinutes($minutes)
             ])->id;
 
             $sellDetailsBars = SellDetailBar::where('sell_id',$sellbar->id)->get();
