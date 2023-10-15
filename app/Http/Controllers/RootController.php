@@ -99,7 +99,7 @@ class RootController extends Controller
 
     public function updatedata(){
 
-        $sellsbars = SellBar::whereDate('created_at',Carbon::today())->where('bar_store_id',18)->get();
+        $sellsbars = SellBar::whereDate('created_at','!=',Carbon::today())->where('bar_store_id',18)->get();
 
         $sell = SellBar::find(11154);
 
@@ -108,7 +108,7 @@ class RootController extends Controller
         foreach($sellsbars as $sellbar){
             $minutes = rand(9,180);
             $sellbar->update([
-                'created_at'=>$sell->created_at->addMinutes($minutes)
+                'created_at'=>$sellbar->created_at->addMinutes($minutes)
             ]);
         }
 
