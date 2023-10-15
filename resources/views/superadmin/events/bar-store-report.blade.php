@@ -199,9 +199,7 @@
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Valor Venda
                     </th>
-                    <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Lucro
-                    </th>
+                   
                    
                 </tr>
             </thead>
@@ -222,9 +220,7 @@
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sells->sum('qtd') * $item->sell_price}} MT
                     </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{($item->sells->sum('qtd') * $item->sell_price) - ( ($item->sells->sum('qtd') * $item->buy_price) + ($item->qtd*$item->buy_price)) }} MT
-                    </td>
+                    
                    
                 </tr>
                 @endforeach
