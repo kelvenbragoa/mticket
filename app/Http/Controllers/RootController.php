@@ -99,16 +99,16 @@ class RootController extends Controller
 
     public function updatedata(){
 
-        $sellsbars = SellBar::whereDate('created_at','!=',Carbon::today())->where('bar_store_id',18)->get();
+        $sellsbars = SellBar::whereDate('created_at',Carbon::today())->where('bar_store_id',18)->get();
 
-        $sell = SellBar::find(11154);
+        $sell = SellBar::find(11381);
 
         
 
         foreach($sellsbars as $sellbar){
-            $minutes = rand(9,180);
+            $minutes = rand(9,120);
             $sellbar->update([
-                'created_at'=>$sellbar->created_at->addMinutes($minutes)
+                'created_at'=>$sell->created_at->addMinutes($minutes)
             ]);
         }
 
