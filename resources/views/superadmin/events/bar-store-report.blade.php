@@ -115,7 +115,7 @@
 
 <div class="invoice">
 
-    <h3 style="text-align:center" >Relatório do venda dos produtos do bar</h3>
+    <h3 style="text-align:center" >Relatório de venda dos produtos do bar</h3>
     <h5><strong>Bar:</strong> {{$barstore->name}}</h5>
     <h5><strong>Valor total: {{$barstore->sells->sum('total') }} MT</strong></h5>
    
