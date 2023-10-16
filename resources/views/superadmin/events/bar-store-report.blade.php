@@ -178,7 +178,7 @@
         </table>
     </div> --}}
 
-    <hr>
+    {{-- <hr>
 
     <h2>Produtos Registrados</h2>
     <div>
@@ -224,7 +224,7 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
+    </div> --}}
 
 
     <hr>
