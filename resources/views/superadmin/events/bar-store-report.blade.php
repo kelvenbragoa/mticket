@@ -230,6 +230,7 @@
     <hr>
 
     <h2>Vendas</h2>
+    <h2>Registros:{{$barstore->sell_bar_detail->count()}}</h2>
 
     <div>
         <table style="table-layout: fixed; width: 95%;">
@@ -279,7 +280,7 @@
                     </td>
 
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->sell->method}}
+                        Crédito
                     </td>
 
                   
