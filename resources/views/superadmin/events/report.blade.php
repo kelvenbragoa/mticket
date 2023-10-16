@@ -92,7 +92,7 @@
                 <h3>MTicket</h3>
                 
                    <p> https://www.mticket.co.mz</p>
-                   <p> +258 8500000</p>
+                   <p> +258 84 228 0974</p>
                     <p> Beira, Mozambique</p>
                         <p> ConnectUs LTD</p>
                

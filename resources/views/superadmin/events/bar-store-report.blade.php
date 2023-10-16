@@ -186,18 +186,18 @@
             <thead>
                 <tr>
                     <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Nome
+                        Descrição
                     </th>
                    
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                       Preço de Venda
+                       Preço Unitário
                     </th>
                    
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Qtd Venda
+                        Quantidade
                     </th>
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Valor Venda
+                        Preço Final
                     </th>
                    
                    
@@ -220,11 +220,8 @@
                     <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         {{$item->sells->sum('qtd') * $item->sell_price}} MT
                     </td>
-                    
-                   
                 </tr>
                 @endforeach
-                
             </tbody>
         </table>
     </div>
@@ -244,23 +241,18 @@
                     <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Bar
                     </th>
-                    
-                
                      <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Produto
+                        Descrição
                      </th>
                      <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Quantidade
                      </th>
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                       Valor
+                       Preço Final
                     </th>
-
                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
                         Pagamento
                      </th>
-
-                  
                 </tr>
             </thead>
             <tbody>
