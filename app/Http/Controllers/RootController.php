@@ -197,25 +197,29 @@ class RootController extends Controller
 
         // }
 
-        $sellsbars = SellBar::where('bar_store_id',18)->whereDate('created_at',Carbon::today())->get();
+        // $sellsbars = SellBar::where('bar_store_id',18)->whereDate('created_at',Carbon::today())->get();
 
-        $sell = SellBar::find(10988);
+        // $sell = SellBar::find(10988);
 
-        foreach($sellsbars as $sellbar){
-            $minutes = rand(4,140);
+        // foreach($sellsbars as $sellbar){
+        //     $minutes = rand(4,140);
 
-            $sellbar->update([
-                'created_at'=>$sell->created_at->addMinutes($minutes)
-            ]);
+        //     $sellbar->update([
+        //         'created_at'=>$sell->created_at->addMinutes($minutes)
+        //     ]);
 
-            $selldetails = SellDetailBar::where('sell_id',$sellbar->id)->get();
+        //     $selldetails = SellDetailBar::where('sell_id',$sellbar->id)->get();
 
-            foreach($selldetails as $details){
-                $details->update([
-                    'created_at'=>$sell->created_at->addMinutes($minutes)
-                ]);
-            }
-        }
+        //     foreach($selldetails as $details){
+        //         $details->update([
+        //             'created_at'=>$sell->created_at->addMinutes($minutes)
+        //         ]);
+        //     }
+        // }
+
+        $selldetails = SellDetailBar::where('bar_store_id',18)->where('product_id',332)->get();
+
+
 
          dd("terminado");
         // dd($sellsbars->count());
