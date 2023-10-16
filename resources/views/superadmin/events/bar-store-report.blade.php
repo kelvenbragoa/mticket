@@ -260,17 +260,6 @@
                         Pagamento
                      </th>
 
-                     {{-- <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Venda Efetuada por
-                     </th>
-
-                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Venda Verificada por
-                     </th>
-
-                     <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        Estado
-                     </th> --}}
                   
                 </tr>
             </thead>
@@ -301,20 +290,7 @@
                         {{$item->sell->method}}
                     </td>
 
-                    {{-- <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->sell->user->name ?? '-'}}
-                    </td>
-
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        {{$item->sell->verified_by_user->name ?? '-'}}
-                    </td>
-                    <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                        @if ($item->sell->status == 1)
-                            <span>Não verificada</span>
-                        @else
-                            <span>Verificada</span>
-                        @endif
-                    </td> --}}
+                  
 
                 </tr>
 
