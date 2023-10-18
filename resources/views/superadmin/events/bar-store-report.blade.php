@@ -85,7 +85,7 @@
 
             </td>
             <td align="center">
-                <img src="http://mticket.co.mz/template/logo1.png" alt="Logo" width="256" class="logo"/>
+                {{-- <img src="http://mticket.co.mz/template/logo1.png" alt="Logo" width="256" class="logo"/> --}}
             </td> 
             <td align="right" style="width: 40%;">
                 

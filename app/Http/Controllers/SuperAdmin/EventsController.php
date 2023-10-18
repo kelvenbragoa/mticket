@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\SuperAdmin;
 
+use App\Exports\BarStoreExport;
 use App\Http\Controllers\Controller;
 use App\Models\Barman;
 use App\Models\BarStore;
@@ -12,6 +13,7 @@ use App\Models\SellDetailBar;
 use App\Models\SellDetails;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EventsController extends Controller
 {
@@ -275,6 +277,12 @@ class EventsController extends Controller
         $sells  = SellBar::where('verified_by',$id)->get();
         $sells_made  = SellBar::where('user_id',$id)->get();
         return view('superadmin.events.barma-report',compact('barman','sells','sells_made'));
+    }
+
+
+
+    public function exportExcel (){
+        return Excel::download(new BarStoreExport, 'barstore.xlsx');
     }
 
 }
