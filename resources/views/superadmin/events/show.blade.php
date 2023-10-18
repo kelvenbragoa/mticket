@@ -438,8 +438,7 @@
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->sells->sum('qtd') }}</td>
                                                 <td>{{$item->sells->sum('total') }} MT</td>
-                                                <td><a href="{{URL::to('/barstore-report/'.$item->id)}}"><i class="align-middle" data-feather="file"></i></a> | <a href="{{URL::to('/barstore-excel-report')}}"><i class="align-middle" data-feather="file"></i></a></td>
-                                                
+                                                <td><a href="{{URL::to('/barstore-report/'.$item->id)}}"><i class="align-middle" data-feather="file"></i></a> | <a href="{{URL::to('/barstore-excel-report/'.$item->id)}}"><i class="align-middle" data-feather="file"></i></a></td>
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -31,11 +31,17 @@ class BarStoreExport implements FromView,ShouldAutoSize
    private $event;
    private $barmans;
 
-   public function __construct() {
+   private $barstore_id;
+   private $event_id;
 
-    $this->barstore = BarStore::find(18);
-    $this->event =  Event::find(34);
-    $this->barmans = Barman::where('bar_store_id',18)->get();
+   public function __construct($barstore_id,$event_id) {
+
+    $this->$barstore_id = $barstore_id;
+    $this->$event_id = $event_id;
+
+    $this->barstore = BarStore::find($this->$barstore_id);
+    $this->event =  Event::find($this->$event_id);
+    $this->barmans = Barman::where('bar_store_id',$this->$barstore_id)->get();
 
     // $this->barstore = BarStore::find(4);
     // $this->event =  Event::find(17);

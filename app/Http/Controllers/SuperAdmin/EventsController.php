@@ -281,8 +281,12 @@ class EventsController extends Controller
 
 
 
-    public function exportExcel (){
-        return Excel::download(new BarStoreExport, 'barstore.xlsx');
+    public function exportExcel ($id){
+        $barstore = BarStore::find($id);
+        $event = Event::find($barstore->event_id);
+        $barmans = Barman::where('bar_store_id',$id)->get();
+
+        return Excel::download(new BarStoreExport($id,$event->id), 'barstore.xlsx');
     }
 
 }
