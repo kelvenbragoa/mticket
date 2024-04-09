@@ -18,9 +18,9 @@ class CheckOutController extends Controller
      */
 
 
-     public function checkout(Event $event){
+     public function checkout($id){
 
-        // $event = Event::find($id);
+        $event = Event::where('slug',$id)->first();
 
         $tickets = Ticket::where('event_id',$event->id)->get();
 
