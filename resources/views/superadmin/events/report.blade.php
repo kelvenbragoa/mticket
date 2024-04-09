@@ -118,6 +118,7 @@
     <h3 style="text-align:center" >Relatório do venda dos produtos do bar</h3>
     <h5><strong>Número Produtos</strong>: {{$event->products->count()}}</h5>
     <h5><strong>Investimento</strong>: {{$investment}} MT</h5>
+    <h5><strong>Lucro esperado</strong>: {{$profit}} MT</h5>
     <h5><strong>Valor de Venda</strong>: {{ $event->sell_bar_detail->sum('total') }} MT</h5>
     <h5><strong>Lucro</strong>: {{$event->sell_bar_detail->sum('total')-$investment}} MT</h5>
 

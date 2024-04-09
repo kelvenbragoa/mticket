@@ -96,11 +96,13 @@ class EventsController extends Controller
         $sells_amount = SellDetailBar::where('event_id',$event->id)->get();
         $barstores = BarStore::where('event_id',$id)->get();
         $investment = 0;
+        $profit = 0;
 
         foreach($event->products as $item){
             $investment = $investment + $item->qtd*$item->buy_price;
+            $profit = $profit + $item->qtd*$item->sell_price;
         }
-        return view('superadmin.events.show',compact('event','investment','sells_amount','barstores'));
+        return view('superadmin.events.show',compact('event','investment','sells_amount','barstores','profit'));
     }
 
     /**
@@ -178,9 +180,11 @@ class EventsController extends Controller
 
         $event = Event::find($event_id);
         $investment = 0;
+        $profit = 0;
 
         foreach($event->products as $item){
-            $investment = $investment + ($item->qtd*$item->buy_price) + ($item->sells->sum('qtd') * $item->buy_price);
+            $investment = $investment + ($item->qtd*$item->buy_price);
+            $profit = $profit + $item->qtd*$item->sell_price;
         }
 
         
@@ -188,7 +192,7 @@ class EventsController extends Controller
 
       
        
-        $pdf = Pdf::loadView('superadmin.events.report', compact('event','investment'))->setOptions([
+        $pdf = Pdf::loadView('superadmin.events.report', compact('event','investment','profit'))->setOptions([
             'defaultFont' => 'sans-serif',
             'isRemoteEnabled' => 'true'
         ]);

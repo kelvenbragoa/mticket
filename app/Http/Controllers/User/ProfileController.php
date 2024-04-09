@@ -23,7 +23,7 @@ class ProfileController extends Controller
 
     public function changepassword(Request $request){
 
-        
+
         $request->validate([
             'current_password' => ['required', new MatchOldPassword],
             'new_password' => ['required','string','min:8'],
@@ -33,6 +33,8 @@ class ProfileController extends Controller
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
        
         return back()->with('message','Password atualizada com sucesso');
+
+
     }
 
     /**
@@ -88,6 +90,7 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         //
+
         $data = $request->all();
         $user = User::find($id);
 
@@ -102,6 +105,7 @@ class ProfileController extends Controller
             if($user->image!=null){
                 unlink("storage/".$user->image);
             }
+
         }
 
         $user->update(array_merge(
@@ -111,6 +115,7 @@ class ProfileController extends Controller
        
 
         return back()->with('message','Perfil editado com sucesso');
+
     }
 
     /**
@@ -119,8 +124,12 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         //
     }
+
+    
+
 }

@@ -346,11 +346,10 @@
                     <div class="row">
                         <div class="col-12">
                             <p><strong>Número Produtos</strong>: {{$event->products->count()}}</p>
-                            {{-- <p><strong>Investimento</strong>: {{$investment}} MT</p> --}}
-                            {{-- <p><strong>Valor de Venda</strong>: {{$sells_amount->sum('total')}} MT</p> --}}
-
-                            
-                            {{-- <p><strong>Lucro</strong>: {{$event->sell_bar->sum('total')-$investment}} MT</p> --}}
+                            <p><strong>Investimento</strong>: {{$investment}} MT</p> 
+                            <p><strong>Lucro esperado</strong>: {{$profit}} MT</p> 
+                             <p><strong>Valor de Venda</strong>: {{$sells_amount->sum('total')}} MT</p> 
+                            <p><strong>Lucro</strong>: {{$event->sell_bar->sum('total')-$investment}} MT</p>
                             {{-- <p><strong>Margem Mticket(6%)</strong>: @if ($event->sell_bar->sum('total')-$investment < 0) 0 MT @else {{($event->sell_bar->sum('total')-$investment)*6/100}} MT @endif</p> --}}
                             <div class="table-responsive">
                                 <table class="table display">

@@ -14,7 +14,6 @@ class CreateRefundsTable extends Migration
     public function up()
     {
         Schema::create('refunds', function (Blueprint $table) {
-            
             $table->id();
             $table->integer('user_id');
             $table->integer('event_card_id');
