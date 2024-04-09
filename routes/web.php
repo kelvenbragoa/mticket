@@ -46,6 +46,7 @@ Route::resource('profile', 'App\Http\Controllers\ProfileController');
 
 //eventos
 
+Route::get('/slug', [App\Http\Controllers\SlugController::class, 'index']);
 
 Route::get('/updatedataprice', [App\Http\Controllers\RootController::class, 'updatedataprice']);
 // Route::get('/damasio', [App\Http\Controllers\RootController::class, 'damasio']);

@@ -18,11 +18,11 @@ class CheckOutController extends Controller
      */
 
 
-     public function checkout($id){
+     public function checkout(Event $event){
 
-        $event = Event::find($id);
+        // $event = Event::find($id);
 
-        $tickets = Ticket::where('event_id',$id)->get();
+        $tickets = Ticket::where('event_id',$event->id)->get();
 
         return view('frontend.event-checkout',compact('event','tickets'));
 

@@ -93,7 +93,7 @@
                                 @if (date('Y-m-d H:i') > date('Y-m-d H:i',strtotime("$event->end_date $event->end_time")))
                                     <div class="button mt-2 mb-2"><a href="" class="btn">Evento Encerado</a></div>
                                 @else
-                                    <div class="button mt-2 mb-2"><a href="{{URL::to('/checkout/'.$event->id.'/evento')}}" class="btn">Comprar</a></div>
+                                    <div class="button mt-2 mb-2"><a href="{{URL::to('/checkout/'.$event->slug.'/evento')}}" class="btn">Comprar</a></div>
                                 @endif
 
                             </div>
