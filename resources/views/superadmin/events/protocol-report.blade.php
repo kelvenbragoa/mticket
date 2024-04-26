@@ -30,6 +30,7 @@
                                                     <th style="width:15%;">ID</th>
                                                     <th style="width:15%;">Venda total</th>
                                                     <th style="width:15%;">Ticket</th>
+                                                    <th style="width:15%;">Data</th>
                     
                                                    
                                                 </tr>
@@ -40,6 +41,7 @@
                                                         <td>{{$item->id}}</td>
                                                         <td>{{$item->total}} MT</td>
                                                         <td>{{$item->ticket->name}}</td>
+                                                        <td>{{$item->created_at}}</td>
                                                         
                                                       
                                                     </tr>
