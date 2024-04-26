@@ -78,6 +78,8 @@ Route::group(['middleware'=>['auth','superadmin']], function(){
 
     Route::get('/barman-report/{barman_id}', [App\Http\Controllers\SuperAdmin\EventsController::class, 'barmanreport']);
 
+    Route::get('/protocol-report/{protocol_id}', [App\Http\Controllers\SuperAdmin\EventsController::class, 'protocolreport']);
+
     Route::get('/barstore-excel-report/{bar_store_id}', [App\Http\Controllers\SuperAdmin\EventsController::class, 'exportExcel']);
 
 

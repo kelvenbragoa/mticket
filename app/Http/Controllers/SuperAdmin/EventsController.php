@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Barman;
 use App\Models\BarStore;
 use App\Models\Event;
+use App\Models\Protocol;
 use App\Models\Sell;
 use App\Models\SellBar;
 use App\Models\SellDetailBar;
@@ -281,6 +282,15 @@ class EventsController extends Controller
         $sells  = SellBar::where('verified_by',$id)->get();
         $sells_made  = SellBar::where('user_id',$id)->get();
         return view('superadmin.events.barma-report',compact('barman','sells','sells_made'));
+    }
+
+    public function protocolreport($id){
+        $protocol = Protocol::find($id);
+
+        $sells  = Sell::where('protocol_id',$id)->get();
+        // $sells_made  = Sell::where('protocol_id',$id)->get();
+        return view('superadmin.events.protocol-report',compact('protocol','sells'));
+
     }
 
 
