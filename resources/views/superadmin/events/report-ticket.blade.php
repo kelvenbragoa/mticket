@@ -189,14 +189,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($event->tickets as $item)
+            @foreach ($event->sell_details as $item)
             <tr>
                 <td style="border-top: 1px solid #eee; padding: 5px;">
-                    {{$item->name}}
+                    {{$item->ticket->name}}
                 </td>
                
                 <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
-                    {{$item->price}} MT
+                    {{$item->ticket->price}} MT
                 </td>
                
                 <td align="left" style="border-top: 1px solid #eee; padding: 5px;">

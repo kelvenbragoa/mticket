@@ -206,6 +206,7 @@ class EventsController extends Controller
     public function ticket_report($event_id){
 
         $event = Event::find($event_id);
+        $sells = SellDetails::where('event_id', $event)->get();
         $tickets_local = Sell::where('event_id',$event->id)->where('user_id',0)->get();
         $tickets_online = Sell::where('event_id',$event->id)->where('user_id','!=',0)->where('user_id','!=',55)->get();
         $invites_online = Sell::where('event_id',$event->id)->where('user_id',55)->get();
@@ -248,6 +249,7 @@ class EventsController extends Controller
                 'invites_online_true',
                 'invites_online_false',
                 'pending_tickets',
+                'sells'
                 ))->setOptions([
             'defaultFont' => 'sans-serif',
             'isRemoteEnabled' => 'true'
