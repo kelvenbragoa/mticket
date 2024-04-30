@@ -163,6 +163,55 @@
     <h5><strong>Número Bilhetes</strong>: {{$event->tickets->count()}}</h5>
     <h5><strong>Número Pacotes</strong>: {{$event->packages->count()}}</h5>
     <h5><strong>Valor</strong>: {{$event->sells->sum('total')}} MT</h5>
+    <hr>
+    <table style="table-layout: fixed; width: 95%;">
+        <thead>
+            <tr>
+                <th  width="20%" align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                    Bilhete
+                </th>
+               
+                <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                   Preço
+                </th>
+               
+                <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                    Usuário/ID
+                </th>
+                <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                    Data de venda
+                </th>
+                <th align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                    Horas de venda
+                </th>
+               
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($event->tickets as $item)
+            <tr>
+                <td style="border-top: 1px solid #eee; padding: 5px;">
+                    {{$item->name}}
+                </td>
+               
+                <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                    {{$item->price}} MT
+                </td>
+               
+                <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                    {{$item->user->name ?? ''}}
+                </td>
+                <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                    {{$item->created_at->format('d-m-Y')}}
+                </td>
+                <td align="left" style="border-top: 1px solid #eee; padding: 5px;">
+                    {{$item->created_at->format('H:i')}}
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
     
 
 
