@@ -60,7 +60,7 @@
                                 <td data-title="" class="place-action">
                                     <a href="{{URL::to('/convites/'.$event->id.'/evento/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
                                     <a href="{{URL::to('/convites/'.$event->id.'/evento/'.$item->id)}}" class="edit" title="Show"><i class="las la-eye"></i></a>
-                                    <form method="POST" action="{{ route('convites.destroy', $item->id)}}">
+                                    {{-- <form method="POST" action="{{ route('convites.destroy', $item->id)}}">
                                         @csrf
                                         @method('DELETE')
                                     <button title="Delete" onclick="this.form.submit();" style="background:none;
@@ -68,7 +68,7 @@
                                     margin:0;
                                     padding:0;
                                     cursor: pointer;"><i class="la la-trash-alt"></i></button>
-                                    </form>
+                                    </form> --}}
                                 </td>
                             </tr>
                         @empty
