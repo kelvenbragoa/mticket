@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\CustomerInvite;
 use App\Models\Event;
 use App\Models\Invite;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class InviteController extends Controller
 
         Invite::create($data);
 
-        return back()->with('message','invite criado com sucesso');
+        return back()->with('message','Convite criado com sucesso');
     }
 
     public function edit($evento, $invite)
@@ -45,6 +46,15 @@ class InviteController extends Controller
         $invites = Invite::find($invite);
         return view('user.invite.edit',compact('event', 'invites'));
     }
+
+    public function show($evento, $invite)
+    {
+        //
+        $event = Event::find($evento);
+        $invites = Invite::find($invite);
+        $customerinvites = CustomerInvite::where('invite_id', $invite)->get();
+        return view('user.invite.show',compact('event', 'invites','customerinvites'));
+    }
     public function update(Request $request, $id)
     {
         //
@@ -53,7 +63,7 @@ class InviteController extends Controller
         $invite = Invite::find($id);
 
         $invite->update($data);
-        return back()->with('message','Invite Editado com sucesso');
+        return back()->with('message','Convite Editado com sucesso');
     }
 
     public function destroy($id)
@@ -65,7 +75,7 @@ class InviteController extends Controller
 
      
             $invite->delete();
-            return back()->with('message','invite apagado com sucesso');
+            return back()->with('message','Convite apagado com sucesso');
 
        
     }

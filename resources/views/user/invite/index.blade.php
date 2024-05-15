@@ -59,6 +59,7 @@
                                 <td data-title="Descrição">{{$item->description}}</td>
                                 <td data-title="" class="place-action">
                                     <a href="{{URL::to('/convites/'.$event->id.'/evento/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
+                                    <a href="{{URL::to('/convites/'.$event->id.'/evento/'.$item->id)}}" class="edit" title="Show"><i class="las la-eye"></i></a>
                                     <form method="POST" action="{{ route('convites.destroy', $item->id)}}">
                                         @csrf
                                         @method('DELETE')
