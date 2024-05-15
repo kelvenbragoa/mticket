@@ -185,7 +185,7 @@
                 </td>
                 <td align="center">
                     <div class="time">
-                        <p>{{date('H:i',strtotime($event->start_time))}}<span>ATÉ</span> {{date('H:i',strtotime($event->end_time))}}</p>
+                        <span>{{date('l',strtotime($event->start_date))}} {{date('d-m',strtotime($event->start_date))}}</span>
                         {{-- <p>DOORS <span>@</span> {{date('H:i',strtotime($item->event->start_time))}}</p> --}}
                     </div>
                     <div class="barcode">
