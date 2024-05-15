@@ -52,6 +52,10 @@ class Event extends Model
         return $this->hasMany('App\Models\Ticket', 'event_id', 'id')->where('is_package',0);
     }
 
+    public function invites(){
+        return $this->hasMany('App\Models\Invite', 'event_id', 'id');
+    }
+
     public function packages(){
         return $this->hasMany('App\Models\Ticket', 'event_id', 'id')->where('is_package',1);
     }

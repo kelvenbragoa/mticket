@@ -99,6 +99,38 @@
                 </div>
                 <div class="listing-box" id="genaral">
                    
+                    <h3>Convites para o evento ({{$event->invites->count()}})</h3>
+                    
+                    <a href="{{URL::to('/convites/'.$event->id.'/evento')}}" class="btn btn-pill btn-warning mb-2"><i class="far fa-plus"></i>Adicionar/Editar Convites</a>
+                    <table class="member-place-list table-responsive">
+                        <thead>
+                            <tr>
+
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @forelse ($event->invites as $item)
+                                    <tr>
+                                    
+                                        <td data-title="Nome">{{$item->name}}</td>
+
+                                        <td data-title="Descricao"><b>{{$item->description}}</b></td>
+                                    
+                                    </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="3" align="center">Nenhum Convite adicionado</td>
+                                </tr>
+                                    
+                                @endforelse 
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="listing-box" id="genaral">
+                   
                     <h3>LineUps/Momentos para o Evento ({{$event->lineups->count()}})</h3>
                     <a href="{{URL::to('/lineup/'.$event->id.'/evento')}}" class="btn btn-pill btn-warning  mb-2"><i class="far fa-plus"></i>Adicionar/Editar LineUps do Evento</a>
                         

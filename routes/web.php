@@ -101,6 +101,8 @@ Route::resource('tickets', 'App\Http\Controllers\User\TicketController');
 Route::resource('package', 'App\Http\Controllers\User\PackageController');
 Route::resource('produtos', 'App\Http\Controllers\User\ProductsController');
 Route::resource('lineup', 'App\Http\Controllers\User\LineupController');
+Route::resource('convites', 'App\Http\Controllers\User\InviteController');
+
 Route::post('/likeevent/{event_id}',[\App\Http\Controllers\User\EventsController::class,'likeevent']);
 Route::get('/user-bar-report/{evento_id}', [App\Http\Controllers\User\BarController::class, 'bar_report']);
 Route::get('/user-ticket-report/{evento_id}', [App\Http\Controllers\User\BarController::class, 'ticket_report']);
@@ -113,6 +115,11 @@ Route::post('/changepassword',[\App\Http\Controllers\User\ProfileController::cla
 Route::get('/lineup/{evento}/add', [App\Http\Controllers\User\LineupController::class, 'create']);
 Route::get('/lineup/{evento}/evento', [App\Http\Controllers\User\LineupController::class, 'index']);
 Route::get('/lineup/{evento}/evento/{lineup}/edit', [App\Http\Controllers\User\LineupController::class, 'edit']);
+
+//convite
+Route::get('/convites/{evento}/add', [App\Http\Controllers\User\InviteController::class, 'create']);
+Route::get('/convites/{evento}/evento', [App\Http\Controllers\User\InviteController::class, 'index']);
+Route::get('/convites/{evento}/evento/{convite}/edit', [App\Http\Controllers\User\InviteController::class, 'edit']);
 
 //bilhete
 Route::get('/bilhete/{evento}/evento', [App\Http\Controllers\User\TicketController::class, 'index']);
