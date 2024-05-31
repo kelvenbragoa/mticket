@@ -148,6 +148,7 @@ Route::get('/produtos/{evento}/evento/{produtos}/edit', [App\Http\Controllers\Us
 Route::get('/barstore/{evento}/evento', [App\Http\Controllers\User\BarStoreController::class, 'index']);
 Route::get('/barstore/{evento}/add', [App\Http\Controllers\User\BarStoreController::class, 'create']);
 Route::get('/barstore/{evento}/evento/{barstore}/edit', [App\Http\Controllers\User\BarStoreController::class, 'edit']);
+Route::get('/barstore/{evento}/evento/{barstore}/copy', [App\Http\Controllers\User\BarStoreController::class, 'copy']);
 
 
 

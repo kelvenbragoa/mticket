@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\BarStore;
 use App\Models\Event;
+use App\Models\Products;
 use Illuminate\Http\Request;
 
 class BarStoreController extends Controller
@@ -103,5 +104,33 @@ class BarStoreController extends Controller
     {
         //
         
+    }
+
+    public function copy($evento, $barstore)
+    {
+        //
+        $event = Event::find($evento);
+
+        $barstore = BarStore::find($barstore);
+        $newbar = BarStore::create([
+            'name' => $barstore->name.'-COPY',
+            'event_id' => $barstore->event_id,
+        ]);
+
+        foreach($barstore->products as $product){
+            Products::create([
+                'name' => $product->name,
+                'qtd' => $product->qtd,
+                'sell_price' => $product->sell_price,
+                'buy_price' => $product->buy_price,
+                'event_id' => $product->event_id,
+                'bar_store_id' => $newbar->id
+            ]);
+        }
+        $barstores = BarStore::where('event_id',$evento)->orderBy('id','desc')->get();
+
+
+        return view('user.barstore.index',compact('barstores','event'));
+
     }
 }

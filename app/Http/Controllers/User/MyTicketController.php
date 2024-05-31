@@ -60,7 +60,6 @@ class MyTicketController extends Controller
 
         $request->validate([
             'mobile' => ['required','numeric'],
-           
         ]);
 
         $string = substr(str_shuffle(str_repeat($x='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(3/strlen($x)) )),1,4);

@@ -57,6 +57,7 @@
                                 <td data-title="Nome">{{$item->name}}</td>
                                 <td data-title="" class="place-action">
                                     <a href="{{URL::to('/barstore/'.$event->id.'/evento/'.$item->id.'/edit')}}" class="edit" title="Edit"><i class="las la-edit"></i></a>
+                                    <a href="{{URL::to('/barstore/'.$event->id.'/evento/'.$item->id.'/copy')}}" class="edit" title="Edit"><i class="las la-copy"></i></a>
                                     <form method="POST" action="{{ route('barstore.destroy', $item->id)}}">
                                         @csrf
                                         @method('DELETE')
