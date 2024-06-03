@@ -101,15 +101,17 @@ class BarController extends Controller
 
         $event = Event::find($event_id);
         $investment = 0;
+        $profit = 0;
 
         foreach($event->products as $item){
-            $investment = $investment + $item->qtd*$item->buy_price;
+            $investment = $investment + ($item->qtd*$item->buy_price);
+            $profit = $profit + $item->qtd*$item->sell_price;
         }
       
 
       
        
-        $pdf = Pdf::loadView('superadmin.events.report', compact('event','investment'))->setOptions([
+        $pdf = Pdf::loadView('superadmin.events.report', compact('event','investment','profit'))->setOptions([
             'defaultFont' => 'sans-serif',
             'isRemoteEnabled' => 'true'
         ]);
