@@ -177,7 +177,7 @@ class SellController extends Controller
 
     public function selldetails($id){
         return response([
-            'selldetail' => SellDetailBar::where('sell_id',$id)->with('product:id,name')->with('sell:id,method,total,status')->with('sell.transaction')->get(),
+            'selldetail' => SellDetailBar::where('sell_id',$id)->with('product:id,name')->with('sell:id,method,total,status')->with('transaction')->get(),
         ],200);
     }
 
