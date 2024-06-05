@@ -22,4 +22,8 @@ class SellDetailBar extends Model
     public function user(){
         return $this->hasOne('App\Models\Barman', 'id', 'user_id');
     }
+
+    public function transaction(){
+        return $this->hasOne('App\Models\CardTransaction', 'sell_id', 'id');
+    }
 }
