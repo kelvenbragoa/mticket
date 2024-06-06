@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Barman;
 
 use App\Http\Controllers\Controller;
+use App\Models\Card;
 use App\Models\CardTransaction;
 use App\Models\EventCard;
 use App\Models\Refund;
@@ -73,9 +74,11 @@ class CardController extends Controller
     public function viewCard($id){
 
         $card = EventCard::where('id',$id)->with('user')->get();
+        $transactions = CardTransaction::where('card_id',$id)->orderby('id','desc')->get();
 
         return response([
             'card' => $card,
+            'transactions' => $transactions
         ],200);
     }
 
